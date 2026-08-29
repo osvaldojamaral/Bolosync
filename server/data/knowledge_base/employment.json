@@ -1,0 +1,122 @@
+[
+  {
+    "id": "emp-ncs-portal",
+    "title": "National Career Service (NCS) Job Portal",
+    "domain": "employment",
+    "target_audience": "Job seekers across all education levels (10th pass, graduates, skilled technicians).",
+    "benefits": "Free job search matching across thousands of private and government vacancies, free career counseling, and job fair alerts without middleman fees.",
+    "eligibility": "Any Indian citizen searching for full-time, part-time, or contract employment.",
+    "documents_needed": "Aadhaar Card, Educational Marksheets, Mobile number, Resume/Experience details.",
+    "how_to_apply": "Register profile online at ncs.gov.in or visit local Model Career Centre (MCC) / District Employment Exchange.",
+    "helpline": "1800-425-1514 (NCS Toll-Free)",
+    "keywords": ["ncs", "job search", "naukri", "sarkari job", "private job", "employment exchange", "rozgar", "career portal"]
+  },
+  {
+    "id": "emp-mgnrega-job-card",
+    "title": "MGNREGA 100-Day Wage Employment Guarantee",
+    "domain": "employment",
+    "target_audience": "Rural adult household members willing to do unskilled manual labor.",
+    "benefits": "Guaranteed 100 days of wage employment per financial year per household. Wages paid directly to bank/post office account within 15 days.",
+    "eligibility": "Adult members of rural households applying to local Gram Panchayat.",
+    "documents_needed": "Aadhaar Card, Passport photo of household members, Bank/Post Office account details.",
+    "how_to_apply": "Submit written or verbal application to Gram Panchayat for Job Card issuance (free of cost).",
+    "helpline": "1800-11-1555 (MGNREGA Toll-Free)",
+    "keywords": ["mgnrega", "nrega", "job card", "100 days work", "gram panchayat rozgar", "majdoori", "rural employment"]
+  },
+  {
+    "id": "emp-naps-apprenticeship",
+    "title": "National Apprenticeship Promotion Scheme (NAPS)",
+    "domain": "employment",
+    "target_audience": "ITI holders, diploma holders, graduates, and 10th/12th pass youth.",
+    "benefits": "Paid on-the-job industrial apprenticeship with monthly stipend (₹7,000 to ₹15,000) sharing from Government of India, leading to permanent job opportunities.",
+    "eligibility": "Minimum 14 years of age with required educational criteria for chosen trade.",
+    "documents_needed": "Aadhaar Card, Bank Details, ITI/Degree Marksheet.",
+    "how_to_apply": "Register at apprenticeshipindia.gov.in and apply for open vacancies in nearby manufacturing and service industries.",
+    "helpline": "011-23748250",
+    "keywords": ["naps", "apprenticeship", "stipend job", "industrial training", "iti job", "apprentice vacancy"]
+  },
+  {
+    "id": "emp-pmegp-self-employment",
+    "title": "Prime Minister's Employment Generation Programme (PMEGP)",
+    "domain": "employment",
+    "target_audience": "Entrepreneurs and youth setting up new micro-enterprises, small shops, or manufacturing units.",
+    "benefits": "Bank loans up to ₹50 Lakh for manufacturing units and ₹20 Lakh for service units, with government subsidy of 15% to 35% on project cost.",
+    "eligibility": "Individuals aged 18+, SHGs, cooperatives. Minimum 8th pass for projects above ₹10 Lakh in manufacturing.",
+    "documents_needed": "Aadhaar Card, Project Report (DPR), Educational certificate, Caste/Special category certificate, Bank passbook.",
+    "how_to_apply": "Apply online at kviconline.gov.in/pmegpeportal with target bank details.",
+    "helpline": "1800-3000-0034",
+    "keywords": ["pmegp", "self employment", "business loan subsidy", "dukan loan", "micro enterprise", "khadi board loan", "apna business"]
+  },
+  {
+    "id": "emp-eshram-gig-unorganized",
+    "title": "e-Shram Portal for Unorganized & Gig Workers",
+    "domain": "employment",
+    "target_audience": "Construction workers, gig workers, domestic helpers, street vendors, and drivers.",
+    "benefits": "Universal Account Number (UAN) card for social security welfare schemes, accident insurance cover under PMSBY, and direct disaster relief aid.",
+    "eligibility": "Unorganized workers aged 16-59 who are not members of EPFO or ESIC and not income tax payers.",
+    "documents_needed": "Aadhaar Card linked with Mobile Number, Bank Account details.",
+    "how_to_apply": "Self-register on eshram.gov.in or visit any nearest CSC kiosk.",
+    "helpline": "14434 (e-Shram Toll-Free)",
+    "keywords": ["eshram", "e shram card", "unorganized worker", "gig worker", "delivery boy", "majdoor card", "social security"]
+  },
+  {
+    "id": "emp-resume-interview-tips",
+    "title": "Basic Resume Writing & Job Interview Preparation Tips",
+    "domain": "employment",
+    "target_audience": "First-time job seekers and entry-level candidates.",
+    "benefits": "Guidelines on crafting a clean 1-page bio-data/resume, highlighting phone number, skills, past experience, and answering interview questions with confidence.",
+    "eligibility": "All candidates preparing for private or government sector interviews.",
+    "documents_needed": "Personal details, education marksheets, references.",
+    "how_to_apply": "Keep resume concise (1-2 pages), practice introducing yourself in 60 seconds ('Tell me about yourself'), dress neatly, and reach 15 minutes before scheduled time.",
+    "helpline": "1800-425-1514 (NCS Counseling)",
+    "keywords": ["resume tips", "interview preparation", "biodata format", "job interview questions", "naukri interview", "self introduction"]
+  },
+  {
+    "id": "emp-standup-india",
+    "title": "Stand-Up India Scheme for Women and SC/ST Entrepreneurs",
+    "domain": "employment",
+    "target_audience": "Women and SC/ST individuals establishing greenfield enterprises.",
+    "benefits": "Bank loans between ₹10 Lakh and ₹1 Crore for setting up manufacturing, services, agri-allied activities, or trading businesses.",
+    "eligibility": "SC/ST and/or women entrepreneurs above 18 years of age. At least 51% shareholding held by woman/SC/ST.",
+    "documents_needed": "Aadhaar Card, Category certificate, Project report, Bank KYC, Business premises proof.",
+    "how_to_apply": "Apply online at standupmitra.in or directly through any commercial bank branch.",
+    "helpline": "1800-180-1111",
+    "keywords": ["stand up india", "women business loan", "sc st entrepreneur", "startup loan", "10 lakh to 1 crore loan", "mahila loan"]
+  },
+  {
+    "id": "emp-rozgar-mela",
+    "title": "Pradhan Mantri National Apprenticeship & Rozgar Melas",
+    "domain": "employment",
+    "target_audience": "Job seekers seeking immediate spot interviews and appointment letters.",
+    "benefits": "Direct face-to-face spot interviews with 50+ private employers and government contractors under one roof in your district.",
+    "eligibility": "5th/8th/10th/12th/ITI/Polytechnic/Graduates seeking work.",
+    "documents_needed": "Multiple copies of Resume/Biodata, Passport photos, Aadhaar, Original marksheets.",
+    "how_to_apply": "Check schedule on ncs.gov.in or visit district employment exchange on designated Rozgar Mela dates.",
+    "helpline": "1800-425-1514",
+    "keywords": ["rozgar mela", "job fair", "spot interview", "district job mela", "direct hiring", "naukri mela"]
+  },
+  {
+    "id": "emp-deen-dayal-upadhyaya-grameen",
+    "title": "DDU-GKY (Deen Dayal Upadhyaya Grameen Kaushalya Yojana)",
+    "domain": "employment",
+    "target_audience": "Poor rural youth aged 15-35 looking for placement-linked skilling.",
+    "benefits": "Free residential training with food, accommodation, uniform, and guaranteed minimum 70% job placement in private sector.",
+    "eligibility": "Rural youth from BPL/welfare families.",
+    "documents_needed": "Aadhaar Card, BPL/SECC proof or MGNREGA Job Card of parent, Educational certificate.",
+    "how_to_apply": "Contact Gram Panchayat or visit ddugky.gov.in to find affiliated training partners.",
+    "helpline": "011-24601900",
+    "keywords": ["ddugky", "rural skill training", "free hostel training", "guaranteed job course", "kaushal vikas rural"]
+  },
+  {
+    "id": "emp-overseas-e-migrate",
+    "title": "e-Migrate System for Safe Overseas Employment",
+    "domain": "employment",
+    "target_audience": "Workers seeking jobs abroad (Gulf countries, Southeast Asia, Europe).",
+    "benefits": "Protects migrant workers from fake visa agents, ensures verified employment contracts, minimum wage standards, and Pravasi Bharatiya Bima Yojana coverage.",
+    "eligibility": "Indian citizens holding ECR (Emigration Check Required) or non-ECR passports.",
+    "documents_needed": "Valid Passport, Verified Employment Contract, Medical Fitness certificate, Visa.",
+    "how_to_apply": "Always check registered recruiting agents on emigrate.gov.in before paying any money.",
+    "helpline": "1800-11-3090 (Pravasi Bharatiya Sahayata Kendra)",
+    "keywords": ["overseas job", "gulf job safety", "fake visa warning", "emigrate portal", "foreign job agent", "videsh naukri"]
+  }
+]

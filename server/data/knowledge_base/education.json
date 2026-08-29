@@ -1,0 +1,122 @@
+[
+  {
+    "id": "edu-nsp-scholarship",
+    "title": "National Scholarship Portal (NSP) & Post-Matric Scholarships",
+    "domain": "education",
+    "target_audience": "School and college students from SC, ST, OBC, Minority, and EWS categories.",
+    "benefits": "Direct financial grant of ₹3,000 to ₹50,000 per year covering tuition fees, books, and hostel allowances directly to the student's Aadhaar-linked bank account.",
+    "eligibility": "Students enrolled in recognized schools, colleges, or ITIs with family annual income generally below ₹2.5 Lakh (varies by scheme).",
+    "documents_needed": "Aadhaar Card, Income Certificate, Caste/Category Certificate, Previous Year Marksheet, Fee Receipt, Bank Passbook.",
+    "how_to_apply": "Register online at scholarships.gov.in (National Scholarship Portal) with OTR (One Time Registration) before annual cut-off dates.",
+    "helpline": "0120-6619540 (NSP Helpdesk)",
+    "keywords": ["scholarship", "nsp", "post matric", "fee waiver", "college scholarship", "sc st obc scholarship", "padhai", "chhatravritti"]
+  },
+  {
+    "id": "edu-pmkvy-skills",
+    "title": "PM Kaushal Vikas Yojana (PMKVY 4.0) - Free Skill Courses",
+    "domain": "education",
+    "target_audience": "Youth, school dropouts, and unemployed individuals seeking vocational jobs.",
+    "benefits": "100% free industry-certified skill training (e.g. Electrician, Solar Technician, Healthcare Assistant, Tailoring, Digital Data Entry) with stipend and placement assistance.",
+    "eligibility": "Any Indian citizen aged 15-45 with basic schooling. No fee required.",
+    "documents_needed": "Aadhaar Card, Bank Account, educational qualification certificate (8th/10th/12th if applicable).",
+    "how_to_apply": "Find nearest Skill India Training Centre at skillindiadigital.gov.in or visit district PMKK (Pradhan Mantri Kaushal Kendra).",
+    "helpline": "088000-55555 / 1800-123-9626",
+    "keywords": ["pmkvy", "skill development", "iti course", "free training", "electrician course", "tailoring training", "hunnar", "kaushal vikas"]
+  },
+  {
+    "id": "edu-vidyalakshmi",
+    "title": "Vidya Lakshmi Education Loan Portal",
+    "domain": "education",
+    "target_audience": "Students pursuing higher education in India or abroad needing low-interest education loans.",
+    "benefits": "Single-window portal to apply for education loans across 40+ national and private banks with Central Sector Interest Subsidy (CSIS) for low-income families.",
+    "eligibility": "Students who secured admission to higher education courses through merit or entrance exams.",
+    "documents_needed": "Admission letter, Fee structure breakdown, 10th/12th/Graduation marksheet, Parent's income proof, KYC documents.",
+    "how_to_apply": "Create an account on vidyalakshmi.co.in, fill Common Educational Loan Application Form (CELAF), and select target banks.",
+    "helpline": "022-27218080",
+    "keywords": ["education loan", "vidya lakshmi", "padhai ke liye loan", "college fee loan", "interest subsidy", "bank loan study"]
+  },
+  {
+    "id": "edu-swayam-free-courses",
+    "title": "SWAYAM & NPTEL Free Online Learning & Certification",
+    "domain": "education",
+    "target_audience": "Students, teachers, and lifelong learners wanting free courses from IITs, IIMs, and NCERT.",
+    "benefits": "Access to high-quality video lectures, reading materials, and tests for Classes 9 to Post-Graduation completely free. Transferable college credits available.",
+    "eligibility": "Open to everyone across India with an internet connection.",
+    "documents_needed": "Email ID or Mobile number for account creation.",
+    "how_to_apply": "Visit swayam.gov.in or download SWAYAM app and enroll in any course for free.",
+    "helpline": "1800-11-2110",
+    "keywords": ["swayam", "nptel", "free online course", "iit course", "ncert learning", "distance education", "online study"]
+  },
+  {
+    "id": "edu-navodaya-admission",
+    "title": "Jawaharlal Navodaya Vidyalaya (JNV) Free Residential Schooling",
+    "domain": "education",
+    "target_audience": "Talented rural children entering Class 6 and Class 9.",
+    "benefits": "100% free high-quality CBSE education, boarding, lodging, uniforms, and textbooks from Class 6 to 12. 75% seats reserved for rural students.",
+    "eligibility": "Students studying in Class 5 in recognized rural schools of the respective district.",
+    "documents_needed": "Aadhaar Card, Rural area school certificate, Residence certificate, Birth certificate.",
+    "how_to_apply": "Register online for JNV Selection Test (JNVST) on navodaya.gov.in through school principal or CSC.",
+    "helpline": "0120-2405968",
+    "keywords": ["navodaya", "jnvst", "free school", "rural education", "class 6 admission", "jnv", "boarding school"]
+  },
+  {
+    "id": "edu-exam-stress-guidance",
+    "title": "Board Exam Preparation & Stress Management Support",
+    "domain": "education",
+    "target_audience": "Students preparing for 10th/12th Board exams, NEET, or JEE experiencing anxiety.",
+    "benefits": "Guidance on study scheduling (25-min Pomodoro cycles), solving previous 5 years' papers, revision routines, and mental health tele-counseling support.",
+    "eligibility": "All students and parents across India.",
+    "documents_needed": "None required.",
+    "how_to_apply": "Call Tele-MANAS helpline 14416 or CBSE Student Counseling helpline during exam seasons.",
+    "helpline": "14416 (Tele-MANAS) / 1800-11-8004 (CBSE Toll-Free)",
+    "keywords": ["exam stress", "10th board tips", "12th board preparation", "neet prep", "jee guidance", "padhai me dhyan", "tension"]
+  },
+  {
+    "id": "edu-iti-polytechnic",
+    "title": "Government ITI & Polytechnic Diploma Admissions",
+    "domain": "education",
+    "target_audience": "10th and 12th pass students wanting job-oriented practical technical diplomas.",
+    "benefits": "Affordable 1 to 3 year hands-on technical trades (Fitter, Motor Mechanic, Draughtsman, Civil/Electrical Diploma) with direct apprenticeship opportunities.",
+    "eligibility": "Passed 8th, 10th, or 12th standard depending on the specific trade.",
+    "documents_needed": "10th Marksheet, Domicile Certificate, Category Certificate, Aadhaar Card.",
+    "how_to_apply": "Apply through your respective State Directorate of Technical Education / ITI admission portal during May-July.",
+    "helpline": "State DTE Helpline",
+    "keywords": ["iti admission", "polytechnic diploma", "technical diploma", "mechanic diploma", "fitter", "wireman course"]
+  },
+  {
+    "id": "edu-pm-shri-schools",
+    "title": "PM SHRI Modernized Government Schools",
+    "domain": "education",
+    "target_audience": "Primary and secondary school students in government school networks.",
+    "benefits": "Smart classrooms, experiential science labs, robotics kits, and modern sports infrastructure inside upgraded government schools.",
+    "eligibility": "Children residing near designated PM SHRI school zones.",
+    "documents_needed": "Birth Certificate, Aadhaar Card, Previous class Transfer Certificate (TC).",
+    "how_to_apply": "Visit the local Government PM SHRI school in your block or village for direct enrollment.",
+    "helpline": "1800-11-2005",
+    "keywords": ["pm shri", "smart school", "sarkari school", "modern school", "free education", "mid day meal"]
+  },
+  {
+    "id": "edu-eklavya-tribal",
+    "title": "Eklavya Model Residential Schools (EMRS) for Tribal Students",
+    "domain": "education",
+    "target_audience": "Scheduled Tribe (ST) students in remote and tribal blocks.",
+    "benefits": "Completely free CBSE education from Class 6 to 12, residential accommodation, nutritional meals, sports coaching, and competitive exam preparation.",
+    "eligibility": "ST boys and girls who clear the EMRS entrance test for Class 6.",
+    "documents_needed": "ST Caste Certificate, Domicile, 5th standard marksheet, Aadhaar Card.",
+    "how_to_apply": "Apply through emrs.tribal.gov.in or district tribal welfare office.",
+    "helpline": "011-23340534",
+    "keywords": ["eklavya school", "emrs", "tribal education", "st scholarship", "free residential school", "adivasi shiksha"]
+  },
+  {
+    "id": "edu-saksham-scholarship",
+    "title": "AICTE Saksham & Pragati Scholarships for Girls and Differently-Abled",
+    "domain": "education",
+    "target_audience": "Girl students and specially-abled students pursuing Technical Degree or Diploma courses.",
+    "benefits": "₹50,000 per annum for every year of technical study towards college fees, laptop purchase, and books.",
+    "eligibility": "Girl students (Pragati) or differently-abled students with >40% disability (Saksham) admitted to AICTE approved technical institutes.",
+    "documents_needed": "Admission letter, Disability certificate (if applicable), Income certificate (<₹8 Lakh), Aadhaar.",
+    "how_to_apply": "Apply on the National Scholarship Portal (NSP) under AICTE schemes.",
+    "helpline": "011-29581000",
+    "keywords": ["pragati scholarship", "saksham", "girl education", "technical degree", "engineering scholarship", "divyang scholarship"]
+  }
+]

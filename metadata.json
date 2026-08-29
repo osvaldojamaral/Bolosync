@@ -1,0 +1,6 @@
+{
+  "name": "BoloSync",
+  "description": "Voice-first regional Indian language AI assistant auto-routing across 10 citizen domains including Schemes, Health, Farming, Education, Jobs, Finance, Legal Aid, Civic, Weather, and Emergency Helplines.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

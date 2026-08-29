@@ -1,0 +1,122 @@
+[
+  {
+    "id": "wea-imd-mausam-forecast",
+    "title": "IMD Mausam App & 5-Day Weather Forecast for Farmers",
+    "domain": "weather",
+    "target_audience": "Farmers, outdoor workers, and general public planning agricultural or travel activities.",
+    "benefits": "Real-time temperature, humidity, rainfall probability, wind speed, and color-coded alerts (Green, Yellow, Orange, Red) from India Meteorological Department.",
+    "eligibility": "All citizens.",
+    "documents_needed": "None.",
+    "how_to_apply": "Download 'Mausam' app by Ministry of Earth Sciences or check mausam.imd.gov.in for district-wise agro-meteorological advisories.",
+    "helpline": "011-24631913 (IMD Weather Central Control)",
+    "keywords": ["imd mausam", "weather forecast", "rain alert", "barish kab hogi", "tufan alert", "district weather", "mosam ki jankari"]
+  },
+  {
+    "id": "wea-damini-lightning-alert",
+    "title": "Damini App for Lightning Strike Alert & Thunderstorm Safety",
+    "domain": "weather",
+    "target_audience": "Farmers, construction workers, and rural residents working in open fields during monsoon and pre-monsoon.",
+    "benefits": "Gives advance warning of cloud-to-ground lightning strikes within 20 to 40 km radius 30-45 minutes before impact, saving lives.",
+    "eligibility": "All smartphone users.",
+    "documents_needed": "GPS Location permission.",
+    "how_to_apply": "Download 'Damini' app from Google Play Store. When lightning warning alerts, avoid standing under tall trees or near electric poles; take shelter inside pucca building.",
+    "helpline": "1078 (National Disaster Management Authority Helpline)",
+    "keywords": ["damini app", "lightning strike alert", "bijli girne ki chetavani", "thunderstorm precaution", "aakashia bijli se bachav", "ndma lightning"]
+  },
+  {
+    "id": "wea-heatwave-loo-precautions",
+    "title": "Heatwave & Loo Wave Protection Guidelines (NDMA)",
+    "domain": "weather",
+    "target_audience": "Laborers, elderly citizens, children, and farm workers during summer months (March - June).",
+    "benefits": "Critical preventive steps: Drink plenty of water, ORS, buttermilk (Chhaas), coconut water; wear loose light-colored cotton clothes; avoid heavy direct sun between 12 PM - 3 PM; carry wet cloth over head.",
+    "eligibility": "All individuals during high summer temperature periods.",
+    "documents_needed": "None.",
+    "how_to_apply": "If heatstroke symptoms occur (high body temperature, dizziness, nausea, dry skin), immediately move patient to shade, apply ice/cool water to neck and armpits, and rush to hospital.",
+    "helpline": "108 (Ambulance Helpline) / 1078 (NDMA)",
+    "keywords": ["heatwave precautions", "loo se bachav", "heatstroke treatment", "garmi me savdhani", "dhoop se bachna", "dehydration first aid"]
+  },
+  {
+    "id": "wea-flood-safety-monsoon",
+    "title": "Monsoon Flood Safety & Evacuation Protocols",
+    "domain": "weather",
+    "target_audience": "Communities residing near riverbanks, low-lying coastal areas, or flood-prone plains.",
+    "benefits": "Life safety instructions: Keep emergency go-bag ready with drinking water, dry food, torch, batteries, essential medicines, and waterproof polythene for Aadhaar/property papers; move to elevated relief shelters before roads submerge.",
+    "eligibility": "Residents in flood alert zones.",
+    "documents_needed": "Carry ID and land documents in waterproof pouch.",
+    "how_to_apply": "Never attempt to walk, swim, or drive through moving floodwaters. Disconnect main electrical power MCB before water enters home. Dial 1070/1078 for NDRF boat rescue.",
+    "helpline": "1078 (NDMA National Emergency) / 1070 (State Emergency Relief)",
+    "keywords": ["flood safety", "baadh se bachav", "monsoon flood alert", "ndrf helpline", "emergency bag", "waterlogging safety"]
+  },
+  {
+    "id": "wea-cyclone-safety-coastal",
+    "title": "Cyclone Warning Flags & Coastal Protection Rules",
+    "domain": "weather",
+    "target_audience": "Fishermen, coastal residents, and maritime workers along Arabian Sea and Bay of Bengal.",
+    "benefits": "Understanding IMD cyclone stages (Pre-Cyclone Watch, Cyclone Alert 48 hrs before, Cyclone Warning 24 hrs before, Landfall Outlook). Strict prohibition on venturing into rough seas.",
+    "eligibility": "Coastal population and fishermen.",
+    "documents_needed": "None.",
+    "how_to_apply": "Secure boat anchors, trim tree branches near houses, board up window glass, stock clean drinking water, and evacuate to Cyclone Shelters upon administration orders.",
+    "helpline": "1070 (State Disaster Control Room) / 1554 (Indian Coast Guard)",
+    "keywords": ["cyclone warning", "samudri tufan", "fishermen sea warning", "cyclone shelter", "coastal alert", "ndma cyclone"]
+  },
+  {
+    "id": "wea-earthquake-drop-cover-hold",
+    "title": "Earthquake Emergency Protocol: Drop, Cover, and Hold On",
+    "domain": "weather",
+    "target_audience": "All citizens in seismic zones.",
+    "benefits": "Golden safety rules during tremor: Do NOT run outside into falling debris or use elevators. Drop to hands and knees, take Cover under a sturdy table/bed, and Hold On until shaking stops.",
+    "eligibility": "All persons experiencing ground tremors.",
+    "documents_needed": "None.",
+    "how_to_apply": "If outdoors, move away from buildings, power cables, and flyovers into an open ground. Check for gas leaks and fire hazards after tremors cease.",
+    "helpline": "112 / 1078",
+    "keywords": ["earthquake safety", "bhookamp se bachav", "drop cover hold", "tremor precautions", "seismic zone", "disaster safety"]
+  },
+  {
+    "id": "wea-meghdoot-agro-advisory",
+    "title": "Meghdoot App for District Crop-Weather Integration",
+    "domain": "weather",
+    "target_audience": "Farmers making decisions on pesticide spraying, fertilizer application, harvesting, and irrigation.",
+    "benefits": "Combines IMD 5-day weather forecasts directly with ICAR agricultural advisory, warning when NOT to spray pesticides before rainfall to prevent chemical wash-off and wastage.",
+    "eligibility": "All farmers and agri-entrepreneurs.",
+    "documents_needed": "None.",
+    "how_to_apply": "Download 'Meghdoot' app developed by ICAR, IITM, and IMD; select your district and crop for customized weekly farm advisory.",
+    "helpline": "1800-180-1551 (Kisan Call Centre)",
+    "keywords": ["meghdoot app", "crop weather advisory", "spray timing rain", "fasal mausam", "icar kisan advisory", "kisan weather"]
+  },
+  {
+    "id": "wea-cold-wave-frost-crops",
+    "title": "Cold Wave & Frost (Pala) Protection for Winter Rabi Crops",
+    "domain": "weather",
+    "target_audience": "Farmers growing potato, mustard, tomato, and vegetables during severe December-January winter.",
+    "benefits": "Protection measures against freezing frost injury: Light night irrigation, smoking (dhuwan) on field borders along wind direction, and spray of 0.1% Commercial Sulfuric Acid or Soluble Sulfur (2g/L).",
+    "eligibility": "Vegetable and crop growers in North & Central India.",
+    "documents_needed": "None.",
+    "how_to_apply": "Monitor nighttime temperature dip below 4°C with calm winds; initiate light irrigation before midnight to raise soil temperature.",
+    "helpline": "1800-180-1551 (Kisan Call Centre)",
+    "keywords": ["frost protection", "pala se fasal bachav", "cold wave crops", "mustard frost", "vegetable frost protection", "sarson pala"]
+  },
+  {
+    "id": "wea-sachet-disaster-sms-alerts",
+    "title": "CAP SACHET National Early Disaster Warning Portal & SMS",
+    "domain": "weather",
+    "target_audience": "Citizens across all states receiving geo-targeted emergency warning alerts.",
+    "benefits": "Targeted wireless SMS and siren alerts directly from State Disaster Management Authorities (SDMA) during extreme weather emergencies without needing internet connectivity.",
+    "eligibility": "All mobile phone users with active network signal.",
+    "documents_needed": "None.",
+    "how_to_apply": "Read official emergency broadcast notifications carefully on phone and follow instructions issued by District Magistrate.",
+    "helpline": "1070 / 1078 (Disaster Management Toll-Free)",
+    "keywords": ["sachet app", "disaster alert sms", "cap emergency alert", "sdma warning", "tufan sms", "early warning system"]
+  },
+  {
+    "id": "wea-landslide-hilly-roads",
+    "title": "Landslide Safety Guidelines for Hilly Roads & Highways",
+    "domain": "weather",
+    "target_audience": "Residents and travelers in Himalayan and Western Ghats mountain regions during monsoon.",
+    "benefits": "Recognizing landslide warning signs (sudden muddiness in spring water, leaning trees, rock falls) and maintaining emergency distance on Ghat roads.",
+    "eligibility": "Travelers and inhabitants of hilly terrains.",
+    "documents_needed": "None.",
+    "how_to_apply": "Check highway transit status with local traffic police control room before traveling in torrential rain; never stop vehicles near steep loose cliff sides.",
+    "helpline": "1077 (District Disaster Control Room) / 1073 (NHAI Emergency)",
+    "keywords": ["landslide safety", "bhooskhalan se bachav", "hill road landslide alert", "mountain travel rain", "rockfall safety"]
+  }
+]

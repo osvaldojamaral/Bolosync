@@ -1,0 +1,122 @@
+[
+  {
+    "id": "leg-nalsa-free-legal-aid",
+    "title": "NALSA & DLSA Free Legal Aid & Advice",
+    "domain": "legal",
+    "target_audience": "Women, children, SC/ST individuals, low-income citizens, industrial workmen, and persons in custody.",
+    "benefits": "100% free legal representation, free advocate assignment, court fee waiver, and preparation of appeals/petitions under Legal Services Authorities Act, 1987 (Section 12).",
+    "eligibility": "Women, children, SC/ST, custody undertrials, or individuals with annual income below prescribed limit (generally ₹3 Lakh).",
+    "documents_needed": "Aadhaar Card, Income certificate / self-declaration, Case-related documents.",
+    "how_to_apply": "Visit District Legal Services Authority (DLSA) at District Court, Front Office at High Court, or call national toll-free helpline 15100.",
+    "helpline": "15100 (National Legal Services Authority Helpline)",
+    "keywords": ["free legal aid", "nalsa", "dlsa", "free lawyer", "sarkari vakeel", "court case help", "legal services", "kanooni sahayata"]
+  },
+  {
+    "id": "leg-consumer-complaint-nch",
+    "title": "National Consumer Helpline (NCH) & e-Daakhil Consumer Complaint",
+    "domain": "legal",
+    "target_audience": "Consumers facing defective products, deficient services, overcharging, or refusal of refunds.",
+    "benefits": "Free consumer dispute mediation through National Consumer Helpline and online filing of consumer cases at District, State, and National Consumer Commissions without mandatory advocate.",
+    "eligibility": "Any consumer who purchased goods or hired services for personal use.",
+    "documents_needed": "Bill/Invoice, warranty card, payment receipt, correspondence with seller.",
+    "how_to_apply": "Call toll-free 1915, register grievance on consumerhelpline.gov.in, WhatsApp to 8800001915, or file formal case via edaakhil.nic.in.",
+    "helpline": "1915 / 1800-11-4000 (National Consumer Helpline)",
+    "keywords": ["consumer complaint", "nch 1915", "defective item refund", "fake product", "edaakhil", "consumer forum", "upbhokta helpline"]
+  },
+  {
+    "id": "leg-tenant-rights-basics",
+    "title": "Tenant Rights & Protection Against Unlawful Eviction",
+    "domain": "legal",
+    "target_audience": "Tenants and landlords residing in rented residential or commercial properties.",
+    "benefits": "Rights to written rent agreement, essential services (water, electricity cannot be cut arbitrarily), reasonable notice period before eviction (usually 1-3 months), and security deposit refund.",
+    "eligibility": "Lawful tenants with valid tenancy agreements under state Rent Control / Tenancy Acts.",
+    "documents_needed": "Signed Rent Agreement, Rent receipts, Bank transfer records, Electricity/Water bill copies.",
+    "how_to_apply": "Always insist on a registered or notarized rent agreement. In case of illegal harassment, file complaint with Rent Authority / Civil Court or local police.",
+    "helpline": "15100 (Legal Aid Helpline) / 112 (Emergency Police)",
+    "keywords": ["tenant rights", "rent agreement", "landlord dispute", "eviction rules", "kirayedar adhikar", "security deposit refund"]
+  },
+  {
+    "id": "leg-labor-minimum-wages",
+    "title": "Labor Rights: Minimum Wages, Working Hours & Gratuity",
+    "domain": "legal",
+    "target_audience": "Factory workers, daily wage laborers, construction workers, and contract staff.",
+    "benefits": "Entitlement to statutory state Minimum Wages, 8-hour daily work limit, double wage rate for overtime, and Payment of Gratuity after 5 continuous years of service.",
+    "eligibility": "All wage earners, contractual laborers, and industrial workmen.",
+    "documents_needed": "Wage slips, Attendance card, Bank statement, ID badge.",
+    "how_to_apply": "File grievance with District Labor Officer, Assistant Labor Commissioner (ALC), or Samadhan Portal at samadhan.labour.gov.in.",
+    "helpline": "14434 (Ministry of Labour Helpline)",
+    "keywords": ["minimum wages", "labor rights", "gratuity", "overtime pay", "majdoor adhikar", "factory dispute", "labor commissioner"]
+  },
+  {
+    "id": "leg-domestic-violence-protection",
+    "title": "Protection of Women from Domestic Violence Act (PWDVA) & 181",
+    "domain": "legal",
+    "target_audience": "Women experiencing physical, verbal, emotional, or economic abuse in domestic relationships.",
+    "benefits": "Right to reside in shared household, protection orders restraining abuser, monthly maintenance, medical expenses, child custody, and free legal aid/shelter home.",
+    "eligibility": "Any woman living in a domestic relationship facing harassment or violence.",
+    "documents_needed": "Medical report (if physical harm), Identity card, Marriage certificate (if available).",
+    "how_to_apply": "Dial 181 (Women Helpline) or 112, or approach Protection Officer (PO) at District Magistrate / Women & Child Development office.",
+    "helpline": "181 (Women in Distress Toll-Free) / 1091 (Women Police)",
+    "keywords": ["women helpline 181", "domestic violence", "pwdva", "mahila suraksha", "protection order", "maintenance for wife", "shelter home"]
+  },
+  {
+    "id": "leg-rti-right-to-information",
+    "title": "Right to Information (RTI) Act Basics & Online Filing",
+    "domain": "legal",
+    "target_audience": "Citizens seeking transparency on government projects, funds, tender decisions, and delayed files.",
+    "benefits": "Statutory right to receive certified government documents, inspection of works, and status of applications within 30 days (48 hours in life/liberty matters). Fee is only ₹10 (free for BPL).",
+    "eligibility": "Any Indian citizen.",
+    "documents_needed": "RTI Application letter, ₹10 Court fee stamp / IPO / Online fee receipt, BPL card (if seeking fee exemption).",
+    "how_to_apply": "Submit physical application to Public Information Officer (PIO) of respective department or file online at rtionline.gov.in for central ministries.",
+    "helpline": "011-24660000 (CIC Helpline)",
+    "keywords": ["rti", "right to information", "jan soochna adhikar", "sarkari file status", "rtionline", "pio application"]
+  },
+  {
+    "id": "leg-lok-adalat-dispute-settlement",
+    "title": "National Lok Adalat for Fast, Fee-Free Mutual Settlement",
+    "domain": "legal",
+    "target_audience": "Parties with pending court cases or pre-litigation disputes (traffic challans, bank loans, electricity bills, matrimonial matters).",
+    "benefits": "Zero court fees (refunded if already paid), final non-appealable amicable award, saves years of court visits, and promotes mutual cordial settlement.",
+    "eligibility": "Both parties agreeing to explore compromise on compoundable matters.",
+    "documents_needed": "Case number, summons copy, settlement proposal.",
+    "how_to_apply": "Approach District Legal Services Authority (DLSA) secretary before the scheduled National Lok Adalat date.",
+    "helpline": "15100 (NALSA)",
+    "keywords": ["lok adalat", "traffic challan settlement", "bank loan compromise", "fast court settlement", "muavza", "samjhauta"]
+  },
+  {
+    "id": "leg-fir-zero-fir-rules",
+    "title": "Filing Police FIR, Zero FIR & Rights Upon Arrest",
+    "domain": "legal",
+    "target_audience": "Victims of cognizable crimes and citizens interacting with police stations.",
+    "benefits": "Right to file 'Zero FIR' at ANY police station regardless of jurisdiction, free copy of FIR immediately, right to inform family member within 12 hours of arrest, and medical checkup.",
+    "eligibility": "Victim or complainant reporting a cognizable offense (theft, assault, cyber fraud, missing person).",
+    "documents_needed": "Written complaint detailing date, time, location, suspects, and eyewitnesses.",
+    "how_to_apply": "Visit police station; if SHO refuses, send complaint to Superintendent of Police (SP) via registered post or file online e-FIR if state provides portal.",
+    "helpline": "112 (National Emergency Number)",
+    "keywords": ["fir kaise kare", "zero fir", "police complaint", "arrest rights", "thana complaint", "police helpline 112"]
+  },
+  {
+    "id": "leg-senior-citizen-maintenance",
+    "title": "Maintenance and Welfare of Parents and Senior Citizens Act",
+    "domain": "legal",
+    "target_audience": "Parents and senior citizens (aged 60+) unable to maintain themselves.",
+    "benefits": "Legal entitlement to monthly maintenance (up to ₹10,000+) from adult children/heirs, protection against eviction from own house, and revocation of gifted property if neglected.",
+    "eligibility": "Senior citizens and parents (biological, adoptive, or step-parents).",
+    "documents_needed": "Age proof (Aadhaar/Voter ID), Proof of neglect/non-maintenance, Property papers (if applicable).",
+    "how_to_apply": "File summary application before Maintenance Tribunal presided by Sub-Divisional Magistrate (SDM). No lawyer needed.",
+    "helpline": "14567 (Elder Line - National Senior Citizen Helpline)",
+    "keywords": ["senior citizen maintenance", "elder line 14567", "parents maintenance act", "sdm tribunal", "vriddha adhikar", "property protection"]
+  },
+  {
+    "id": "leg-motor-accident-claim-mact",
+    "title": "Motor Accident Claims Tribunal (MACT) & Hit-and-Run Compensation",
+    "domain": "legal",
+    "target_audience": "Road accident victims, injured passengers, and legal heirs of deceased victims.",
+    "benefits": "Compensation for medical treatment, loss of earning capacity, and death. Special statutory Solatium Fund gives ₹2,00,000 for death and ₹50,000 for grievous injury in hit-and-run cases.",
+    "eligibility": "Victims or legal heirs of road motor accidents.",
+    "documents_needed": "FIR copy, Detailed Accident Report (DAR), Medical bills, Post-mortem report (if death), Income proof.",
+    "how_to_apply": "File claim petition before MACT at the place of accident or where victim resides, or apply for Hit-and-Run compensation via District Magistrate/SDM.",
+    "helpline": "1073 (National Highway Emergency) / 112",
+    "keywords": ["mact", "road accident compensation", "hit and run compensation", "durghatna muavza", "accident insurance claim"]
+  }
+]

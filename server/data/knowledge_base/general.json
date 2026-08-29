@@ -1,0 +1,122 @@
+[
+  {
+    "id": "gen-national-emergency-112",
+    "title": "National Single Emergency Number 112 (ERSS)",
+    "domain": "general",
+    "target_audience": "All citizens needing immediate Police, Fire, Ambulance, or Disaster rescue.",
+    "benefits": "Single integrated 24x7 emergency response across all states and union territories. Works even without SIM card balance, locked mobile phones, and routes GPS location automatically to the nearest emergency dispatch vehicle.",
+    "eligibility": "Anyone in India facing an emergency.",
+    "documents_needed": "None.",
+    "how_to_apply": "Dial 112 directly from any mobile phone or landline.",
+    "helpline": "112 (All-in-One National Emergency)",
+    "keywords": ["112 emergency", "police 112", "ambulance", "fire brigade", "emergency help", "sos emergency", "tatkal sahayata"]
+  },
+  {
+    "id": "gen-cybercrime-reporting-1930",
+    "title": "National Cyber Crime Reporting Portal & 1930 Helpline",
+    "domain": "general",
+    "target_audience": "Victims of financial online fraud, unauthorized bank transfers, social media blackmail, or cyberstalking.",
+    "benefits": "Immediate 'Golden Hour' financial lien/freeze on fraudulent bank accounts and UPI IDs to recover stolen funds before scammers withdraw cash.",
+    "eligibility": "All cyber fraud victims.",
+    "documents_needed": "Bank account number, transaction UTR number, mobile number, SMS screenshots.",
+    "how_to_apply": "Call 1930 immediately within 1-2 hours of financial fraud, or file full complaint with evidence on cybercrime.gov.in.",
+    "helpline": "1930 (Cyber Financial Fraud Toll-Free)",
+    "keywords": ["1930 cyber crime", "cybercrime reporting", "online paisa chori", "otp fraud recovery", "bank account freeze fraud"]
+  },
+  {
+    "id": "gen-kisan-call-centre-1551",
+    "title": "Kisan Call Centre (KCC) 1800-180-1551 Free Agro-Advisory",
+    "domain": "general",
+    "target_audience": "Farmers, fruit growers, and dairy farmers seeking free agricultural scientist consultation.",
+    "benefits": "Toll-free voice call connecting directly to agricultural experts speaking your local regional dialect from 6:00 AM to 10:00 PM on all 7 days.",
+    "eligibility": "All farmers and rural citizens.",
+    "documents_needed": "None.",
+    "how_to_apply": "Dial 1800-180-1551 (or short code 1551) from any mobile phone.",
+    "helpline": "1800-180-1551 / 1551 (Kisan Call Centre)",
+    "keywords": ["kisan call centre", "1551", "krishi vigyan helpline", "kisan helpline", "free farming advice", "agri scientist talk"]
+  },
+  {
+    "id": "gen-childline-1098",
+    "title": "Childline 1098 for Child Protection & Distress",
+    "domain": "general",
+    "target_audience": "Children in distress, child laborers, missing children, runaway or abused minors.",
+    "benefits": "24-hour free emergency phone service for children in need of care and protection, connecting with District Child Protection Units (DCPU) and Child Welfare Committees.",
+    "eligibility": "Children under 18 years of age or concerned citizens reporting child distress.",
+    "documents_needed": "None.",
+    "how_to_apply": "Dial 1098 from any phone across India.",
+    "helpline": "1098 (Childline National Helpline)",
+    "keywords": ["childline 1098", "child helpline", "bal helpline", "bachhon ki suraksha", "missing child", "child labor report"]
+  },
+  {
+    "id": "gen-tele-manas-mental-health",
+    "title": "Tele-MANAS 14416 Free 24x7 Mental Health Counseling",
+    "domain": "general",
+    "target_audience": "Individuals experiencing depression, severe anxiety, loneliness, insomnia, or emotional distress.",
+    "benefits": "Completely confidential, free 24x7 psychological tele-counseling by trained mental health counselors and clinical psychiatrists in 20+ regional languages.",
+    "eligibility": "Open to everyone.",
+    "documents_needed": "None.",
+    "how_to_apply": "Dial 14416 or 1800-891-4416 toll-free from any mobile or landline.",
+    "helpline": "14416 / 1800-891-4416 (Tele-MANAS Toll-Free)",
+    "keywords": ["tele manas", "14416", "mental health helpline", "depression counseling", "manasik tanav", "free counselor talk"]
+  },
+  {
+    "id": "gen-postal-services-speedpost-tracking",
+    "title": "India Post Tracking, Speed Post & Rural Post Office Savings",
+    "domain": "general",
+    "target_audience": "Citizens sending parcels, speed post letters, or seeking secure post office recurring deposits.",
+    "benefits": "Reliable last-mile delivery to every village pin code in India, SMS tracking alerts, Post Office Monthly Income Scheme (MIS), and Kisan Vikas Patra.",
+    "eligibility": "All citizens.",
+    "documents_needed": "Consignment tracking number (13 alphanumeric characters) for package tracking.",
+    "how_to_apply": "Track articles online on indiapost.gov.in or visit local Branch Post Office (BPO).",
+    "helpline": "1800-266-6868 (India Post Customer Care)",
+    "keywords": ["speed post tracking", "dak khana", "post office saving", "india post tracking", "parcel status", "pincode search"]
+  },
+  {
+    "id": "gen-blood-bank-eraktkosh",
+    "title": "e-RaktKosh National Blood Bank Stock Availability & 104",
+    "domain": "general",
+    "target_audience": "Patients and hospital attendants requiring emergency blood units or platelets.",
+    "benefits": "Real-time verification of blood group stock availability (A+, B+, O+, AB+, etc.) across licensed government and Red Cross blood banks in every district.",
+    "eligibility": "All patients with doctor's blood requisition slip.",
+    "documents_needed": "Patient hospital requisition slip and donor replacement card if available.",
+    "how_to_apply": "Search live stock on eraktkosh.in or call state health helpline 104.",
+    "helpline": "104 (State Health & Blood Bank Information) / 011-23063238",
+    "keywords": ["blood bank", "eraktkosh", "blood availability", "platelet emergency", "khoon ki jarurat", "red cross blood"]
+  },
+  {
+    "id": "gen-irctc-train-inquiry-139",
+    "title": "Rail Madad 139 All-in-One Railway Inquiry & Grievance",
+    "domain": "general",
+    "target_audience": "Train passengers needing PNR status, train running status, clean coach request, or medical emergency on train.",
+    "benefits": "Single interactive voice response (IVR) and live agent assistance for all railway queries: PNR, arrival/departure delays, coach cleaning, wheelchair at station, and security assistance.",
+    "eligibility": "All train travelers.",
+    "documents_needed": "10-digit PNR number or 5-digit Train number.",
+    "how_to_apply": "Dial 139 from any mobile phone or send SMS to 139.",
+    "helpline": "139 (Rail Madad Toll-Free Helpline)",
+    "keywords": ["railway 139", "pnr status", "train running status", "rail madad", "train complaint", "coach safai train"]
+  },
+  {
+    "id": "gen-poison-control-centre-aiims",
+    "title": "National Poisons Information Centre (NPIC) - AIIMS New Delhi",
+    "domain": "general",
+    "target_audience": "Cases of accidental ingestion of pesticide, household chemicals, rat poison, snake bite, or poisonous plants.",
+    "benefits": "Immediate clinical emergency toxicological guidance on antidotes, first aid, gastric lavage protocols, and hospital stabilization for doctors and public.",
+    "eligibility": "All emergency poisoning cases.",
+    "documents_needed": "Name or bottle of consumed chemical/pesticide.",
+    "how_to_apply": "Call 1800-116-117 (24x7 Toll-Free NPIC AIIMS) immediately while shifting patient to nearest ICU.",
+    "helpline": "1800-116-117 / 011-26589391 (AIIMS Poison Control)",
+    "keywords": ["poison control", "aiims poison helpline", "keetnashak pi liya", "snake bite antidote", "rat poison first aid", "zehar emergency"]
+  },
+  {
+    "id": "gen-aadhaar-helpline-1947",
+    "title": "UIDAI Aadhaar 1947 Toll-Free All-Language Helpline",
+    "domain": "general",
+    "target_audience": "Citizens with queries on Aadhaar generation, PVC card delivery, update status, or demographic mismatch.",
+    "benefits": "Interactive voice guidance and live executive support in 12 Indian languages regarding enrolment ID status, nearest Aadhaar center, and OTP delivery troubleshooting.",
+    "eligibility": "All Indian residents.",
+    "documents_needed": "12-digit Aadhaar number or 28-digit Enrolment ID (EID).",
+    "how_to_apply": "Dial 1947 (toll-free) from any mobile or landline phone.",
+    "helpline": "1947 (UIDAI National Toll-Free)",
+    "keywords": ["aadhaar 1947", "uidai helpline", "aadhaar status check", "aadhaar download help", "aadhaar call center"]
+  }
+]

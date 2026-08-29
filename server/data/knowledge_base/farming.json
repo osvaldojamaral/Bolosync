@@ -1,0 +1,90 @@
+[
+  {
+    "id": "farming-wheat-yellow-rust",
+    "title": "Wheat Yellow Rust (Peela Rata / Haldi Rog) Control",
+    "domain": "farming",
+    "crop": "Wheat (Kanak / Gehun)",
+    "problem": "Yellow powder/stripes appearing on wheat leaves during cool, humid February-March weather, drying out leaves and reducing grain weight by up to 40%.",
+    "advisory": "Inspect fields weekly. On first notice of yellow pustules, spray Propiconazole 25% EC (Tilt) @ 200 ml in 200 litres of water per acre. Repeat after 10-15 days if cloudy weather continues. Avoid excessive nitrogen/urea fertilizer which aggravates fungal spread.",
+    "organic_method": "Spray fermented butter milk (Khatta Chhachh) mixed with copper vessel extract (5 litres in 100 litres water) in early stages.",
+    "helpline": "Kisan Call Centre 1800-180-1551 or PAU / ICAR advisory",
+    "keywords": ["peela rata", "yellow rust", "gehun rog", "wheat disease", "propiconazole", "tilt", "kanak bimari", "haldi rog"]
+  },
+  {
+    "id": "farming-mustard-aphids",
+    "title": "Mustard Aphid (Sarson ka Mahu / Chepa) Management",
+    "domain": "farming",
+    "crop": "Mustard / Rapeseed (Sarson / Raya)",
+    "problem": "Tiny green/black insects sucking sap from flowering buds and pods, causing flower drop and stunted oilseeds.",
+    "advisory": "Spray Dimethoate 30% EC (Rogor) @ 250 ml OR Thiamethoxam 25% WG @ 80-100 g in 150-200 litres water per acre when 10% twigs show aphid colonies. Spray late afternoon to protect honeybee pollinators.",
+    "organic_method": "Spray 5% Neem Seed Kernel Extract (NSKE) or Neem Oil (1500 ppm @ 3 ml per litre) or yellow sticky traps (10 traps per acre).",
+    "helpline": "1800-180-1551",
+    "keywords": ["sarson mahu", "chepa", "mustard aphid", "dimethoate", "neem oil", "telia", "raya keeda"]
+  },
+  {
+    "id": "farming-paddy-stem-borer",
+    "title": "Paddy Stem Borer (Dhaan ka Tana Chhedak Rog)",
+    "domain": "farming",
+    "crop": "Paddy / Rice (Dhaan / Chawal)",
+    "problem": "Larvae boring into central shoot causing 'dead heart' in tillering stage or 'white earhead' (empty white panicles) at heading stage.",
+    "advisory": "Apply Cartap Hydrochloride 4G @ 7.5 kg/acre OR Chlorantraniliprole 0.4% GR (Ferterra) @ 4 kg/acre in standing water (2-3 inches) when 5% dead hearts appear.",
+    "organic_method": "Install pheromone traps @ 8 traps/acre for monitoring and release egg parasitoid Trichogramma @ 20,000/acre at 30 and 45 days after transplanting.",
+    "helpline": "1800-180-1551",
+    "keywords": ["dhaan ka keeda", "tana chhedak", "stem borer", "dead heart", "white earhead", "cartap", "ferterra", "chawal rog"]
+  },
+  {
+    "id": "farming-cotton-pink-bollworm",
+    "title": "Cotton Pink Bollworm (Gulabi Sundi) Control",
+    "domain": "farming",
+    "crop": "Cotton (Narma / Kapas)",
+    "problem": "Caterpillar entering green bolls, feeding on developing seeds and staining lint, drastically reducing cotton quality and yield.",
+    "advisory": "Install 5 pheromone traps per acre. If trap catch exceeds 8 moths/night for 3 consecutive nights, spray Emamectin Benzoate 5% SG @ 100 g OR Spinetoram 11.7% SC @ 170 ml in 150 litres water per acre.",
+    "organic_method": "Pick and bury rosette flowers infested with larvae. Avoid growing ratoon cotton.",
+    "helpline": "1800-180-1551",
+    "keywords": ["gulabi sundi", "pink bollworm", "kapas keeda", "narma rog", "emamectin", "cotton pest", "cotton boll"]
+  },
+  {
+    "id": "farming-drip-irrigation",
+    "title": "Drip Irrigation and Water Conservation Benefits",
+    "domain": "farming",
+    "crop": "Horticulture, Vegetables, Sugarcane, Cotton",
+    "problem": "Depleting groundwater table and high electricity/diesel pumping costs under flood irrigation.",
+    "advisory": "Drip irrigation saves 40-60% irrigation water and improves fertilizer efficiency by 30-40% via fertigation. Government provides 70-80% subsidy for small/marginal farmers under Pradhan Mantri Krishi Sinchayee Yojana (PMKSY - Per Drop More Crop).",
+    "organic_method": "Combine drip with organic mulching (straw/crop residue) to prevent soil moisture evaporation and weed growth.",
+    "helpline": "State Micro-Irrigation Cell / PMKSY Portal",
+    "keywords": ["drip irrigation", "tapkap sinchai", "water saving", "fertigation", "pmksy", "per drop more crop", "subsidy on drip"]
+  },
+  {
+    "id": "farming-organic-jeevamrit",
+    "title": "Natural Farming — How to Prepare Jeevamrit Bio-Fertilizer",
+    "domain": "farming",
+    "crop": "All crops (Organic & Natural Farming)",
+    "problem": "High cost of chemical fertilizers and deteriorating soil biological health.",
+    "advisory": "Jeevamrit recipe for 1 acre: In a 200-litre plastic drum, mix 10 kg fresh Desi cow dung + 10 litres Desi cow urine + 2 kg old Jaggery (gur) + 2 kg pulse flour (besan) + a handful of fertile farm soil (virgin soil from tree base). Fill with water, stir clockwise twice daily. Ready in 48-72 hours in summer (5-7 days in winter). Apply with irrigation water or filter and spray (10% solution).",
+    "organic_method": "Apply twice a month to boost beneficial soil microorganisms, earthworms, and plant immunity.",
+    "helpline": "1800-180-1551",
+    "keywords": ["jeevamrit", "organic farming", "desi cow dung", "natural fertilizer", "jaivik kheti", "besan gur formula", "soil health"]
+  },
+  {
+    "id": "farming-potato-blight",
+    "title": "Potato Late Blight (Aloo ka Pachheti Jhulsa) Treatment",
+    "domain": "farming",
+    "crop": "Potato (Aloo)",
+    "problem": "Water-soaked dark lesions on leaf tips and white mildew on undersides during cool, foggy winter weather, destroying potato crop in days.",
+    "advisory": "Preventive spray: Mancozeb 75% WP @ 2.5 g/litre water. If disease has started: spray systemic fungicide Cymoxanil + Mancozeb (Curzate) @ 2.5 g/litre or Metalaxyl + Mancozeb (Ridomil MZ) @ 2.5 g/litre water. Avoid night irrigation during dense fog.",
+    "organic_method": "Spray Trichoderma viride @ 5 g/litre as soil and foliar preventive application.",
+    "helpline": "1800-180-1551",
+    "keywords": ["aloo jhulsa", "late blight", "potato disease", "pachheti jhulsa", "mancozeb", "ridomil", "curzate"]
+  },
+  {
+    "id": "farming-dairy-mastitis",
+    "title": "Dairy Cattle Mastitis (Thanela Rog / Hawana Rog) Prevention",
+    "domain": "farming",
+    "crop": "Dairy Animals (Cow / Buffalo)",
+    "problem": "Udder inflammation, swollen painful teats, curdled or blood-mixed milk, causing permanent loss of milk production.",
+    "advisory": "Maintain strict barn sanitation. Wash hands and teats with potassium permanganate (Lal Dawai) or iodophor solution before and after milking. Do teat dipping. Keep cattle standing for at least 30-45 minutes after milking by providing fresh feed so the teat canal can close naturally.",
+    "organic_method": "Apply topical paste of Turmeric powder + Aloe vera pulp + Calcium hydroxide (Chuna) on affected udder in very early stage. Contact veterinary doctor immediately for intra-mammary antibiotics if udder is hard or hot.",
+    "helpline": "1962 (National Animal Helpline / Pashu Chikitsa)",
+    "keywords": ["thanela rog", "mastitis", "udder infection", "cow milk blood", "pashu bimari", "than sujhan", "dairy health"]
+  }
+]

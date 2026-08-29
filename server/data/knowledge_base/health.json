@@ -1,0 +1,82 @@
+[
+  {
+    "id": "health-ors-diarrhea",
+    "title": "Oral Rehydration & Home Care for Diarrhea / Loose Motion",
+    "domain": "health",
+    "summary": "Severe dehydration from loose motions is dangerous, especially in children and elders. Immediate ORS and fluids are vital.",
+    "home_action": "Mix one standard WHO-ORS packet in 1 litre of clean boiled water. Give half to one glass after every watery stool. Homemade alternative: 1 litre water + 6 teaspoons sugar + 1/2 teaspoon salt. Continue normal feeding and breast milk.",
+    "warning_signs": "Sunken eyes, extreme thirst, inability to drink, blood in stool, high fever, or passing very little urine. Rush to Primary Health Centre (PHC) immediately.",
+    "disclaimer": "This is first-aid guidance only, not a clinical diagnosis. Consult your local ASHA worker or doctor if symptoms persist.",
+    "keywords": ["loose motion", "diarrhea", "dast", "ors", "paani ki kami", "dehydration", "pait kharab", "sugar salt solution"]
+  },
+  {
+    "id": "health-heatstroke",
+    "title": "Heatstroke (Loo) Prevention & Emergency First Aid",
+    "domain": "health",
+    "summary": "Working in severe summer heat can cause life-threatening hyperthermia and heat exhaustion.",
+    "home_action": "Move person immediately to shaded cool place. Loosen tight clothes. Apply wet cloth or ice packs to neck, armpits, and groin. Fan vigorously. Sip cool water with a pinch of salt or lemon water / Aam Panna if conscious.",
+    "warning_signs": "High body temperature (>104°F/40°C), lack of sweating despite heat, confusion, slurred speech, unconsciousness, or seizures.",
+    "disclaimer": "Heatstroke is a medical emergency. Administer first aid and transport to nearest hospital immediately.",
+    "keywords": ["loo lagna", "heat stroke", "garmi se chakkar", "giddiness", "sunstroke", "fever in summer", "aam panna"]
+  },
+  {
+    "id": "health-dengue-fever",
+    "title": "Dengue Fever Care, Hydration & Platelet Warning Signs",
+    "domain": "health",
+    "summary": "Dengue is transmitted by daytime Aedes mosquitoes. Fever usually lasts 5 to 7 days.",
+    "home_action": "Strict bed rest and heavy hydration (coconut water, ORS, fresh fruit juices, dal soup, clean water). Take only Paracetamol for high fever (strictly avoid Aspirin or Brufen/Ibuprofen as they increase bleeding risk).",
+    "warning_signs": "Persistent vomiting, severe belly pain, bleeding from gums or nose, black tarry stools, extreme fatigue or cold clammy skin (signs of dengue hemorrhagic fever).",
+    "disclaimer": "Confirm dengue via NS1 Antigen or IgM blood test. Do not take antibiotics. Seek urgent medical supervision.",
+    "keywords": ["dengue", "dengu bukhar", "platelets", "haddi tod bukhar", "breakbone fever", "mosquito fever", "paracetamol"]
+  },
+  {
+    "id": "health-anemia-iron",
+    "title": "Anemia (Khooni Kami) Symptoms & Dietary Management",
+    "domain": "health",
+    "summary": "Low hemoglobin causes chronic fatigue, dizziness, pale skin, and poor immunity, common in women and children.",
+    "home_action": "Eat iron-rich foods: green leafy vegetables (spinach, methi, sarson), jaggery (gur) with roasted chana, beetroot, pomegranate, lentils, and citrus fruits (amla, lemon) to boost iron absorption. Take Iron & Folic Acid (IFA) tablets provided free by ASHA.",
+    "warning_signs": "Shortness of breath on mild exertion, severe dizziness, fainting, swelling in feet. Get a simple CBC/Hemoglobin test done at the PHC.",
+    "disclaimer": "Regular dietary improvement should accompany medical treatment for severe anemia (Hb < 7 g/dL).",
+    "keywords": ["khoon ki kami", "anemia", "pale skin", "gur chana", "iron tablet", "ifa", "hemoglobin kam", "dizziness"]
+  },
+  {
+    "id": "health-maternal-care",
+    "title": "Pregnancy Nutrition & Safe Delivery Care (Janani Suraksha)",
+    "domain": "health",
+    "summary": "Adequate nutrition and at least 4 Ante-Natal Care (ANC) checkups ensure safe childbirth and healthy baby.",
+    "home_action": "Register pregnancy with ASHA within first 12 weeks. Take daily Iron-Folic Acid and Calcium tablets after first trimester. Eat small frequent meals rich in pulses, milk, green vegetables, and eggs. Drink clean boiled water.",
+    "warning_signs": "Vaginal bleeding, severe headache with blurred vision, sudden swelling of hands/face, high fever, or reduced baby kicks. Call 108 ambulance immediately.",
+    "disclaimer": "Always deliver in an authorized government hospital or CHC under Janani Suraksha Yojana for free care and cash assistance.",
+    "keywords": ["garbhavastha", "pregnancy care", "anc checkup", "asha worker", "janani suraksha", "delivery", "fetal movement"]
+  },
+  {
+    "id": "health-infant-vaccination",
+    "title": "Infant Immunization (Mission Indradhanush) Schedule",
+    "domain": "health",
+    "summary": "Timely vaccines protect babies from 12 life-threatening diseases including polio, measles, tetanus, and hepatitis.",
+    "home_action": "At birth: BCG, OPV-0, Hepatitis B-0. At 6, 10, 14 weeks: Pentavalent, OPV, Rotavirus, PCV, IPV. At 9-12 months: MR-1 (Measles-Rubella), PCV booster, Vitamin A. All vaccines are provided 100% free at Anganwadi and PHC on Village Health and Nutrition Days (VHND).",
+    "warning_signs": "Mild fever or swelling at injection site is normal for 24-48 hours. If fever exceeds 102°F or baby does not nurse, consult doctor.",
+    "disclaimer": "Keep Mother and Child Protection (MCP) card safe and bring it to every immunization session.",
+    "keywords": ["vaccination", "teekakaran", "indradhanush", "baby vaccine", "polio", "pentavalent", "anganwadi teeka"]
+  },
+  {
+    "id": "health-diabetes-management",
+    "title": "Blood Sugar (Madhumeha / Diabetes) Control Tips",
+    "domain": "health",
+    "summary": "High blood sugar causes frequent urination, unquenchable thirst, slow wound healing, and eye problems.",
+    "home_action": "Walk at least 30-45 minutes daily. Avoid refined white sugar, sweets, cold drinks, and excess white rice/maida. Eat high-fiber grains (millets, bajra, jowar, whole wheat) and green vegetables. Check fasting and post-meal sugar every month.",
+    "warning_signs": "Sudden confusion, sweet fruity breath, extreme weakness (dangerously high sugar), or sweating with trembling and sudden hunger (hypoglycemia/low sugar - eat 1 spoon sugar or candy immediately).",
+    "disclaimer": "Do not stop or adjust prescribed diabetes medications without consulting your primary doctor.",
+    "keywords": ["sugar", "diabetes", "madhumeha", "blood sugar", "insulin", "sweet urine", "sugar ki bimari", "millets"]
+  },
+  {
+    "id": "health-snakebite-firstaid",
+    "title": "Snakebite Emergency First Aid — DOs and DON'Ts",
+    "domain": "health",
+    "summary": "Snakebites during farm work require prompt medical administration of Anti-Snake Venom (ASV).",
+    "home_action": "Keep the victim calm and completely still. Immobilize the bitten limb with a splint/cloth like a fracture. Keep bite site below heart level. Transport IMMEDIATELY to district hospital or CHC with ASV.",
+    "warning_signs": "DO NOT tie tight tourniquets (causes gangrene). DO NOT cut the wound or try to suck venom. DO NOT apply cow dung or herbal paste. DO NOT waste time visiting faith healers (ojha/tantrik).",
+    "disclaimer": "Only Anti-Snake Venom (ASV) saves lives. Every district hospital has ASV available 24/7 free.",
+    "keywords": ["saanp ka katna", "snake bite", "zeher", "anti snake venom", "khet me saanp", "tourniquet", "asv"]
+  }
+]

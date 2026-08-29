@@ -1,0 +1,122 @@
+[
+  {
+    "id": "civ-ration-onorc",
+    "title": "One Nation One Ration Card (ONORC) & Mera Ration",
+    "domain": "civic",
+    "target_audience": "NFSA ration card holders, migrant laborers, and rural/urban poor families.",
+    "benefits": "Collect entitled subsidized or free foodgrains (wheat/rice) from ANY Fair Price Shop (FPS / Ration Dukan) across India using Aadhaar biometric authentication.",
+    "eligibility": "All NFSA (Priority Household & Antyodaya Anna Yojana) card holders.",
+    "documents_needed": "Ration Card number and Aadhaar linked with ration database.",
+    "how_to_apply": "Download 'Mera Ration' mobile app to find nearest FPS dealer, check monthly quota, or link Aadhaar at Fair Price Shop.",
+    "helpline": "1967 / 1800-180-2087 (National Food Security Portal)",
+    "keywords": ["ration card", "onorc", "mera ration", "free gehu chawal", "fair price shop", "ration dukan", "khadya suraksha"]
+  },
+  {
+    "id": "civ-voter-id-registration",
+    "title": "Voter ID Card Online Registration & Correction (Form 6/8)",
+    "domain": "civic",
+    "target_audience": "Citizens who completed 18 years of age or need address change/corrections on EPIC card.",
+    "benefits": "Constitutional right to vote in General, State, and Panchayat elections with digital downloadable e-EPIC card on mobile phone.",
+    "eligibility": "Indian citizens aged 18+ on qualifying dates (Jan 1, Apr 1, Jul 1, Oct 1).",
+    "documents_needed": "Passport photo, Proof of Age (Birth Certificate/Aadhaar/10th Marksheet), Proof of Ordinary Residence (Electricity bill/Aadhaar/Rent receipt).",
+    "how_to_apply": "Apply on voters.eci.gov.in (ECI Voters Portal) or Voter Helpline Mobile App using Form 6 (new voter) or Form 8 (shifting/correction).",
+    "helpline": "1950 (Election Commission of India Voter Helpline)",
+    "keywords": ["voter id", "epic card", "form 6", "vote banwana", "voter list name check", "voter helpline 1950", "chunav card"]
+  },
+  {
+    "id": "civ-electricity-water-grievance",
+    "title": "Electricity Outage (1912) & Municipal Water Grievance",
+    "domain": "civic",
+    "target_audience": "Residents experiencing prolonged power blackouts, transformer failure, or tap water supply contamination.",
+    "benefits": "Direct registration of electricity outage tickets with DISCOM control room and automated lineman dispatch for rapid power restoration.",
+    "eligibility": "All domestic, agricultural, and commercial power consumers.",
+    "documents_needed": "Consumer Account Number (CA number / Consumer ID on electricity bill).",
+    "how_to_apply": "Dial 1912 (National Electricity Emergency Helpline) or state DISCOM toll-free number from any registered mobile phone.",
+    "helpline": "1912 (Electricity Outage & Fuse Call National Helpline)",
+    "keywords": ["bijli complaint", "1912 helpline", "power cut complaint", "transformer fuse", "electricity meter problem", "pani supply issue"]
+  },
+  {
+    "id": "civ-csc-edistrict-certificates",
+    "title": "Common Service Centers (CSC) & e-District Certificates",
+    "domain": "civic",
+    "target_audience": "Citizens needing Income, Caste, Domicile, Birth, or Death certificates.",
+    "benefits": "Legally valid, digitally signed government certificates issued within statutory timeframe without visiting government offices repeatedly.",
+    "eligibility": "All residents of the respective state/district.",
+    "documents_needed": "Aadhaar Card, Passport photo, Self-declaration/Pradhan report, Land/Tax receipt, Old family caste certificate (if caste applied).",
+    "how_to_apply": "Visit nearest CSC Village Level Entrepreneur (VLE) or apply directly on state e-District portal (e.g. edistrict.up.gov.in, etc.).",
+    "helpline": "14599 (CSC Helpdesk)",
+    "keywords": ["caste certificate", "income certificate", "domicile niwas praman patra", "csc center", "edistrict", "janam praman patra"]
+  },
+  {
+    "id": "civ-swachhata-civic-complaint",
+    "title": "Swachhata App for Garbage, Street Light & Drainage Issues",
+    "domain": "civic",
+    "target_audience": "Urban and rural residents facing uncollected garbage, open drains, dead animal removal, or broken streetlights.",
+    "benefits": "Geotagged photo-based complaint directly assigned to local municipality sanitary inspector with mandatory resolution within 24 to 48 hours.",
+    "eligibility": "Any citizen living in municipal corporation, municipality, or cantonment board limits.",
+    "documents_needed": "Mobile phone with camera and GPS location.",
+    "how_to_apply": "Download 'Swachhata-MoHUA' app, take photo of garbage dump/pothole/streetlight, and submit in 1 click.",
+    "helpline": "1969 (Swachh Bharat Helpline)",
+    "keywords": ["swachhata app", "garbage complaint", "safai shikayat", "street light kharab", "nagar nigam complaint", "pothole road repair"]
+  },
+  {
+    "id": "civ-uts-railway-unreserved-tickets",
+    "title": "UTS on Mobile App for Unreserved Train & Platform Tickets",
+    "domain": "civic",
+    "target_audience": "Railway commuters taking general unreserved coaches, passenger trains, and suburban local trains.",
+    "benefits": "Skip long ticket counter queues at railway stations, book paperless unreserved train tickets and platform tickets in seconds, with 3% wallet bonus on R-Wallet recharge.",
+    "eligibility": "All railway passengers with Android or iOS smartphone.",
+    "documents_needed": "Mobile number for registration.",
+    "how_to_apply": "Download 'UTS' app by CRIS, keep GPS on, book within 50 meters to 5 km radius outside railway track zone.",
+    "helpline": "139 (Indian Railways All-in-One Helpline)",
+    "keywords": ["uts app", "railway general ticket", "local train ticket", "platform ticket on mobile", "irctc unreserved", "train ticket bina line"]
+  },
+  {
+    "id": "civ-aadhaar-update-uidai",
+    "title": "Aadhaar Card Update, Correction & PVC Card Ordering",
+    "domain": "civic",
+    "target_audience": "Citizens needing mobile number linking, address update, or physical durable PVC Aadhaar card.",
+    "benefits": "Keep Aadhaar biometric and demographic data current for smooth DBT welfare benefits, bank account operation, and SIM card verification.",
+    "eligibility": "All Aadhaar holders.",
+    "documents_needed": "Proof of Address (Electricity bill, Ration card, Passport, Bank passbook) for address update.",
+    "how_to_apply": "Update address online on myaadhaar.uidai.gov.in. For mobile number / biometric update, visit nearest Aadhaar Seva Kendra / Post Office.",
+    "helpline": "1947 (UIDAI Toll-Free Helpline)",
+    "keywords": ["aadhaar update", "myaadhaar", "pvc aadhaar card", "aadhaar mobile link", "uidai 1947", "pata change aadhaar"]
+  },
+  {
+    "id": "civ-digilocker-digital-documents",
+    "title": "DigiLocker Government Verified Digital Documents Wallet",
+    "domain": "civic",
+    "target_audience": "Students, drivers, and citizens wanting paperless official documents.",
+    "benefits": "Legally valid digital copies of Driving License, Vehicle RC, Insurance, 10th/12th Marksheet, Caste Certificate, and PAN card under Rule 9A of IT Rules 2016.",
+    "eligibility": "Any citizen having Aadhaar linked with mobile number.",
+    "documents_needed": "Aadhaar Number and OTP.",
+    "how_to_apply": "Sign up on digilocker.gov.in or DigiLocker app, search issuing authority, and pull verified digital certificates.",
+    "helpline": "011-24303714",
+    "keywords": ["digilocker", "digital driving license", "vehicle rc digital", "marksheet download", "official document wallet", "paperless id"]
+  },
+  {
+    "id": "civ-pm-awaas-urban-rural-status",
+    "title": "Pradhan Mantri Awas Yojana (PMAY) House Construction & Geo-Tagging",
+    "domain": "civic",
+    "target_audience": "Homeless families or families living in kutcha/dilapidated houses in rural or urban areas.",
+    "benefits": "Financial assistance of ₹1.20 Lakh (plains) to ₹1.30 Lakh (hilly areas) for PMAY-Gramin, plus 90-95 days of MGNREGA wages and ₹12,000 for toilet construction.",
+    "eligibility": "Deprived households listed in Socio-Economic Caste Census (SECC) or Awaas+ list with no pucca house anywhere in India.",
+    "documents_needed": "Aadhaar Card, Bank Account, Land/Patta document, MGNREGA Job Card.",
+    "how_to_apply": "PMAY-G selection is done through Gram Sabha. Track instalment release on pmayg.nic.in via registration number.",
+    "helpline": "1800-11-6446 (PMAY-G) / 1800-11-3377 (PMAY-U)",
+    "keywords": ["pmay", "pm awas yojana", "pucca makan yojana", "awaas plus list", "house installment status", "gramin awas"]
+  },
+  {
+    "id": "civ-senior-citizen-railway-concession-pass",
+    "title": "Bus & Public Transit Passes for Senior Citizens, Students & Divyangjan",
+    "domain": "civic",
+    "target_audience": "Senior citizens (60+), students, and persons with disabilities using state transport buses (SRTC).",
+    "benefits": "Concession of 50% to 100% on state road transport buses (KSRTC, UPSRTC, PRTC, MSRTC, DTC etc.) and dedicated priority seating.",
+    "eligibility": "Senior citizens, bonafide school/college students, and Divyangjan with UDID card.",
+    "documents_needed": "Age proof / UDID card / School ID, Passport photo, Residence proof.",
+    "how_to_apply": "Apply at local State Roadways Bus Depot pass counter or state roadways portal.",
+    "helpline": "State Roadways Customer Care",
+    "keywords": ["bus pass concession", "senior citizen bus pass", "student bus pass", "divyang bus pass", "roadways bus discount"]
+  }
+]

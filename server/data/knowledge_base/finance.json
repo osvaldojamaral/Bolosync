@@ -1,0 +1,122 @@
+[
+  {
+    "id": "fin-pm-jan-dhan",
+    "title": "Pradhan Mantri Jan Dhan Yojana (PMJDY) Zero Balance Bank Account",
+    "domain": "finance",
+    "target_audience": "Unbanked individuals and rural/urban households.",
+    "benefits": "Zero minimum balance requirement, free RuPay debit card, ₹2,00,000 accidental insurance cover, and overdraft facility up to ₹10,000 after satisfactory account operation.",
+    "eligibility": "Any Indian resident aged 10+ years without an existing bank account.",
+    "documents_needed": "Aadhaar Card, Mobile Number, Passport photo (or Voter ID/NREGA card if Aadhaar not available).",
+    "how_to_apply": "Visit any public/private commercial bank branch, regional rural bank (RRB), or Bank Mitra (CSP kiosk).",
+    "helpline": "1800-11-0001 / 1800-180-1111 (National Toll-Free)",
+    "keywords": ["jan dhan", "pmjdy", "zero balance account", "bank khata", "rupay card", "overdraft", "free bank account"]
+  },
+  {
+    "id": "fin-upi-safety-basics",
+    "title": "Safe UPI Payments, PIN Rules & Fraud Prevention",
+    "domain": "finance",
+    "target_audience": "Users of Google Pay, PhonePe, Paytm, BHIM, and other UPI apps.",
+    "benefits": "Essential security guidelines: UPI PIN is ONLY needed for SENDING money, NEVER for receiving money. QR codes scanned for receiving payments do not require entering PIN.",
+    "eligibility": "All bank account holders using mobile UPI payments.",
+    "documents_needed": "None.",
+    "how_to_apply": "Never share UPI PIN, OTP, or CVV with anyone. Do not click unknown links claiming 'Cashback won' or 'KYC expire'. In case of fraud, report within 24 hours to 1930.",
+    "helpline": "1930 (National Cyber Crime Reporting Helpline) / 14431 (UPI Helpline)",
+    "keywords": ["upi safety", "upi pin", "gpay phonepe safety", "receive money pin", "qr code scam", "online fraud", "bhim upi"]
+  },
+  {
+    "id": "fin-mudra-loans",
+    "title": "Pradhan Mantri MUDRA Yojana (PMMY) Collateral-Free Loans",
+    "domain": "finance",
+    "target_audience": "Small business owners, shopkeepers, fruit/vegetable vendors, artisans, and service providers.",
+    "benefits": "Collateral-free business loans in 3 categories: Shishu (up to ₹50,000), Kishore (₹50,000 to ₹5 Lakh), and Tarun (₹5 Lakh to ₹10 Lakh / ₹20 Lakh) with affordable interest.",
+    "eligibility": "Non-corporate, non-farm small/micro enterprises engaged in income-generating activities.",
+    "documents_needed": "Identity proof (Aadhaar/Voter ID), Address proof, Business registration/license, Quotation for machinery/items.",
+    "how_to_apply": "Apply through any commercial bank, MFI, NBFC, or online at udyamimitra.in.",
+    "helpline": "1800-180-1111 / State MUDRA Toll-Free",
+    "keywords": ["mudra loan", "shishu kishore tarun", "collateral free loan", "shop loan", "business credit", "dukan loan mudra"]
+  },
+  {
+    "id": "fin-pmsby-accident-insurance",
+    "title": "Pradhan Mantri Suraksha Bima Yojana (PMSBY) - ₹20/Year Accident Insurance",
+    "domain": "finance",
+    "target_audience": "Savings bank account holders aged 18 to 70 years.",
+    "benefits": "₹2,00,000 cover for accidental death or permanent total disability, and ₹1,00,000 for permanent partial disability for an annual premium of just ₹20 auto-debited once a year.",
+    "eligibility": "Individual bank account holders aged 18-70 years with active Aadhaar link.",
+    "documents_needed": "Bank account number, Aadhaar card, Consent form for auto-debit.",
+    "how_to_apply": "Submit auto-debit consent form at your bank branch, via netbanking/mobile banking, or through SMS.",
+    "helpline": "1800-180-1111 / 1800-110-001",
+    "keywords": ["pmsby", "suraksha bima", "20 rupees insurance", "accident insurance", "durghatna bima", "accidental death cover"]
+  },
+  {
+    "id": "fin-pmjjby-life-insurance",
+    "title": "Pradhan Mantri Jeevan Jyoti Bima Yojana (PMJJBY) - Life Insurance",
+    "domain": "finance",
+    "target_audience": "Savings bank account holders aged 18 to 50 years.",
+    "benefits": "₹2,00,000 life insurance coverage for death due to any cause for an annual premium of ₹436 per year auto-debited from bank account.",
+    "eligibility": "All bank account holders aged 18-50 years with auto-debit consent.",
+    "documents_needed": "Aadhaar Card, Bank Passbook, Nominee details.",
+    "how_to_apply": "Enroll at your bank branch or through mobile banking before 31st May each year for coverage from June 1st to May 31st.",
+    "helpline": "1800-180-1111",
+    "keywords": ["pmjjby", "jeevan jyoti bima", "life insurance", "436 rupees bima", "death cover", "nominee claim", "term insurance"]
+  },
+  {
+    "id": "fin-atal-pension-yojana",
+    "title": "Atal Pension Yojana (APY) Guaranteed Monthly Old-Age Pension",
+    "domain": "finance",
+    "target_audience": "Unorganized sector workers and citizens aged 18 to 40 years.",
+    "benefits": "Guaranteed lifetime monthly pension of ₹1,000, ₹2,000, ₹3,000, ₹4,000, or ₹5,000 starting from age 60. Same pension continues to spouse after subscriber's demise.",
+    "eligibility": "All Indian citizens aged 18-40 years with a savings bank account (non-income tax payers).",
+    "documents_needed": "Aadhaar Card, Savings Bank Account, Nominee Details.",
+    "how_to_apply": "Enroll at your bank branch or through netbanking. Monthly contribution starts as low as ₹42/month depending on age.",
+    "helpline": "1800-110-069 (PFRDA Toll-Free)",
+    "keywords": ["atal pension", "apy", "monthly pension", "old age pension", "pfrda", "pension scheme 60 years", "retire pension"]
+  },
+  {
+    "id": "fin-aeps-aadhaar-banking",
+    "title": "AePS (Aadhaar Enabled Payment System) & Micro-ATM",
+    "domain": "finance",
+    "target_audience": "Rural citizens wanting cash withdrawal and deposit without visiting far bank branches.",
+    "benefits": "Cash withdrawal, cash deposit, balance enquiry, and mini-statement using only your Aadhaar number and fingerprint biometric at any CSC or local Bank Mitra.",
+    "eligibility": "Any person whose bank account is linked to Aadhaar.",
+    "documents_needed": "Aadhaar number and fingerprint verification.",
+    "how_to_apply": "Visit any authorized Bank Correspondent (BC), CSC kiosk, or India Post Payments Bank (IPPB) postman.",
+    "helpline": "155299 (India Post Payments Bank) / 1947 (UIDAI)",
+    "keywords": ["aeps", "aadhaar atm", "fingerprint money withdrawal", "bank mitra", "csp", "micro atm", "post office bank"]
+  },
+  {
+    "id": "fin-scam-warnings-digital-arrest",
+    "title": "Protection Against Fake Police/CBI 'Digital Arrest' & KYC Scams",
+    "domain": "finance",
+    "target_audience": "All citizens using smartphones and receiving suspicious video calls or SMS.",
+    "benefits": "Crucial awareness: No government agency (Police, CBI, ED, RBI, Customs) conducts 'Digital Arrest' over WhatsApp/Skype or asks to transfer money for 'verification'.",
+    "eligibility": "All citizens.",
+    "documents_needed": "Screenshot of caller number, transaction reference ID (UTR).",
+    "how_to_apply": "If you receive a threatening video call or fake parcel call, immediately disconnect and report to cybercrime.gov.in or call 1930 without panic.",
+    "helpline": "1930 (National Cyber Crime Helpline) / 14440 (RBI Sachet Fraud Alert)",
+    "keywords": ["digital arrest scam", "fake police call", "cbi video call scam", "kyc fraud", "lottery scam", "cybercrime 1930", "freeze account"]
+  },
+  {
+    "id": "fin-pm-svanidhi-street-vendors",
+    "title": "PM SVANidhi Micro-Credit for Urban & Peri-Urban Street Vendors",
+    "domain": "finance",
+    "target_audience": "Street vendors, hawkers, cart pullers, and roadside food stall owners.",
+    "benefits": "Initial working capital loan of ₹10,000 without collateral. On timely repayment, enhanced loans of ₹20,000 and ₹50,000 with 7% interest subsidy and cashback on digital transactions.",
+    "eligibility": "Street vendors holding Certificate of Vending / ID Card issued by Urban Local Bodies (ULBs).",
+    "documents_needed": "Aadhaar Card, Vending ID / Survey Reference Number, Bank Account.",
+    "how_to_apply": "Apply online at pmsvanidhi.mohua.gov.in or through Urban Local Body (Nagar Nigam) / CSC.",
+    "helpline": "1800-11-1979",
+    "keywords": ["pm svanidhi", "street vendor loan", "thela loan", "10000 loan vendor", "rehri loan", "urban micro loan"]
+  },
+  {
+    "id": "fin-sukanya-samriddhi",
+    "title": "Sukanya Samriddhi Yojana (SSY) High-Interest Savings for Girl Child",
+    "domain": "finance",
+    "target_audience": "Parents of girl children aged up to 10 years.",
+    "benefits": "Highest sovereign guaranteed interest rate (approx. 8.2% p.a.), tax exemption under Section 80C, and maturity corpus for higher education and marriage after age 18/21.",
+    "eligibility": "Girl child residing in India up to age 10. Maximum 2 accounts per family.",
+    "documents_needed": "Girl child birth certificate, Parent's KYC (Aadhaar & PAN), Address proof.",
+    "how_to_apply": "Open account at any Post Office branch or designated commercial bank with minimum ₹250 deposit.",
+    "helpline": "1800-266-6868 (India Post Helpdesk)",
+    "keywords": ["sukanya samriddhi", "ssy", "girl child savings", "post office scheme", "beti padhao scheme", "high interest account"]
+  }
+]

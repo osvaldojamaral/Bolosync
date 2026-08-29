@@ -1,0 +1,122 @@
+[
+  {
+    "id": "scheme-pm-kisan",
+    "title": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+    "domain": "scheme",
+    "target_audience": "Small and marginal farmers across India",
+    "benefits": "₹6,000 per year directly transferred to bank accounts in three equal installments of ₹2,000 every 4 months.",
+    "eligibility": "All landholding farmer families who have cultivable land in their names. Excludes institutional landholders, high-income taxpayers, and government employees.",
+    "documents_needed": "Aadhaar Card, Bank Account linked to Aadhaar (eKYC completed), Land Ownership records (Khasra/Khatauni), Mobile Number.",
+    "how_to_apply": "Apply online at pmkisan.gov.in or visit the nearest Common Service Centre (CSC) or Agriculture Office.",
+    "helpline": "155261 / 011-24300606",
+    "keywords": ["pm kisan", "kisan samman", "6000 rupees", "farmer money", "installment", "kist", "ekyc", "pmkisan", "financial assistance"]
+  },
+  {
+    "id": "scheme-pmfby",
+    "title": "Pradhan Mantri Fasal Bima Yojana (PMFBY)",
+    "domain": "scheme",
+    "target_audience": "Farmers growing notified crops in notified areas facing crop damage.",
+    "benefits": "Comprehensive crop insurance covering yield loss due to non-preventable natural risks (drought, flood, pests, storms). Premium is only 2% for Kharif crops, 1.5% for Rabi, and 5% for commercial/horticultural crops.",
+    "eligibility": "All farmers including sharecroppers and tenant farmers growing notified crops.",
+    "documents_needed": "Land sowing certificate (Patwari/Revenue official), Land possession certificate/Rent agreement, Aadhaar Card, Bank Passbook.",
+    "how_to_apply": "Enroll through pmfby.gov.in, your bank branch, cooperative society, or CSC within the cut-off date. Claim within 72 hours of crop damage via Crop Insurance App.",
+    "helpline": "14447 (Crop Insurance Toll-Free)",
+    "keywords": ["fasal bima", "crop insurance", "crop damage", "flood compensation", "drought loss", "insurance claim", "kharif rabi"]
+  },
+  {
+    "id": "scheme-pmjay",
+    "title": "Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana (PM-JAY)",
+    "domain": "scheme",
+    "target_audience": "Bottom 40% vulnerable and low-income families in rural and urban India.",
+    "benefits": "Free cashless health insurance cover up to ₹5,00,000 per family per year for secondary and tertiary hospitalization in empaneled public and private hospitals.",
+    "eligibility": "Identified by Socio-Economic Caste Census (SECC 2011) or state welfare rolls. No restriction on family size or age.",
+    "documents_needed": "Ayushman Card (Golden Card), Aadhaar Card, Ration Card.",
+    "how_to_apply": "Check eligibility at beneficiaries.nha.gov.in or visit any Ayushman Arogya Mandir / empaneled hospital with Aadhaar and Ration card to create Ayushman Card.",
+    "helpline": "14555",
+    "keywords": ["ayushman bharat", "pmjay", "5 lakh hospital", "golden card", "free surgery", "free treatment", "swasthya bima"]
+  },
+  {
+    "id": "scheme-kcc",
+    "title": "Kisan Credit Card (KCC) Scheme",
+    "domain": "scheme",
+    "target_audience": "Farmers, animal husbandry rearers, and fishers.",
+    "benefits": "Short-term credit for crop cultivation at subsidized interest rate of 4% (effective with prompt repayment subvention) up to ₹3 Lakh. Collateral-free loan up to ₹1.60 Lakh.",
+    "eligibility": "Individual/joint cultivators, tenant farmers, oral lessees, and Self-Help Groups.",
+    "documents_needed": "Duly filled application, Land records (7/12 extract or Jamabandi), Aadhaar, PAN or Voter ID, Passport photo.",
+    "how_to_apply": "Apply at any rural, commercial bank branch or cooperative bank, or through PM-KISAN portal (KCC link).",
+    "helpline": "1800-180-1551 (Kisan Call Centre)",
+    "keywords": ["kcc", "kisan credit card", "crop loan", "low interest loan", "agriculture loan", "karza", "bank loan for farming"]
+  },
+  {
+    "id": "scheme-pm-kusum",
+    "title": "PM KUSUM Solar Pump Scheme",
+    "domain": "scheme",
+    "target_audience": "Individual farmers, farmer groups, cooperatives, water user associations.",
+    "benefits": "Up to 60% subsidy for installing standalone solar agriculture pumps (Component B) or solarizing existing grid-connected pumps (Component C). Extra electricity can be sold back to DISCOM.",
+    "eligibility": "Farmers with agricultural land seeking day-time uninterrupted power and replacement of diesel pumps.",
+    "documents_needed": "Aadhaar Card, Land ownership document, Bank account passbook, Electricity bill (for grid pump solarization).",
+    "how_to_apply": "Apply through State Renewable Energy Development Agencies (e.g., PEDA in Punjab, UPNEDA in UP) or state agriculture portals.",
+    "helpline": "1800-180-3333",
+    "keywords": ["kusum", "solar pump", "solar panel", "diesel pump replacement", "irrigation subsidy", "bijli pump", "tubewell"]
+  },
+  {
+    "id": "scheme-pm-awas-gramin",
+    "title": "Pradhan Mantri Awas Yojana - Gramin (PMAY-G)",
+    "domain": "scheme",
+    "target_audience": "Houseless families and those living in kutcha or dilapidated houses in rural areas.",
+    "benefits": "Financial assistance of ₹1.20 Lakh in plain areas and ₹1.30 Lakh in hilly/difficult areas for constructing a permanent pucca house with toilet, plus 90 days MGNREGA wages.",
+    "eligibility": "Identified through SECC 2011 and Awaas+ list verified by Gram Sabha.",
+    "documents_needed": "Aadhaar Card, Bank account details, Job Card (MGNREGA), Land document.",
+    "how_to_apply": "Selected beneficiaries are verified by Gram Panchayat and Block Development Office (BDO).",
+    "helpline": "1800-11-6446",
+    "keywords": ["pm awas", "awas yojana", "pucca makan", "ghar banane ke paise", "rural housing", "house grant", "colony"]
+  },
+  {
+    "id": "scheme-ujjwala",
+    "title": "Pradhan Mantri Ujjwala Yojana (PMUY 2.0)",
+    "domain": "scheme",
+    "target_audience": "Adult women belonging to BPL / economically weaker rural households.",
+    "benefits": "Deposit-free LPG cylinder connection, free stove (hotplate), free first cylinder refill, and ongoing targeted subsidy of ₹300 per refill.",
+    "eligibility": "Adult woman from eligible BPL / rural poor households without an existing LPG connection in the home.",
+    "documents_needed": "Aadhaar Card of applicant and adult family members, Ration Card, Bank Passbook linked to Aadhaar.",
+    "how_to_apply": "Apply at nearest LPG distributor (Indane, Bharatgas, HP Gas) or online at pmuy.gov.in.",
+    "helpline": "1906 / 1800-266-6696",
+    "keywords": ["ujjwala", "free gas", "lpg connection", "gas cylinder", "stove", "chulha", "subsidy refill"]
+  },
+  {
+    "id": "scheme-soil-health",
+    "title": "Soil Health Card Scheme",
+    "domain": "scheme",
+    "target_audience": "All farmers wanting to know soil fertility and optimize fertilizer costs.",
+    "benefits": "Free testing of 12 critical soil parameters (N, P, K, S, Zinc, Iron, Cu, Mn, Boron, pH, EC, OC) and customized dosage recommendations for urea/DAP to cut fertilizer costs by 20-30%.",
+    "eligibility": "Every agricultural landholder.",
+    "documents_needed": "Land details, Soil sample collected from field with assistance of Krishi Sahayak.",
+    "how_to_apply": "Contact local Agriculture Extension Officer or Krishi Vigyan Kendra (KVK) to have soil sampled.",
+    "helpline": "1800-180-1551",
+    "keywords": ["soil health card", "mitti ki jaanch", "fertilizer test", "urea recommendation", "dap test", "soil sample"]
+  },
+  {
+    "id": "scheme-eshram",
+    "title": "e-Shram Card for Unorganized Workers",
+    "domain": "scheme",
+    "target_audience": "Agricultural laborers, street vendors, domestic workers, construction laborers aged 16-59.",
+    "benefits": "Universal 12-digit UAN card, ₹2 Lakh accidental death cover (under PMSBY), direct access to state and central social security welfare schemes.",
+    "eligibility": "Unorganized workers not paying income tax and not enrolled in EPFO/ESIC.",
+    "documents_needed": "Aadhaar number linked with active mobile number, Bank Account details.",
+    "how_to_apply": "Self-register on eshram.gov.in or visit any CSC centre.",
+    "helpline": "14434",
+    "keywords": ["eshram", "e shram card", "labor card", "majdoor bima", "unorganized worker", "uan card"]
+  },
+  {
+    "id": "scheme-sukanya-samriddhi",
+    "title": "Sukanya Samriddhi Yojana (SSY)",
+    "domain": "scheme",
+    "target_audience": "Parents of girl child aged below 10 years.",
+    "benefits": "Highest sovereign government interest rate (currently 8.2% p.a., compounded annually), tax-free maturity amount for girl's higher education and marriage.",
+    "eligibility": "Girl child residing in India up to age 10. Maximum 2 accounts per family.",
+    "documents_needed": "Birth Certificate of girl child, Identity & Address proof of parent/guardian (Aadhaar/PAN).",
+    "how_to_apply": "Open account at any Post Office or authorized commercial bank with minimum ₹250 initial deposit.",
+    "helpline": "1800-266-6868",
+    "keywords": ["sukanya samriddhi", "girl child saving", "beti padhao", "post office saving", "8.2 percent interest"]
+  }
+]
