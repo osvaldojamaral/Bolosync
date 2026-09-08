@@ -23,7 +23,7 @@ async function startServer() {
   app.use(express.urlencoded({ extended: true, limit: "30mb" }));
 
   // 1. Health check endpoint
-  app.get("/api/health", (req, res) => {
+  app.get("/api/health", (_req, res) => {
     res.json({
       status: "ok",
       service: "BoloSync Voice Pipeline API",
@@ -299,7 +299,7 @@ async function startServer() {
   });
 
   // 4. Query History & Metrics endpoint
-  app.get("/api/history", (req, res) => {
+  app.get("/api/history", (_req, res) => {
     const logs = db.getLogs();
     const stats = {
       total_queries: logs.length,
@@ -327,13 +327,13 @@ async function startServer() {
     res.json({ stats, history: logs });
   });
 
-  app.delete("/api/history", (req, res) => {
+  app.delete("/api/history", (_req, res) => {
     db.clearLogs();
     res.json({ message: "History cleared successfully." });
   });
 
   // 5. Voice-Confirmed Transaction Demo endpoints
-  app.get("/api/transactions", (req, res) => {
+  app.get("/api/transactions", (_req, res) => {
     res.json(db.getTransactions());
   });
 
@@ -357,21 +357,21 @@ async function startServer() {
 
   // 6. IVR Call Simulation endpoint
   app.post("/api/ivr/dial", async (req, res) => {
-    const { language = "hi", menuOption = "1", query = "" } = req.body;
+    const { language = "hi", menuOption = "1" } = req.body;
 
     const menuPrompts: Record<string, Record<string, string>> = {
       hi: {
-        "1": "सरकारी योजनाओं की जानकारी के लिए कृपया अपनी योजना का नाम बोलें।",
+        "1": "आपने सरकारी योजनाएं चुनी हैं। अपना सवाल बोलें, मैं आपकी मदद करूंगी।",
         "2": "प्राथमिक स्वास्थ्य और प्राथमिक उपचार की जानकारी के लिए अपनी समस्या बताएं।",
         "3": "फसल सलाह, कीट नियंत्रण और कृषि जानकारी के लिए अपनी फसल का नाम बोलें।",
       },
       pa: {
-        "1": "ਸਰਕਾਰੀ ਸਕੀਮਾਂ ਦੀ ਜਾਣਕਾਰੀ ਲਈ ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੀ ਸਕੀਮ ਦਾ ਨਾਮ ਬੋਲੋ।",
+        "1": "ਤੁਸੀਂ ਸਰਕਾਰੀ ਸਕੀਮਾਂ ਚੁਣੀਆਂ ਹਨ। ਆਪਣਾ ਸਵਾਲ ਬੋਲੋ, ਮੈਂ ਤੁਹਾਡੀ ਮਦਦ ਕਰਾਂਗੀ।",
         "2": "ਮੁੱਢਲੀ ਸਿਹਤ ਅਤੇ ਫਸਟ ਏਡ ਲਈ ਆਪਣੀ ਸਮੱਸਿਆ ਦੱਸੋ।",
         "3": "ਫ਼ਸਲ ਸਲਾਹ, ਕੀੜੇ-ਮਕੌੜੇ ਅਤੇ ਖੇਤੀਬਾੜੀ ਜਾਣਕਾਰੀ ਲਈ ਆਪਣੀ ਫ਼ਸਲ ਦਾ ਨਾਮ ਬੋਲੋ।",
       },
       en: {
-        "1": "For government welfare schemes, please speak the scheme name.",
+        "1": "You selected government schemes. Speak your question and I will help you.",
         "2": "For basic health guidance and first aid, please describe your symptom.",
         "3": "For farming advisories and crop health, please speak your crop name.",
       },
@@ -552,7 +552,7 @@ async function startServer() {
   } else {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));
-    app.get("*", (req, res) => {
+    app.get("*", (_req, res) => {
       res.sendFile(path.join(distPath, "index.html"));
     });
   }

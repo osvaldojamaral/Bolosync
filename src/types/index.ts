@@ -93,18 +93,6 @@ export interface KnowledgeItem {
   organic_method?: string;
 }
 
-export interface VoiceTransaction {
-  id: string;
-  timestamp: string;
-  title: string;
-  recipient: string;
-  amount_inr: number;
-  purpose: string;
-  status: "pending" | "confirmed" | "rejected";
-  voice_confirmation_phrase: string;
-  confirmed_at?: string;
-}
-
 export interface ConversationMessage {
   id: string;
   timestamp: string;

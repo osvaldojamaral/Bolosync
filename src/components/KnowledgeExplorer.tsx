@@ -11,11 +11,12 @@ import {
   Scale,
   Building2,
   CloudRain,
-  Sparkles,
-  CheckCircle2,
-  FileText,
   PhoneCall,
   AlertTriangle,
+  ArrowLeft,
+  Database,
+  Filter,
+  SearchX,
   Layers,
 } from "lucide-react";
 import { DomainType, KnowledgeItem } from "../types";
@@ -25,6 +26,24 @@ import { DomainBadge } from "./DomainBadge";
 interface KnowledgeExplorerProps {
   onBackToAssistant?: () => void;
 }
+
+const domainTabs: Array<{
+  id: DomainType | "all";
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+}> = [
+  { id: "all", label: "All topics", icon: Layers },
+  { id: "scheme", label: "Schemes", icon: Landmark },
+  { id: "health", label: "Health", icon: HeartPulse },
+  { id: "farming", label: "Farming", icon: Sprout },
+  { id: "education", label: "Education", icon: GraduationCap },
+  { id: "employment", label: "Employment", icon: Briefcase },
+  { id: "finance", label: "Finance", icon: Wallet },
+  { id: "legal", label: "Legal aid", icon: Scale },
+  { id: "civic", label: "Civic", icon: Building2 },
+  { id: "weather", label: "Weather", icon: CloudRain },
+  { id: "general", label: "General", icon: BookOpen },
+];
 
 export const KnowledgeExplorer: React.FC<KnowledgeExplorerProps> = ({
   onBackToAssistant,
@@ -64,121 +83,143 @@ export const KnowledgeExplorer: React.FC<KnowledgeExplorerProps> = ({
     return str.includes(q);
   });
 
-  const domainTabs: Array<{ id: DomainType | "all"; label: string }> = [
-    { id: "all", label: "All Topics (सभी)" },
-    { id: "scheme", label: "🏛️ Schemes" },
-    { id: "health", label: "❤️ Health" },
-    { id: "farming", label: "🌾 Farming" },
-    { id: "education", label: "📚 Education" },
-    { id: "employment", label: "💼 Employment" },
-    { id: "finance", label: "💰 Finance" },
-    { id: "legal", label: "⚖️ Legal Aid" },
-    { id: "civic", label: "🏙️ Civic Info" },
-    { id: "weather", label: "🌦️ Weather" },
-    { id: "general", label: "💬 General" },
-  ];
+  const activeTab = domainTabs.find((tab) => tab.id === activeDomain) || domainTabs[0];
+  const getItemSummary = (item: KnowledgeItem) =>
+    item.benefits || item.advisory || item.summary || item.problem || "Verified public-service guidance.";
 
   return (
-    <div id="knowledge-explorer-container" className="max-w-6xl mx-auto p-3 sm:p-6 space-y-5">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xs">
+    <div id="knowledge-explorer-container" className="mx-auto max-w-6xl space-y-4 p-3 sm:p-6">
+      <header className="flex flex-col gap-4 border-b border-slate-200 pb-5 dark:border-slate-800 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <div className="flex items-center gap-2">
-            <BookOpen className="w-6 h-6 text-indigo-600" />
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100">
-              Curated RAG Knowledge Base (सत्यापित ज्ञानकोश)
-            </h2>
+          <div className="mb-2 flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
+            <Database className="h-5 w-5" />
+            <span className="text-[11px] font-bold uppercase tracking-[0.18em]">BoloSync knowledge</span>
           </div>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-            Grounded knowledge store used by Gemini across 10 Indian welfare & public service domains.
+          <h2 className="text-2xl font-bold tracking-tight text-slate-950 dark:text-slate-100 sm:text-3xl">
+            Verified public-service guidance
+          </h2>
+          <p className="mt-1 max-w-2xl text-sm text-slate-500 dark:text-slate-400">
+            Browse the evidence used to ground answers across welfare, health, farming and civic services.
           </p>
         </div>
-
         {onBackToAssistant && (
           <button
             type="button"
             onClick={onBackToAssistant}
-            className="px-3.5 py-1.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 text-xs font-semibold hover:bg-indigo-100 transition-colors"
+            className="inline-flex items-center gap-2 self-start rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-700 transition-colors hover:border-indigo-300 hover:text-indigo-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-indigo-600 dark:hover:text-indigo-300 sm:self-auto"
           >
-            ← Back to Voice Assistant
+            <ArrowLeft className="h-3.5 w-3.5" />
+            Voice Assistant
           </button>
         )}
-      </div>
+      </header>
 
-      {/* Domain Filter Pills Scrollable */}
-      <div className="flex items-center gap-1.5 p-1.5 bg-slate-100 dark:bg-slate-800/90 rounded-2xl border border-slate-200/60 dark:border-slate-700/60 overflow-x-auto no-scrollbar">
-        {domainTabs.map((tab) => (
-          <button
-            key={tab.id}
-            type="button"
-            onClick={() => setActiveDomain(tab.id)}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
-              activeDomain === tab.id
-                ? "bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-xs border border-slate-200/80 dark:border-slate-600 font-bold"
-                : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
-
-      {/* Search Input Bar */}
-      <div className="relative">
-        <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-        <input
-          type="text"
-          placeholder="Search by topic, scheme, crop disease, scholarship, legal right, or helpline (e.g., 'PM KISAN', 'NSP', 'UPI', 'Damini', 'ORS')..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-slate-900 dark:text-slate-100"
-        />
-      </div>
-
-      {/* Main Grid: Left list + Right Detail Card */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left Side: Cards List */}
-        <div className="lg:col-span-5 space-y-2.5 max-h-[600px] overflow-y-auto pr-1">
-          {filteredItems.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => setSelectedItem(item)}
-              className={`w-full text-left p-3.5 rounded-xl border transition-all ${
-                selectedItem?.id === item.id
-                  ? "bg-indigo-50/80 dark:bg-indigo-950/40 border-indigo-500 ring-2 ring-indigo-500/20"
-                  : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700"
-              }`}
-            >
-              <div className="flex items-center justify-between mb-1">
-                <DomainBadge domain={item.domain} size="sm" />
-                {item.helpline && (
-                  <span className="text-[10px] text-slate-400 font-mono">
-                    ☎ {item.helpline}
-                  </span>
-                )}
-              </div>
-              <h4 className="font-semibold text-sm text-slate-900 dark:text-slate-100 line-clamp-1">
-                {item.title}
-              </h4>
-              <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mt-1">
-                {item.benefits || item.advisory || item.summary || item.problem || item.description}
-              </p>
-            </button>
-          ))}
-
-          {filteredItems.length === 0 && (
-            <div className="p-8 text-center text-xs text-slate-400 bg-slate-50 dark:bg-slate-900 rounded-xl">
-              No knowledge entries found matching "{searchQuery}".
-            </div>
-          )}
+      <section className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <div className="border-l-2 border-indigo-500 pl-3">
+          <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Entries</p>
+          <p className="mt-0.5 text-xl font-bold text-slate-900 dark:text-slate-100">{items.length}</p>
         </div>
+        <div className="border-l-2 border-emerald-500 pl-3">
+          <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Showing</p>
+          <p className="mt-0.5 text-xl font-bold text-slate-900 dark:text-slate-100">{filteredItems.length}</p>
+        </div>
+        <div className="border-l-2 border-amber-500 pl-3">
+          <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Topic</p>
+          <p className="mt-0.5 truncate text-xl font-bold text-slate-900 dark:text-slate-100">{activeTab.label}</p>
+        </div>
+        <div className="border-l-2 border-slate-400 pl-3">
+          <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Status</p>
+          <p className="mt-0.5 text-xl font-bold text-slate-900 dark:text-slate-100">{isLoading ? "Loading" : "Ready"}</p>
+        </div>
+      </section>
 
-        {/* Right Side: Selected Knowledge Detail Card */}
-        <div className="lg:col-span-7">
+      <section className="space-y-3 border-y border-slate-200 py-4 dark:border-slate-800">
+        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+          <Filter className="h-3.5 w-3.5" />
+          Browse by topic
+        </div>
+        <div className="flex gap-2 overflow-x-auto pb-1">
+          {domainTabs.map((tab) => {
+            const Icon = tab.icon;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveDomain(tab.id)}
+                className={`inline-flex shrink-0 items-center gap-1.5 rounded-lg border px-3 py-2 text-xs font-bold transition-colors ${
+                  activeDomain === tab.id
+                    ? "border-indigo-500 bg-indigo-600 text-white shadow-sm"
+                    : "border-slate-200 bg-white text-slate-600 hover:border-indigo-300 hover:text-indigo-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-indigo-600 dark:hover:text-indigo-300"
+                }`}
+              >
+                <Icon className="h-3.5 w-3.5" />
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
+        <div className="relative">
+          <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+          <input
+            type="text"
+            placeholder="Search schemes, symptoms, crops, services or helplines..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full rounded-lg border border-slate-200 bg-white py-3 pl-10 pr-4 text-sm text-slate-900 outline-none transition-colors placeholder:text-slate-400 focus:border-indigo-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+          />
+        </div>
+      </section>
+
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(280px,0.85fr)_minmax(0,1.5fr)]">
+        <section className="min-w-0">
+          <div className="mb-3 flex items-center justify-between">
+            <div>
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">Knowledge entries</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Select an entry to inspect its evidence.</p>
+            </div>
+            <span className="rounded-full bg-slate-100 px-2 py-1 text-[11px] font-bold text-slate-500 dark:bg-slate-800 dark:text-slate-300">
+              {filteredItems.length}
+            </span>
+          </div>
+          <div className="max-h-[640px] space-y-1.5 overflow-y-auto pr-1">
+            {isLoading ? (
+              Array.from({ length: 6 }).map((_, index) => (
+                <div key={index} className="h-24 animate-pulse rounded-lg border border-slate-200 bg-slate-100 dark:border-slate-800 dark:bg-slate-900" />
+              ))
+            ) : filteredItems.length > 0 ? (
+              filteredItems.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setSelectedItem(item)}
+                  className={`w-full border-l-4 p-3 text-left transition-colors ${
+                    selectedItem?.id === item.id
+                      ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-950/40"
+                      : "border-transparent bg-slate-50 hover:border-slate-300 hover:bg-white dark:bg-slate-900/60 dark:hover:border-slate-700 dark:hover:bg-slate-900"
+                  }`}
+                >
+                  <div className="mb-1 flex items-center justify-between gap-2">
+                    <DomainBadge domain={item.domain} size="sm" />
+                    {item.helpline && <span className="shrink-0 text-[10px] font-mono text-slate-400">{item.helpline}</span>}
+                  </div>
+                  <h4 className="line-clamp-1 text-sm font-bold text-slate-900 dark:text-slate-100">{item.title}</h4>
+                  <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500 dark:text-slate-400">{getItemSummary(item)}</p>
+                </button>
+              ))
+            ) : (
+              <div className="flex flex-col items-center justify-center border border-dashed border-slate-300 py-12 text-center dark:border-slate-700">
+                <SearchX className="mb-2 h-7 w-7 text-slate-400" />
+                <p className="text-sm font-bold text-slate-700 dark:text-slate-200">No entries found</p>
+                <p className="mt-1 text-xs text-slate-500">Try another search term or topic.</p>
+              </div>
+            )}
+          </div>
+        </section>
+
+        <section className="min-w-0">
           {selectedItem ? (
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xs space-y-5">
-              <div className="flex items-start justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
+            <div className="border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+              <div className="flex items-start justify-between gap-3 border-b border-slate-100 p-5 pb-4 dark:border-slate-800">
                 <div>
                   <DomainBadge domain={selectedItem.domain} size="md" />
                   <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-2">
@@ -188,7 +229,7 @@ export const KnowledgeExplorer: React.FC<KnowledgeExplorerProps> = ({
                 {selectedItem.helpline && (
                   <a
                     href={`tel:${selectedItem.helpline.split("/")[0].trim()}`}
-                    className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 shrink-0"
+                    className="inline-flex shrink-0 items-center gap-1 rounded-lg border border-emerald-200 bg-emerald-600 px-3 py-2 text-xs font-bold text-white transition-colors hover:bg-emerald-500 dark:border-emerald-700"
                   >
                     <PhoneCall className="w-3 h-3" />
                     {selectedItem.helpline}
@@ -196,11 +237,10 @@ export const KnowledgeExplorer: React.FC<KnowledgeExplorerProps> = ({
                 )}
               </div>
 
-              {/* General details / benefits */}
-              <div className="space-y-3.5 text-xs sm:text-sm">
+              <div className="space-y-4 p-5 text-xs sm:text-sm">
                 {selectedItem.target_audience && (
                   <div className="text-xs text-slate-600 dark:text-slate-400">
-                    <span className="font-semibold text-slate-800 dark:text-slate-200">Target Beneficiaries: </span>
+                    <span className="font-semibold text-slate-800 dark:text-slate-200">Target beneficiaries: </span>
                     {selectedItem.target_audience}
                   </div>
                 )}
@@ -208,7 +248,7 @@ export const KnowledgeExplorer: React.FC<KnowledgeExplorerProps> = ({
                 {selectedItem.benefits && (
                   <div className="p-3.5 bg-indigo-50/60 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-900/60 rounded-xl">
                     <span className="font-bold text-indigo-900 dark:text-indigo-300 block mb-1">
-                      Key Benefits / Coverage / Direct Assistance:
+                      Benefits and coverage
                     </span>
                     <p className="text-indigo-950 dark:text-indigo-200">
                       {selectedItem.benefits}
@@ -219,7 +259,7 @@ export const KnowledgeExplorer: React.FC<KnowledgeExplorerProps> = ({
                 {selectedItem.eligibility && (
                   <div>
                     <span className="font-bold text-slate-800 dark:text-slate-200 block mb-0.5">
-                      Eligibility Criteria (पात्रता):
+                      Eligibility criteria
                     </span>
                     <p className="text-slate-600 dark:text-slate-400">
                       {selectedItem.eligibility}
@@ -230,7 +270,7 @@ export const KnowledgeExplorer: React.FC<KnowledgeExplorerProps> = ({
                 {selectedItem.documents_needed && (
                   <div>
                     <span className="font-bold text-slate-800 dark:text-slate-200 block mb-0.5">
-                      Required Documents (दस्तावेज):
+                      Required documents
                     </span>
                     <p className="text-slate-600 dark:text-slate-400">
                       {selectedItem.documents_needed}
@@ -241,7 +281,7 @@ export const KnowledgeExplorer: React.FC<KnowledgeExplorerProps> = ({
                 {selectedItem.how_to_apply && (
                   <div>
                     <span className="font-bold text-slate-800 dark:text-slate-200 block mb-0.5">
-                      How to Apply / Take Action (आवेदन / प्रक्रिया):
+                      How to apply
                     </span>
                     <p className="text-slate-600 dark:text-slate-400">
                       {selectedItem.how_to_apply}
@@ -249,11 +289,10 @@ export const KnowledgeExplorer: React.FC<KnowledgeExplorerProps> = ({
                   </div>
                 )}
 
-                {/* Specific Health items */}
                 {selectedItem.domain === "health" && selectedItem.home_action && (
                   <div className="p-3.5 bg-emerald-50/60 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/60 rounded-xl">
                     <span className="font-bold text-emerald-900 dark:text-emerald-300 block mb-1">
-                      Home Care & First Aid Action (प्राथमिक उपचार):
+                      Home care and first aid
                     </span>
                     <p className="text-emerald-950 dark:text-emerald-200">
                       {selectedItem.home_action}
@@ -264,7 +303,7 @@ export const KnowledgeExplorer: React.FC<KnowledgeExplorerProps> = ({
                 {selectedItem.domain === "health" && selectedItem.warning_signs && (
                   <div className="p-3.5 bg-rose-50/60 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-900/60 rounded-xl">
                     <span className="font-bold text-rose-900 dark:text-rose-300 block mb-1">
-                      Red Flag Warning Signs (गंभीर लक्षण - तुरंत अस्पताल जाएं):
+                      Warning signs
                     </span>
                     <p className="text-rose-950 dark:text-rose-200">
                       {selectedItem.warning_signs}
@@ -272,7 +311,6 @@ export const KnowledgeExplorer: React.FC<KnowledgeExplorerProps> = ({
                   </div>
                 )}
 
-                {/* Specific Farming items */}
                 {selectedItem.domain === "farming" && selectedItem.advisory && (
                   <div className="p-3.5 bg-emerald-50/60 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/60 rounded-xl">
                     <span className="font-bold text-emerald-900 dark:text-emerald-300 block mb-1">
@@ -287,7 +325,7 @@ export const KnowledgeExplorer: React.FC<KnowledgeExplorerProps> = ({
                 {selectedItem.domain === "farming" && selectedItem.organic_method && (
                   <div className="p-3 bg-slate-50 dark:bg-slate-800/40 rounded-xl border border-slate-200 dark:border-slate-700">
                     <span className="font-bold text-slate-800 dark:text-slate-200 block mb-0.5">
-                      Organic / Zero-Budget Alternative (जैविक उपाय):
+                      Organic alternative
                     </span>
                     <p className="text-slate-600 dark:text-slate-400">
                       {selectedItem.organic_method}
@@ -303,9 +341,8 @@ export const KnowledgeExplorer: React.FC<KnowledgeExplorerProps> = ({
                 )}
               </div>
 
-              {/* Keywords Tagging for RAG */}
               {selectedItem.keywords && (
-                <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
+                <div className="border-t border-slate-100 p-5 dark:border-slate-800">
                   <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
                     Semantic Indexing Keywords:
                   </span>
@@ -323,11 +360,11 @@ export const KnowledgeExplorer: React.FC<KnowledgeExplorerProps> = ({
               )}
             </div>
           ) : (
-            <div className="p-12 text-center text-slate-400 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-dashed border-slate-200 dark:border-slate-800">
+            <div className="flex min-h-64 items-center justify-center border border-dashed border-slate-300 p-12 text-center text-slate-400 dark:border-slate-700">
               Select a knowledge item on the left to view details.
             </div>
           )}
-        </div>
+        </section>
       </div>
     </div>
   );

@@ -117,6 +117,15 @@ const TOPIC_DETAILS: Record<
   },
 };
 
+const EMERGENCY_HELPLINES: Record<string, { name: string; number: string }> = {
+  "112": { name: "National Emergency Helpline", number: "112" },
+  "108": { name: "National Emergency Ambulance", number: "108" },
+  "100": { name: "Police Emergency", number: "100" },
+  "101": { name: "Fire Emergency", number: "101" },
+  "181": { name: "Women Helpline", number: "181" },
+  "1930": { name: "National Cyber Crime Helpline", number: "1930" },
+};
+
 export function checkNavigationIntent(
   rawTranscript: string,
   context?: {
@@ -196,7 +205,25 @@ export function checkNavigationIntent(
     }
   }
 
-  // 3. Helpline Call Request
+  // 3. Explicit emergency number request. Always confirm before opening the dialer.
+  const emergencyRequest = text.match(
+    /(?:call|dial|phone|ring|contact|कॉल|फोन|मिलाओ|ਕਾਲ|ਫੋਨ)\s*(?:number|नंबर|ਨੰਬਰ)?\s*(112|108|100|101|181|1930)\b/i
+  );
+  if (emergencyRequest) {
+    const emergency = EMERGENCY_HELPLINES[emergencyRequest[1]];
+    return {
+      isNavigation: true,
+      commandType: "call_helpline",
+      targetHelpline: emergency,
+      spokenResponse: {
+        hi: `${emergency.name} ${emergency.number} पर कॉल की जाएगी। क्या मैं अभी डायल करूं? कृपया हाँ या नहीं बोलें।`,
+        pa: `${emergency.name} ${emergency.number} 'ਤੇ ਕਾਲ ਕੀਤੀ ਜਾਵੇਗੀ। ਕੀ ਮੈਂ ਹੁਣੇ ਡਾਇਲ ਕਰਾਂ? ਕਿਰਪਾ ਕਰਕੇ ਹਾਂ ਜਾਂ ਨਹੀਂ ਬੋਲੋ।`,
+        en: `I can connect you to ${emergency.name} at ${emergency.number}. Shall I dial it now? Please say yes or no.`,
+      },
+    };
+  }
+
+  // 4. Helpline Call Request
   if (
     /^(call|call helpline|dial helpline|call the helpline|call kisan|call ambulance|call police|call for scheme|call for health|हेल्पलाइन पर कॉल करो|कॉल करो|हेल्पलाइन मिलाओ|ਨੰਬਰ ਮਿਲਾਓ|ਕਾਲ ਕਰੋ|ਫੋਨ ਕਰੋ)$/i.test(
       text

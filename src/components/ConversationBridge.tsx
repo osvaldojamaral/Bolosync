@@ -14,9 +14,8 @@ import {
   Share2,
   Clock,
   MessageSquare,
-  Sparkle,
 } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { ConversationMessage } from "../types";
 import { sendConversationAudio, sendConversationText } from "../services/api";
 import { useLanguage } from "../services/i18n";
@@ -422,14 +421,14 @@ export const ConversationBridge: React.FC = () => {
 
         audio.onerror = () => {
           activeAudioRef.current = null;
-          fallbackBrowserSpeech(text, langCode, msgId);
+          fallbackBrowserSpeech(text, langCode);
         };
 
         const playPromise = audio.play();
         if (playPromise !== undefined) {
           playPromise.catch((err) => {
             console.warn("Audio autoplay notice:", err);
-            fallbackBrowserSpeech(text, langCode, msgId);
+            fallbackBrowserSpeech(text, langCode);
           });
         }
         return;
@@ -439,10 +438,10 @@ export const ConversationBridge: React.FC = () => {
     }
 
     // 4. Native Browser Speech Synthesis Fallback
-    fallbackBrowserSpeech(text, langCode, msgId);
+    fallbackBrowserSpeech(text, langCode);
   };
 
-  const fallbackBrowserSpeech = (text: string, langCode: string, msgId: string) => {
+  const fallbackBrowserSpeech = (text: string, langCode: string) => {
     if (typeof window === "undefined" || !("speechSynthesis" in window)) {
       setPlayingMessageId(null);
       return;

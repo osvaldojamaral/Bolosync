@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Play, Pause, RotateCcw, Volume2, VolumeX, Sparkles } from "lucide-react";
+import { Play, Pause, RotateCcw, Sparkles } from "lucide-react";
 
 interface AudioPlayerProps {
   textToSpeak: string;
@@ -17,11 +17,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
   onEnded,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
   const [playbackRate, setPlaybackRate] = useState<number>(1.0);
-  const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const speechUtteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
@@ -65,7 +61,6 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
 
     utterance.onend = () => {
       setIsPlaying(false);
-      setProgress(100);
       onEnded?.();
     };
 
@@ -157,11 +152,6 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
     };
   }, []);
 
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
-  };
 
   return (
     <div
@@ -178,19 +168,6 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
           onEnded={() => {
             setIsPlaying(false);
             onEnded?.();
-          }}
-          onTimeUpdate={() => {
-            if (audioRef.current) {
-              setCurrentTime(audioRef.current.currentTime);
-              const dur = audioRef.current.duration || 1;
-              setDuration(dur);
-              setProgress((audioRef.current.currentTime / dur) * 100);
-            }
-          }}
-          onLoadedMetadata={() => {
-            if (audioRef.current) {
-              setDuration(audioRef.current.duration);
-            }
           }}
         />
       )}

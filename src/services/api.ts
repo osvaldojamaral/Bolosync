@@ -2,7 +2,6 @@ import {
   KnowledgeItem,
   VoiceQueryResponse,
   ConversationTranslateResponse,
-  VoiceTransaction,
 } from "../types";
 
 /**
@@ -106,24 +105,6 @@ export async function sendVoiceQueryText(
 }
 
 /**
- * Direct TTS Audio generation helper
- */
-export async function fetchTTSAudio(
-  text: string,
-  language: string = "hi"
-): Promise<{ audio_url: string; provider: string; voice_name: string }> {
-  const response = await fetch("/api/tts", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text, language }),
-  });
-  return parseJsonResponse<{ audio_url: string; provider: string; voice_name: string }>(
-    response,
-    "TTS audio generation failed"
-  );
-}
-
-/**
  * Fetch knowledge base items
  */
 export async function fetchKnowledgeBase(
@@ -136,78 +117,6 @@ export async function fetchKnowledgeBase(
   return parseJsonResponse<{ total: number; items: KnowledgeItem[] }>(
     res,
     "Failed to fetch knowledge base"
-  );
-}
-
-/**
- * Fetch query logs & history
- */
-export async function fetchQueryHistory(): Promise<{
-  stats: {
-    total_queries: number;
-    domains: { scheme: number; health: number; farming: number };
-    languages: { hi: number; pa: number; en: number };
-    avg_latency_ms: number;
-  };
-  history: any[];
-}> {
-  const res = await fetch("/api/history");
-  return parseJsonResponse<{
-    stats: {
-      total_queries: number;
-      domains: { scheme: number; health: number; farming: number };
-      languages: { hi: number; pa: number; en: number };
-      avg_latency_ms: number;
-    };
-    history: any[];
-  }>(res, "Failed to fetch query history");
-}
-
-/**
- * Clear history
- */
-export async function clearQueryHistory(): Promise<void> {
-  await fetch("/api/history", { method: "DELETE" });
-}
-
-/**
- * Fetch mock transactions
- */
-export async function fetchTransactions(): Promise<VoiceTransaction[]> {
-  const res = await fetch("/api/transactions");
-  return parseJsonResponse<VoiceTransaction[]>(
-    res,
-    "Failed to fetch transactions"
-  );
-}
-
-/**
- * Confirm transaction
- */
-export async function confirmTransaction(
-  id: string
-): Promise<{ success: boolean; transaction: VoiceTransaction }> {
-  const res = await fetch(`/api/transactions/${id}/confirm`, {
-    method: "POST",
-  });
-  return parseJsonResponse<{ success: boolean; transaction: VoiceTransaction }>(
-    res,
-    "Failed to confirm transaction"
-  );
-}
-
-/**
- * Reject transaction
- */
-export async function rejectTransaction(
-  id: string
-): Promise<{ success: boolean; transaction: VoiceTransaction }> {
-  const res = await fetch(`/api/transactions/${id}/reject`, {
-    method: "POST",
-  });
-  return parseJsonResponse<{ success: boolean; transaction: VoiceTransaction }>(
-    res,
-    "Failed to reject transaction"
   );
 }
 

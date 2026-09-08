@@ -3,12 +3,7 @@ import {
   Mic,
   Send,
   Trash2,
-  Sparkles,
-  Volume2,
-  Info,
   Radio,
-  ArrowDown,
-  Layers,
   BookOpen,
   PhoneCall,
   X,
@@ -16,19 +11,25 @@ import {
   Compass,
   ArrowLeft,
 } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
-import { ChatMessage, DomainType, LatencyBreakdown, VoiceQueryResponse } from "./types";
-import { sendVoiceQueryAudio, sendVoiceQueryText, fetchQueryHistory, fetchTTSAudio } from "./services/api";
+import { motion } from "motion/react";
+import { ChatMessage, DomainType, VoiceQueryResponse } from "./types";
+import { sendVoiceQueryAudio, sendVoiceQueryText } from "./services/api";
 import { Navbar, NavTab } from "./components/Navbar";
 import { VoiceRecorder } from "./components/VoiceRecorder";
 import { ChatBubble } from "./components/ChatBubble";
-import { PipelineVisualizer } from "./components/PipelineVisualizer";
 import { IVRSimulator } from "./components/IVRSimulator";
 import { KnowledgeExplorer } from "./components/KnowledgeExplorer";
 import { ConversationBridge } from "./components/ConversationBridge";
 import { EmergencyModal } from "./components/EmergencyModal";
 import { SpokenLanguageSelector } from "./components/SpokenLanguageSelector";
 import { LanguageProvider, translate } from "./services/i18n";
+
+const getActionableHelpline = (query: string, answer: string, helpline?: string) => {
+  if (helpline) return helpline;
+  const combinedText = `${query} ${answer}`;
+  const emergencyMatch = combinedText.match(/\b(112|108|100|101|181|1930)\b/);
+  return emergencyMatch?.[1];
+};
 
 const getWelcomeMessage = (langCode: string): ChatMessage => {
   const welcomeByLang = {
@@ -71,13 +72,10 @@ export default function App() {
   const [pipelineStage, setPipelineStage] = useState<
     "idle" | "stt" | "translate_in" | "rag" | "translate_out" | "tts" | "completed"
   >("idle");
-  const [latestLatency, setLatestLatency] = useState<LatencyBreakdown | undefined>(undefined);
   const [manualText, setManualText] = useState<string>("");
-  const [showPipelineDrawer, setShowPipelineDrawer] = useState<boolean>(false);
   const [isEmergencyOpen, setIsEmergencyOpen] = useState<boolean>(false);
   const t = (key: Parameters<typeof translate>[1]) => translate(selectedLanguage, key);
 
-  // Voice Navigation State
   const [currentTopic, setCurrentTopic] = useState<string>("home");
   const [previousTopic, setPreviousTopic] = useState<string>("home");
   const [pendingAction, setPendingAction] = useState<{
@@ -115,7 +113,6 @@ export default function App() {
     }
   }, [messages, activeTab, isProcessing]);
 
-  // Audio Playback Engine
   const playSpokenResponse = (
     text: string,
     langCode: string = "hi",
@@ -175,7 +172,6 @@ export default function App() {
     }
   };
 
-  // Handle recorded voice audio submission
   const handleAudioRecorded = async (audioBlob: Blob, browserTranscript?: string) => {
     if (browserTranscript) {
       await handleSendTextQuery(
@@ -188,7 +184,6 @@ export default function App() {
     const audioBlobUrl = URL.createObjectURL(audioBlob);
     const tempUserMsgId = `user-${Date.now()}`;
 
-    // Add optimistic user message
     const userMsg: ChatMessage = {
       id: tempUserMsgId,
       sender: "user",
@@ -211,7 +206,6 @@ export default function App() {
         conversationContext: getConversationContext(),
       });
 
-      // Update user message with real transcript
       setMessages((prev) =>
         prev.map((m) =>
           m.id === tempUserMsgId
@@ -226,11 +220,9 @@ export default function App() {
         )
       );
 
-      // Handle Navigation Commands if detected
       if (res.is_navigation) {
         handleNavigationCommandResult(res);
       } else {
-        // Regular RAG Answer
         const assistantMsg: ChatMessage = {
           id: res.id,
           sender: "assistant",
@@ -247,17 +239,15 @@ export default function App() {
           sources: res.sources,
           keyPoints: res.key_points,
           suggestions: res.suggestions,
-          helpline: res.helpline,
+          helpline: getActionableHelpline(res.transcript, res.answer_text, res.helpline),
           disclaimer: res.disclaimer,
           latencyBreakdown: res.latency_breakdown,
           ttsProvider: res.tts_provider,
         };
 
-        setLatestLatency(res.latency_breakdown);
         setMessages((prev) => [...prev, assistantMsg]);
         setPipelineStage("completed");
 
-        // Automatically play spoken audio for zero-literacy user
         playSpokenResponse(res.answer_text, res.detected_language, res.answer_audio_url, 1.0);
       }
     } catch (err: any) {
@@ -276,7 +266,6 @@ export default function App() {
     }
   };
 
-  // Handle Navigation Command Results
   const handleNavigationCommandResult = (res: VoiceQueryResponse) => {
     const cmd = res.command_type;
 
@@ -291,7 +280,6 @@ export default function App() {
       });
     } else if (cmd === "confirm_yes") {
       if (pendingAction && pendingAction.helpline) {
-        // Execute helpline dial
         const number = pendingAction.helpline.split("/")[0].trim();
         window.location.href = `tel:${number}`;
         setPendingAction(null);
@@ -310,7 +298,6 @@ export default function App() {
       stopAudioPlayback();
     }
 
-    // Add assistant bubble for command acknowledgment
     const assistantMsg: ChatMessage = {
       id: res.id,
       sender: "assistant",
@@ -333,11 +320,9 @@ export default function App() {
       topic: res.topic,
     };
 
-    setLatestLatency(res.latency_breakdown);
     setMessages((prev) => [...prev, assistantMsg]);
     setPipelineStage("completed");
 
-    // Automatically speak the response
     playSpokenResponse(
       res.answer_text,
       res.detected_language,
@@ -346,7 +331,6 @@ export default function App() {
     );
   };
 
-  // Handle text query submission
   const handleSendTextQuery = async (queryText: string, lang?: string) => {
     const clean = queryText.trim();
     if (!clean || isProcessing) return;
@@ -392,13 +376,12 @@ export default function App() {
           sources: res.sources,
           keyPoints: res.key_points,
           suggestions: res.suggestions,
-          helpline: res.helpline,
+          helpline: getActionableHelpline(clean, res.answer_text, res.helpline),
           disclaimer: res.disclaimer,
           latencyBreakdown: res.latency_breakdown,
           ttsProvider: res.tts_provider,
         };
 
-        setLatestLatency(res.latency_breakdown);
         setMessages((prev) => [...prev, assistantMsg]);
         setPipelineStage("completed");
 
@@ -433,7 +416,6 @@ export default function App() {
     const welcomeMessage = { ...getWelcomeMessage(selectedLanguage), id: `welcome-${Date.now()}` };
     setMessages([welcomeMessage]);
     setLastSpokenText(welcomeMessage.answerText || "");
-    setLatestLatency(undefined);
     setCurrentTopic("home");
     setPendingAction(null);
     stopAudioPlayback();
@@ -445,10 +427,8 @@ export default function App() {
         id="bolosync-app"
         className="min-h-screen flex flex-col bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans selection:bg-indigo-600 selection:text-white"
       >
-      {/* Centralized Audio Element */}
       <audio ref={audioPlayerRef} className="hidden" />
 
-      {/* Spoken Language Selection Modal (On first start or when requested) */}
       {isSpokenLanguageOpen && (
         <SpokenLanguageSelector
           onLanguageSelected={handleLanguageSelectedFromPicker}
@@ -457,23 +437,16 @@ export default function App() {
         />
       )}
 
-      {/* Top Navigation */}
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         selectedLanguage={selectedLanguage}
-        setSelectedLanguage={(lang) => {
-          setSelectedLanguage(lang);
-          try {
-            localStorage.setItem("bolosync_spoken_language", lang);
-          } catch {}
-        }}
+        onLanguageSelected={handleLanguageSelectedFromPicker}
+        onOpenLanguagePicker={() => setIsSpokenLanguageOpen(true)}
         onOpenEmergency={() => setIsEmergencyOpen(true)}
       />
 
-      {/* Main App Container */}
       <main className="flex-1 w-full max-w-6xl mx-auto px-3 sm:px-6 py-3 flex flex-col min-h-0">
-        {/* Render Tab Views */}
         {activeTab === "conversation" ? (
           <ConversationBridge />
         ) : activeTab === "ivr" ? (
@@ -481,12 +454,9 @@ export default function App() {
         ) : activeTab === "knowledge" ? (
           <KnowledgeExplorer onBackToAssistant={() => setActiveTab("assistant")} />
         ) : (
-          /* Voice Assistant Main View with Fixed Bottom Controls */
           <div className="flex-1 min-h-0 max-h-[calc(100vh-5.5rem)] flex flex-col h-[calc(100vh-5.5rem)] max-w-5xl mx-auto w-full relative overflow-hidden">
-            {/* Top Toolbar: Voice-First Location Status, Language Switcher, History & Clear */}
             <div className="relative z-20 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-2.5 sm:p-3 shadow-xs mb-2.5 shrink-0">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-                {/* Voice Navigation Location / Intent Indicator */}
                 <div className="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-300">
                   <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
                     <Compass className="w-3.5 h-3.5 text-indigo-500 animate-spin" />
@@ -509,9 +479,7 @@ export default function App() {
                   )}
                 </div>
 
-                {/* Right Actions: language picker, knowledge base link, and clear */}
                 <div className="flex items-center gap-1.5 self-end sm:self-auto flex-wrap">
-                  {/* Spoken Language Change Trigger */}
                   <button
                     id="open-spoken-language-picker-btn"
                     type="button"
@@ -523,7 +491,6 @@ export default function App() {
                     <span>{t("changeLanguage")}</span>
                   </button>
 
-                  {/* Secondary Knowledge Base Link */}
                   <button
                     id="secondary-knowledge-base-btn"
                     type="button"
@@ -535,7 +502,6 @@ export default function App() {
                     <span className="hidden sm:inline">{t("knowledge")}</span>
                   </button>
 
-                  {/* Clear Button */}
                   <button
                     type="button"
                     onClick={clearChat}
@@ -565,7 +531,11 @@ export default function App() {
                       {t("voiceConfirmation")}
                     </div>
                     <div className="text-sm font-semibold">
-                      {pendingAction.name} ({pendingAction.helpline}) पर कॉल करें?
+                      {selectedLanguage === "en"
+                        ? `Call ${pendingAction.name} (${pendingAction.helpline}) now?`
+                        : selectedLanguage === "pa"
+                          ? `${pendingAction.name} (${pendingAction.helpline}) 'ਤੇ ਹੁਣੇ ਕਾਲ ਕਰੀਏ?`
+                          : `${pendingAction.name} (${pendingAction.helpline}) पर अभी कॉल करें?`}
                     </div>
                     <div className="text-xs text-amber-800 dark:text-amber-200">
                       {t("sayYesNo")}
@@ -600,7 +570,6 @@ export default function App() {
               </motion.div>
             )}
 
-            {/* Middle: Scrollable Conversation Stream */}
             <div
               id="voice-chat-stream-container"
               className="flex-1 min-h-0 overflow-y-auto px-2 sm:px-3 py-2 space-y-3 rounded-2xl bg-slate-50/50 dark:bg-slate-900/30 border border-slate-200/60 dark:border-slate-800/60 mb-2.5"
@@ -609,7 +578,6 @@ export default function App() {
                 <ChatBubble key={msg.id} message={msg} />
               ))}
 
-              {/* Live Processing Indicator */}
               {isProcessing && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -637,12 +605,10 @@ export default function App() {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* FIXED BOTTOM SECTION: Ultra-Compact Voice Recorder & Text Input Dock */}
             <div
               id="assistant-fixed-bottom-dock"
               className="relative z-20 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-2xl p-2 sm:p-2.5 shadow-lg shrink-0 space-y-2"
             >
-              {/* Primary Compact Voice Recorder with One-Button Quick Repeat */}
               <VoiceRecorder
                 onAudioRecorded={handleAudioRecorded}
                 isProcessing={isProcessing}
@@ -653,7 +619,6 @@ export default function App() {
                 onStopAudio={stopAudioPlayback}
               />
 
-              {/* Manual Text Input Bar */}
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -683,7 +648,6 @@ export default function App() {
         )}
       </main>
 
-      {/* Emergency & Citizen Helplines Modal */}
       <EmergencyModal
         isOpen={isEmergencyOpen}
         onClose={() => setIsEmergencyOpen(false)}

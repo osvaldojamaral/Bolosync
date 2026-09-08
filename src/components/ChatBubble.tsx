@@ -16,12 +16,10 @@ import { useLanguage } from "../services/i18n";
 
 interface ChatBubbleProps {
   message: ChatMessage;
-  onHelplineClick?: (helpline: string) => void;
 }
 
 export const ChatBubble: React.FC<ChatBubbleProps> = ({
   message,
-  onHelplineClick,
 }) => {
   const { language, t } = useLanguage();
   const [showEnglishTranslation, setShowEnglishTranslation] = useState(false);
@@ -29,6 +27,10 @@ export const ChatBubble: React.FC<ChatBubbleProps> = ({
   const [copied, setCopied] = useState(false);
 
   const isUser = message.sender === "user";
+  const emergencyNumber = message.helpline?.split("/")[0].trim();
+  const isEmergency = ["112", "108", "100", "101", "181", "1930"].includes(
+    emergencyNumber || ""
+  );
 
   const handleCopyText = () => {
     const text = isUser
@@ -167,10 +169,14 @@ export const ChatBubble: React.FC<ChatBubbleProps> = ({
             <a
               href={`tel:${message.helpline.split("/")[0].trim()}`}
               id={`call-helpline-${message.id}`}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/60 dark:hover:bg-emerald-900 text-emerald-700 dark:text-emerald-300 font-semibold rounded-lg border border-emerald-200 dark:border-emerald-800 transition-colors"
+              className={`inline-flex items-center gap-2 px-4 py-2 font-bold rounded-xl border transition-colors ${
+                isEmergency
+                  ? "bg-rose-600 hover:bg-rose-500 text-white border-rose-500 shadow-md"
+                  : "bg-emerald-600 hover:bg-emerald-500 text-white border-emerald-500 shadow-sm"
+              }`}
             >
-              <PhoneCall className="w-3.5 h-3.5 text-emerald-600" />
-              <span>{t("helpline")}: {message.helpline}</span>
+              <PhoneCall className="w-4 h-4" />
+              <span>{isEmergency ? `Call ${emergencyNumber}` : `${t("helpline")}: ${message.helpline}`}</span>
             </a>
           ) : (
             <div />

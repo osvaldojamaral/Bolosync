@@ -5,7 +5,6 @@ import {
   AlertTriangle,
   HeartPulse,
   ShieldAlert,
-  Flame,
   Sprout,
   Users,
   Search,

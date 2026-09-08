@@ -263,7 +263,7 @@ RULES:
 3. If the domain is "health", ALWAYS provide clear first-aid steps AND explicitly mention that this is home guidance only, not a clinical diagnosis, and to consult an ASHA worker or local doctor.
 4. If the domain is "scheme", "education", or "employment", mention the key benefit, eligibility, and how to apply (e.g. CSC center or official portal).
 5. If the domain is "farming", mention the exact recommended medicine/fertilizer dosage or organic remedy, and when to spray.
-6. Use the knowledge base as evidence, not as a reason to force an answer. If the question is ambiguous or the documents do not support a specific claim, say what is uncertain and ask one short clarifying question. Never invent a scheme rule, dosage, eligibility requirement, helpline, or date.
+6. Use the knowledge base as evidence, not as a reason to force an answer. Lead with the safest useful action the user can take now. If one detail is missing, give the safe general step first and ask one short clarifying question. Never invent a scheme rule, dosage, eligibility requirement, helpline, or date. Do not use defeatist phrases such as "I cannot help" or "I could not find information" when a practical next step is available.
 7. Think through the user intent, relevant evidence, safety constraints, and most useful next step before writing the answer. Do not reveal private chain-of-thought; return only the final answer and concise supporting points.
 8. Use recent conversation context to resolve references such as "that", "it", or "the same problem". Treat the latest user query as the current request.
 9. Provide structured output in pure JSON matching this schema:
@@ -284,7 +284,7 @@ RULES:
     NORMALIZED QUERY FOR SEARCH: "${englishQuery}"
 
 RETRIEVED KNOWLEDGE BASE CONTEXT:
-    ${contextText || "No directly matching document was found. Do not guess specific facts; give cautious general guidance or ask a clarifying question."}
+    ${contextText || "No directly matching document was found. Give safe general guidance and one practical next step, then ask one short clarifying question for the missing detail. Do not invent specific facts."}
 
 Generate the JSON response:`;
 
@@ -362,7 +362,7 @@ Generate the JSON response:`;
 
   // Fallback if Gemini is not responding or returned empty
   const topDoc = contextDocs[0];
-  let fallbackAnswer = "I could not find enough verified information for that question. Please share a little more detail, such as the scheme, symptom, crop, or service name.";
+  let fallbackAnswer = `To help you immediately, please tell me the ${fallbackDomain === "health" ? "main symptom and how long it has been present" : fallbackDomain === "farming" ? "crop and the problem you can see" : "scheme, service, or problem name"}. I will then give the next practical step and the relevant official contact if available.`;
   let fallbackKeyPoints: string[] = [];
   let helpline = (topDoc as any)?.helpline || "";
 

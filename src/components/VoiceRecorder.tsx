@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Mic, Square, Sparkles, AlertCircle, Radio, X, Check, RotateCcw, Volume2 } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { useLanguage } from "../services/i18n";
 
 interface VoiceRecorderProps {
@@ -94,7 +94,6 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
         } catch {}
       }
 
-      // Audio analysis for real-time visualizer
       const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
       audioContextRef.current = audioCtx;
       const analyser = audioCtx.createAnalyser();
@@ -118,7 +117,6 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       };
       updateLevel();
 
-      // Setup MediaRecorder
       const options = { mimeType: "audio/webm;codecs=opus" };
       let recorder: MediaRecorder;
       try {
@@ -223,7 +221,6 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       id="compact-voice-recorder"
       className="w-full relative transition-all"
     >
-      {/* Permission alert if mic denied */}
       {permissionError && (
         <div className="mb-2 flex items-center gap-2 p-2 bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-900 text-red-800 dark:text-red-300 text-xs rounded-xl">
           <AlertCircle className="w-4 h-4 shrink-0" />
@@ -238,7 +235,6 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
         </div>
       )}
 
-      {/* COMPACT SLIM BAR */}
       <div
         className={`flex items-center justify-between gap-2.5 px-3 py-2 rounded-2xl border transition-all ${
           isRecording
@@ -248,7 +244,6 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             : "bg-slate-50 dark:bg-slate-900/90 border-slate-200/80 dark:border-slate-800 text-slate-800 dark:text-slate-200"
         }`}
       >
-        {/* Left: Record Button / Status Icon */}
         <div className="flex items-center gap-2.5">
           <button
             id="main-voice-record-btn"
@@ -288,7 +283,6 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             )}
           </button>
 
-          {/* Text Info / Live Recording Meter */}
           <div className="flex flex-col justify-center">
             {isProcessing ? (
               <div className="flex items-center gap-1.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400">
@@ -323,11 +317,9 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
           </div>
         </div>
 
-        {/* Center/Right: Equalizer bars when recording OR Action Controls when idle */}
         <div className="flex items-center gap-2">
           {isRecording ? (
             <div className="flex items-center gap-2">
-              {/* Sound visualizer level bars */}
               <div className="flex items-center gap-1 px-2 py-1 bg-slate-900 rounded-lg">
                 {[15, 50, 85, 60, 30, 95, 70, 40].map((h, idx) => (
                   <div
@@ -340,7 +332,6 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
                 ))}
               </div>
 
-              {/* Cancel Button */}
               <button
                 type="button"
                 onClick={cancelRecording}
@@ -350,7 +341,6 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
                 <X className="w-4 h-4" />
               </button>
 
-              {/* Done / Stop Button */}
               <button
                 type="button"
                 onClick={stopRecording}
@@ -362,7 +352,6 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             </div>
           ) : (
             <div className="flex items-center gap-1.5">
-              {/* Repeat Last Spoken Answer Button for Zero-Literacy Quick Replay */}
               {hasLastAnswer && onRepeatLastAnswer && (
                 <button
                   type="button"
@@ -376,7 +365,6 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
                 </button>
               )}
 
-              {/* Stop Audio if currently speaking */}
               {isAudioPlaying && onStopAudio && (
                 <button
                   type="button"
@@ -390,7 +378,6 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
                 </button>
               )}
 
-              {/* Compact Mode Switcher (Tap vs Hold) */}
               <div className="hidden sm:flex items-center bg-slate-200/70 dark:bg-slate-800 p-0.5 rounded-lg text-[10px] text-slate-600 dark:text-slate-400">
                 <button
                   type="button"

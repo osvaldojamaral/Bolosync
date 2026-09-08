@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Mic,
   Phone,
   Globe,
   Languages,
   PhoneCall,
+  ChevronDown,
+  Check,
 } from "lucide-react";
 import { useLanguage } from "../services/i18n";
 
@@ -14,7 +16,8 @@ interface NavbarProps {
   activeTab: NavTab;
   setActiveTab: (tab: NavTab) => void;
   selectedLanguage: string;
-  setSelectedLanguage: (lang: string) => void;
+  onLanguageSelected: (lang: "hi" | "pa" | "en") => void;
+  onOpenLanguagePicker: () => void;
   onOpenEmergency?: () => void;
 }
 
@@ -22,16 +25,35 @@ export const Navbar: React.FC<NavbarProps> = ({
   activeTab,
   setActiveTab,
   selectedLanguage,
-  setSelectedLanguage,
+  onLanguageSelected,
+  onOpenLanguagePicker,
   onOpenEmergency,
 }) => {
   const { t } = useLanguage();
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const languageMenuRef = useRef<HTMLDivElement | null>(null);
+  const languageLabel = selectedLanguage === "hi"
+    ? t("hindi")
+    : selectedLanguage === "pa"
+      ? t("punjabi")
+      : selectedLanguage === "en"
+        ? t("englishIndian")
+        : t("autoDetect");
+
+  useEffect(() => {
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!languageMenuRef.current?.contains(event.target as Node)) {
+        setIsLanguageMenuOpen(false);
+      }
+    };
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
+  }, []);
 
   return (
     <header id="main-navbar" className="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16 gap-4">
-          {/* Logo & Branding */}
           <div
             id="navbar-brand-logo"
             className="flex items-center gap-2.5 cursor-pointer select-none"
@@ -45,7 +67,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             </span>
           </div>
 
-          {/* Center Navigation Tabs */}
           <nav className="hidden md:flex items-center gap-1 p-1 bg-slate-100 dark:bg-slate-800/80 rounded-xl border border-slate-200/60 dark:border-slate-700/60">
             <button
               id="nav-tab-assistant"
@@ -94,9 +115,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           </nav>
 
-          {/* Right Section: Emergency Helpline Button + Language Selector */}
           <div className="flex items-center gap-2">
-            {/* Red Emergency Helpline Button */}
             <button
               id="emergency-helpline-top-btn"
               type="button"
@@ -112,25 +131,68 @@ export const Navbar: React.FC<NavbarProps> = ({
               </span>
             </button>
 
-            {/* Language Selector */}
-            <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs shadow-2xs">
-              <Globe className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400 shrink-0" />
-              <select
-                id="language-select-dropdown"
-                value={selectedLanguage}
-                onChange={(e) => setSelectedLanguage(e.target.value)}
-                className="bg-transparent font-semibold text-slate-800 dark:text-slate-200 focus:outline-none cursor-pointer text-xs max-w-[130px] sm:max-w-none"
+            <div ref={languageMenuRef} className="relative">
+              <button
+                id="language-picker-trigger"
+                type="button"
+                onClick={() => setIsLanguageMenuOpen((open) => !open)}
+                className="group flex max-w-[180px] items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-2.5 py-1.5 text-xs shadow-2xs transition-colors hover:border-indigo-400 hover:bg-indigo-50 dark:border-slate-700 dark:bg-slate-800 dark:hover:border-indigo-500 dark:hover:bg-indigo-950/40"
+                title={t("changeLanguage")}
+                aria-expanded={isLanguageMenuOpen}
               >
-                <option value="auto">🌐 {t("autoDetect")}</option>
-                <option value="hi">🇮🇳 {t("hindi")}</option>
-                <option value="pa">🇮🇳 {t("punjabi")}</option>
-                <option value="en">🇮🇳 {t("englishIndian")}</option>
-              </select>
+                <Globe className="h-3.5 w-3.5 shrink-0 text-indigo-600 dark:text-indigo-400" />
+                <span className="truncate font-bold text-slate-800 dark:text-slate-200">{languageLabel}</span>
+                <ChevronDown className={`h-3.5 w-3.5 shrink-0 text-slate-500 transition-transform ${isLanguageMenuOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              {isLanguageMenuOpen && (
+                <div className="absolute right-0 top-[calc(100%+0.5rem)] z-50 w-[min(18rem,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-2xl dark:border-slate-700 dark:bg-slate-900">
+                  <div className="border-b border-slate-100 px-3 pb-2 pt-1 dark:border-slate-800">
+                    <p className="text-sm font-bold text-slate-900 dark:text-slate-100">Choose your language</p>
+                    <p className="mt-0.5 text-[11px] text-slate-500 dark:text-slate-400">Select a language for the whole app</p>
+                  </div>
+                  {([
+                    { code: "hi", native: "हिंदी", english: "Hindi", flag: "🇮🇳" },
+                    { code: "pa", native: "ਪੰਜਾਬੀ", english: "Punjabi", flag: "🇮🇳" },
+                    { code: "en", native: "English", english: "Indian English", flag: "🇮🇳" },
+                  ] as const).map((option) => {
+                    const selected = selectedLanguage === option.code;
+                    return (
+                      <button
+                        key={option.code}
+                        type="button"
+                        onClick={() => {
+                          onLanguageSelected(option.code);
+                          setIsLanguageMenuOpen(false);
+                        }}
+                        className={`mt-1 flex w-full items-center gap-3 rounded-xl border p-3 text-left transition-colors ${selected ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40" : "border-transparent hover:border-indigo-300 hover:bg-indigo-50 dark:hover:border-indigo-700 dark:hover:bg-indigo-950/40"}`}
+                      >
+                        <span className="text-xl">{option.flag}</span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block text-sm font-bold text-slate-900 dark:text-slate-100">{option.native}</span>
+                          <span className="block text-[11px] text-slate-500 dark:text-slate-400">{option.english}</span>
+                        </span>
+                        {selected && <Check className="h-4 w-4 text-emerald-600" />}
+                      </button>
+                    );
+                  })}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsLanguageMenuOpen(false);
+                      onOpenLanguagePicker();
+                    }}
+                    className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl border border-indigo-200 bg-indigo-50 px-3 py-2 text-xs font-bold text-indigo-700 transition-colors hover:bg-indigo-100 dark:border-indigo-800 dark:bg-indigo-950/50 dark:text-indigo-300 dark:hover:bg-indigo-950"
+                  >
+                    <Mic className="h-3.5 w-3.5" />
+                    Choose by voice
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
 
-        {/* Mobile Sub-Navigation Bar */}
         <div className="flex md:hidden items-center justify-around py-2 border-t border-slate-200 dark:border-slate-800 text-xs overflow-x-auto no-scrollbar gap-1">
           <button
             type="button"

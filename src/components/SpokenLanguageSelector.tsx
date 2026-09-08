@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Mic, Globe, Sparkles, Check, Play, RefreshCw, VolumeX } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
-import { sendVoiceQueryAudio } from "../services/api";
+import { Mic, Check, Hand } from "lucide-react";
+import { motion } from "motion/react";
 
 interface SpokenLanguageSelectorProps {
   onLanguageSelected: (langCode: "hi" | "pa" | "en") => void;
@@ -56,11 +55,6 @@ export const SpokenLanguageSelector: React.FC<SpokenLanguageSelectorProps> = ({
   const [isListeningForLanguage, setIsListeningForLanguage] = useState<boolean>(false);
   const [detectedSpokenText, setDetectedSpokenText] = useState<string>("");
   const [selectedLanguage, setSelectedLanguage] = useState<"hi" | "pa" | "en" | null>(null);
-  const [isConfirming, setIsConfirming] = useState<boolean>(false);
-
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const audioChunksRef = useRef<Blob[]>([]);
   const recognitionRef = useRef<any>(null);
   const isMountedRef = useRef<boolean>(true);
   const selectedLanguageRef = useRef<"hi" | "pa" | "en" | null>(null);
@@ -81,7 +75,6 @@ export const SpokenLanguageSelector: React.FC<SpokenLanguageSelectorProps> = ({
     });
   };
 
-  // Start continuous Web Speech recognition if available in browser
   const startSpeechRecognitionListener = () => {
     if (typeof window === "undefined") return;
 
@@ -115,7 +108,6 @@ export const SpokenLanguageSelector: React.FC<SpokenLanguageSelectorProps> = ({
           if (!spokenText) return;
           setDetectedSpokenText(spokenText);
 
-          // Check if speech matches any language
           if (
             clean.includes("हिंदी") ||
             clean.includes("hindi") ||
@@ -165,7 +157,6 @@ export const SpokenLanguageSelector: React.FC<SpokenLanguageSelectorProps> = ({
     }
   };
 
-  // Keep the picker stable while listening for a spoken selection.
   const startSpokenPicker = () => {
     if (selectedLanguageRef.current) return;
     setDetectedSpokenText("");
@@ -201,15 +192,12 @@ export const SpokenLanguageSelector: React.FC<SpokenLanguageSelectorProps> = ({
     };
   }, []);
 
-  // Handle final language selection
   const handleChooseLanguage = async (langCode: "hi" | "pa" | "en") => {
     if (selectedLanguage === langCode) return;
     selectionRequestRef.current += 1;
     const requestId = selectionRequestRef.current;
     selectedLanguageRef.current = langCode;
     setSelectedLanguage(langCode);
-    setIsConfirming(true);
-
     if (recognitionRef.current) {
       try {
         recognitionRef.current.stop();
@@ -221,12 +209,10 @@ export const SpokenLanguageSelector: React.FC<SpokenLanguageSelectorProps> = ({
 
     const matched = LANGUAGES.find((l) => l.code === langCode) || LANGUAGES[0];
 
-    // Save selection locally so this only happens once
     try {
       localStorage.setItem("bolosync_spoken_language", langCode);
     } catch {}
 
-    // Speak the confirmation and welcome intro fully in the chosen language
     await playAudioString(matched.welcomeResponse, matched.code);
 
     if (requestId === selectionRequestRef.current) {
@@ -237,21 +223,18 @@ export const SpokenLanguageSelector: React.FC<SpokenLanguageSelectorProps> = ({
   return (
     <div
       id="spoken-language-selector-overlay"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn"
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto p-3 sm:p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn"
     >
-      <audio ref={audioRef} className="hidden" />
-
-      <div className="w-full max-w-lg bg-white dark:bg-slate-900 border-2 border-indigo-500/30 rounded-3xl shadow-2xl overflow-hidden flex flex-col text-slate-900 dark:text-white">
-        {/* Header with audio wave indicator */}
-        <div className="p-6 pb-4 bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-600 text-white text-center relative">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-xs ring-4 ring-white/30 mb-3 shadow-lg">
-            <Mic className="w-8 h-8 animate-pulse" />
+      <div className="flex max-h-[calc(100dvh-1.5rem)] w-full max-w-lg flex-col overflow-hidden rounded-3xl border-2 border-indigo-500/30 bg-white text-slate-900 shadow-2xl dark:bg-slate-900 dark:text-white sm:max-h-[calc(100dvh-2rem)]">
+        <div className="relative shrink-0 bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-600 p-4 pb-3 text-center text-white sm:p-6 sm:pb-4">
+          <div className="mb-2 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20 shadow-lg ring-4 ring-white/30 sm:h-16 sm:w-16 sm:mb-3">
+            <Mic className="h-6 w-6 animate-pulse sm:h-8 sm:w-8" />
           </div>
 
-          <h2 className="text-xl sm:text-2xl font-black tracking-tight mb-1">
+          <h2 className="mb-1 text-xl font-black tracking-tight sm:text-2xl">
             Choose your language
           </h2>
-          <p className="text-xs sm:text-sm text-indigo-100 font-medium">
+          <p className="text-xs font-medium text-indigo-100 sm:text-sm">
             Tap a language or say its name
           </p>
 
@@ -266,21 +249,42 @@ export const SpokenLanguageSelector: React.FC<SpokenLanguageSelectorProps> = ({
           )}
         </div>
 
-        {/* Live Audio & Prompt Status Box */}
-        <div className="p-5 sm:p-6 flex-1 flex flex-col gap-4">
-          <div className="p-4 rounded-2xl bg-indigo-50 dark:bg-slate-800/80 border border-indigo-200 dark:border-indigo-900/60 flex items-center gap-3">
-            <button
-              type="button"
-              onClick={isListeningForLanguage ? stopSpokenPicker : startSpokenPicker}
-              aria-label={isListeningForLanguage ? "Stop listening" : "Start listening for language"}
-              className="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 hover:bg-indigo-500 active:scale-95 transition-transform"
-            >
-              {isListeningForLanguage ? (
-                <Mic className="w-5 h-5 animate-pulse text-emerald-300" />
-              ) : (
-                <Mic className="w-5 h-5" />
+        <div className="min-h-0 flex-1 space-y-3 overflow-y-auto p-4 sm:space-y-4 sm:p-6">
+          <div className="flex items-center gap-3 rounded-2xl border border-indigo-200 bg-indigo-50 p-3 dark:border-indigo-900/60 dark:bg-slate-800/80 sm:p-4">
+              <div className="relative flex h-14 w-14 shrink-0 items-center justify-center sm:h-16 sm:w-16">
+              <motion.div
+                aria-hidden="true"
+                className="absolute inset-0 rounded-full border-2 border-indigo-400/50"
+                animate={{ scale: isListeningForLanguage ? [1, 1.35, 1] : [1, 1.12, 1], opacity: isListeningForLanguage ? [0.8, 0, 0.8] : [0.35, 0, 0.35] }}
+                transition={{ repeat: Infinity, duration: isListeningForLanguage ? 1.2 : 2.2, ease: "easeOut" }}
+              />
+              <motion.div
+                aria-hidden="true"
+                className="absolute inset-1 rounded-full border border-emerald-400/50"
+                animate={{ scale: isListeningForLanguage ? [1, 1.25, 1] : [1, 1.08, 1], opacity: isListeningForLanguage ? [0.7, 0, 0.7] : [0.25, 0, 0.25] }}
+                transition={{ repeat: Infinity, duration: isListeningForLanguage ? 1.2 : 2.2, delay: 0.35, ease: "easeOut" }}
+              />
+              <motion.button
+                type="button"
+                onClick={isListeningForLanguage ? stopSpokenPicker : startSpokenPicker}
+                aria-label={isListeningForLanguage ? "Stop listening" : "Start listening for language"}
+                className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 transition-colors hover:bg-indigo-500 active:scale-90"
+                animate={{ scale: isListeningForLanguage ? [1, 1.08, 1] : [1, 1.04, 1] }}
+                transition={{ repeat: Infinity, duration: isListeningForLanguage ? 0.9 : 1.8, ease: "easeInOut" }}
+              >
+                <Mic className={`h-6 w-6 ${isListeningForLanguage ? "text-emerald-300" : ""}`} />
+              </motion.button>
+              {!isListeningForLanguage && (
+                <motion.div
+                  aria-hidden="true"
+                  className="absolute -bottom-1 -right-1 z-20 flex h-7 w-7 items-center justify-center rounded-full bg-amber-400 text-amber-950 shadow-md"
+                  animate={{ x: [0, -3, 0], y: [0, -3, 0], rotate: [-12, 0, -12] }}
+                  transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+                >
+                  <Hand className="h-4 w-4" />
+                </motion.div>
               )}
-            </button>
+            </div>
 
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
@@ -295,7 +299,6 @@ export const SpokenLanguageSelector: React.FC<SpokenLanguageSelectorProps> = ({
             </div>
           </div>
 
-          {/* Equalizer animation when listening or speaking */}
           <div className="flex items-center justify-center gap-1.5 py-2">
             {[20, 60, 95, 45, 80, 100, 70, 30, 85, 50, 20].map((h, i) => (
               <motion.div
@@ -318,13 +321,12 @@ export const SpokenLanguageSelector: React.FC<SpokenLanguageSelectorProps> = ({
             ))}
           </div>
 
-          {/* Visual Backup: 3 Large Tappable Language Cards for low-literacy or quick tap */}
           <div className="space-y-2.5">
             <div className="text-[11px] font-bold tracking-wider uppercase text-slate-400 text-center">
               Visual Options (Tap or Speak)
             </div>
 
-            {LANGUAGES.map((lang, idx) => {
+            {LANGUAGES.map((lang) => {
               const isSelected = selectedLanguage === lang.code;
 
               return (
@@ -373,7 +375,6 @@ export const SpokenLanguageSelector: React.FC<SpokenLanguageSelectorProps> = ({
             })}
           </div>
 
-          {/* Voice Prompt Action Tip */}
           <div className="text-center pt-2 text-xs text-slate-500 dark:text-slate-400 flex items-center justify-center gap-1.5">
             <Mic className="w-3.5 h-3.5 text-indigo-500" />
             <span>Say the language name into your microphone</span>
