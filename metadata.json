@@ -1,6 +1,10 @@
 {
   "name": "BoloSync",
-  "description": "Voice-first regional Indian language AI assistant auto-routing across 10 citizen domains including Schemes, Health, Farming, Education, Jobs, Finance, Legal Aid, Civic, Weather, and Emergency Helplines.",
+  "description": "Voice-first AI assistant for Hindi, Punjabi and Indian English, with grounded citizen guidance, emergency helplines, a two-way translation bridge and an interactive 1800 IVR simulation.",
   "requestFramePermissions": ["microphone"],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API",
+    "VOICE_INTERACTION",
+    "MULTILINGUAL_CITIZEN_SUPPORT"
+  ]
 }
