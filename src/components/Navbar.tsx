@@ -7,10 +7,11 @@ import {
   PhoneCall,
   ChevronDown,
   Check,
+  Clock3,
 } from "lucide-react";
 import { useLanguage } from "../services/i18n";
 
-export type NavTab = "assistant" | "conversation" | "ivr" | "knowledge";
+export type NavTab = "assistant" | "conversation" | "translator" | "ivr" | "reminder" | "knowledge";
 
 interface NavbarProps {
   activeTab: NavTab;
@@ -100,6 +101,20 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
 
             <button
+              id="nav-tab-translator"
+              type="button"
+              onClick={() => setActiveTab("translator")}
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${
+                activeTab === "translator"
+                  ? "bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-xs border border-slate-200/80 dark:border-slate-600"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
+              }`}
+            >
+              <Languages className="w-3.5 h-3.5 text-violet-600 dark:text-violet-400" />
+              <span>Translator</span>
+            </button>
+
+            <button
               id="nav-tab-ivr"
               type="button"
               onClick={() => setActiveTab("ivr")}
@@ -111,6 +126,20 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <Phone className="w-3.5 h-3.5" />
               <span>{t("ivr")}</span>
+            </button>
+
+            <button
+              id="nav-tab-reminder"
+              type="button"
+              onClick={() => setActiveTab("reminder")}
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${
+                activeTab === "reminder"
+                  ? "bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-xs border border-slate-200/80 dark:border-slate-600"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
+              }`}
+            >
+              <Clock3 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+              <span>{t("reminderDashboard")}</span>
             </button>
 
           </nav>
@@ -226,6 +255,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             {t("ivr")}
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("reminder")}
+            className={`px-2.5 py-1 rounded-md font-semibold whitespace-nowrap ${
+              activeTab === "reminder"
+                ? "text-indigo-700 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950"
+                : "text-slate-500"
+            }`}
+          >
+            {t("reminderDashboard")}
           </button>
         </div>
       </div>

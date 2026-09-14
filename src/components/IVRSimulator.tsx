@@ -60,24 +60,6 @@ export const IVRSimulator: React.FC = () => {
     },
   }[selectedLang];
 
-  const sampleQuestions = {
-    hi: [
-      "पीएम किसान योजना में बैंक खाता कैसे जोड़ें?",
-      "लू लगने पर मरीज को क्या देना चाहिए?",
-      "सरसों में चेपा कीड़े का क्या इलाज है?",
-    ],
-    pa: [
-      "ਪੀਐੱਮ ਕਿਸਾਨ ਯੋਜਨਾ ਵਿੱਚ ਬੈਂਕ ਖਾਤਾ ਕਿਵੇਂ ਜੋੜੀਏ?",
-      "ਲੂ ਲੱਗਣ 'ਤੇ ਮਰੀਜ਼ ਨੂੰ ਕੀ ਦੇਣਾ ਚਾਹੀਦਾ ਹੈ?",
-      "ਸਰਸੋਂ ਵਿੱਚ ਚੇਪਾ ਕੀੜੇ ਦਾ ਕੀ ਇਲਾਜ ਹੈ?",
-    ],
-    en: [
-      "How do I link my bank account to PM-KISAN?",
-      "What should I give someone suffering from heatstroke?",
-      "How can I treat aphids on mustard plants?",
-    ],
-  }[selectedLang];
-
   const menuLabels = {
     hi: ["योजनाएँ", "स्वास्थ्य", "खेती"],
     pa: ["ਸਕੀਮਾਂ", "ਸਿਹਤ", "ਖੇਤੀਬਾੜੀ"],
@@ -493,9 +475,9 @@ export const IVRSimulator: React.FC = () => {
   };
 
   return (
-    <div id="ivr-simulator-container" className="max-w-4xl mx-auto p-4 sm:p-6 space-y-4">
+    <div id="ivr-simulator-container" className="w-full max-w-4xl mx-auto p-2 sm:p-4 md:p-6 space-y-3 sm:space-y-4 overflow-hidden">
       {/* Overview Banner */}
-      <div className="p-5 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-2xl shadow-xs border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="p-3 sm:p-5 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-2xl shadow-xs border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold">
             {uiText.title}
@@ -516,9 +498,9 @@ export const IVRSimulator: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Side: Interactive Phone Handset UI */}
         <div className="lg:col-span-6 flex justify-center">
-          <div className="w-full max-w-sm bg-slate-900 text-slate-100 rounded-3xl p-6 border-4 border-slate-800 shadow-2xl space-y-5">
+          <div className="w-full max-w-sm bg-slate-900 text-slate-100 rounded-3xl p-3 sm:p-6 border-4 border-slate-800 shadow-2xl space-y-4 sm:space-y-5">
             {/* Phone Screen Display */}
-            <div className="p-4 bg-slate-950 rounded-2xl border border-slate-800 min-h-[140px] flex flex-col justify-between text-center">
+            <div className="p-3 sm:p-4 bg-slate-950 rounded-2xl border border-slate-800 min-h-[120px] sm:min-h-[140px] flex flex-col justify-between text-center">
               <div>
                 <span className="text-[10px] text-indigo-400 font-mono tracking-widest uppercase">
                   BoloSync Telephony Node
@@ -569,7 +551,7 @@ export const IVRSimulator: React.FC = () => {
             </div>
 
             {/* Dialpad Keys 1-9 */}
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
               {[
                 { num: "1", label: menuLabels[0] },
                 { num: "2", label: menuLabels[1] },
@@ -589,13 +571,13 @@ export const IVRSimulator: React.FC = () => {
                   type="button"
                   onClick={() => handleKeypadPress(key.num)}
                   disabled={callState !== "connected"}
-                  className={`flex flex-col items-center justify-center p-3 rounded-2xl transition-all active:scale-90 ${
+                  className={`flex flex-col items-center justify-center p-2 sm:p-3 rounded-2xl transition-all active:scale-90 ${
                     callState === "connected"
                       ? "bg-slate-800 hover:bg-slate-700 text-white cursor-pointer active:bg-indigo-600"
                       : "bg-slate-800/50 text-slate-600 cursor-not-allowed"
                   }`}
                 >
-                  <span className="text-xl font-bold">{key.num}</span>
+                  <span className="text-lg sm:text-xl font-bold">{key.num}</span>
                   {key.label && (
                     <span className="text-[8px] text-slate-400 font-mono">
                       {key.label}
@@ -606,24 +588,24 @@ export const IVRSimulator: React.FC = () => {
             </div>
 
             {/* Call / Hangup Actions */}
-            <div className="flex items-center justify-center gap-6 pt-2">
+            <div className="flex items-center justify-center gap-4 sm:gap-6 pt-1 sm:pt-2">
               {callState === "idle" ? (
                 <button
                   type="button"
                   onClick={startCall}
-                  className="flex items-center justify-center w-16 h-16 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg transition-transform active:scale-95"
+                  className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg transition-transform active:scale-95"
                   title="Dial 1800-BOLO-SYNC"
                 >
-                  <Phone className="w-7 h-7 fill-current" />
+                  <Phone className="w-6 h-6 sm:w-7 sm:h-7 fill-current" />
                 </button>
               ) : (
                 <button
                   type="button"
                   onClick={endCall}
-                  className="flex items-center justify-center w-16 h-16 rounded-full bg-rose-600 hover:bg-rose-500 text-white shadow-lg transition-transform active:scale-95 animate-pulse"
+                  className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-rose-600 hover:bg-rose-500 text-white shadow-lg transition-transform active:scale-95 animate-pulse"
                   title="End Call"
                 >
-                  <PhoneOff className="w-7 h-7 fill-current" />
+                  <PhoneOff className="w-6 h-6 sm:w-7 sm:h-7 fill-current" />
                 </button>
               )}
             </div>
@@ -632,7 +614,7 @@ export const IVRSimulator: React.FC = () => {
 
         {/* Right Side: Conversation */}
         <div className="lg:col-span-6 space-y-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-xs space-y-4">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-3 sm:p-5 shadow-xs space-y-3 sm:space-y-4">
             <h3 className="font-bold text-sm text-slate-900 dark:text-slate-100 flex items-center gap-2">
               <Mic className="w-4 h-4 text-emerald-600" />
               {uiText.speakTitle}
@@ -642,7 +624,7 @@ export const IVRSimulator: React.FC = () => {
               type="button"
               onClick={() => (isListening ? stopListening() : void startListening())}
               disabled={callState !== "connected" || isProcessingVoice}
-              className={`w-full flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold transition-all ${
+              className={`w-full flex items-center justify-center gap-2 rounded-xl px-3 sm:px-4 py-2.5 sm:py-3 text-sm font-bold transition-all ${
                 isListening
                   ? "bg-rose-600 text-white animate-pulse"
                   : "bg-emerald-600 text-white hover:bg-emerald-500 disabled:bg-slate-200 disabled:text-slate-400"
@@ -665,37 +647,17 @@ export const IVRSimulator: React.FC = () => {
                 onChange={(event) => setManualQuery(event.target.value)}
                 disabled={callState !== "connected" || isProcessingVoice}
                 placeholder={selectedLang === "en" ? "Type or speak a question or command" : selectedLang === "pa" ? "ਸਵਾਲ ਜਾਂ ਕਮਾਂਡ ਬੋਲੋ ਜਾਂ ਲਿਖੋ" : "सवाल या कमांड बोलें या लिखें"}
-                className="min-w-0 flex-1 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-emerald-500 disabled:bg-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+                className="min-w-0 flex-1 rounded-xl border border-slate-200 bg-white px-2.5 sm:px-3 py-2 text-sm text-slate-900 outline-none focus:border-emerald-500 disabled:bg-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
               />
               <button
                 type="submit"
                 disabled={callState !== "connected" || isProcessingVoice || !manualQuery.trim()}
-                className="flex items-center justify-center rounded-xl bg-emerald-600 px-3 text-white transition-colors hover:bg-emerald-500 disabled:bg-slate-200 disabled:text-slate-400"
+                className="flex items-center justify-center rounded-xl bg-emerald-600 px-2.5 sm:px-3 text-white transition-colors hover:bg-emerald-500 disabled:bg-slate-200 disabled:text-slate-400"
                 title={selectedLang === "en" ? "Send command" : "भेजें"}
               >
                 <Send className="h-4 w-4" />
               </button>
             </form>
-
-            <div className="space-y-2">
-              {sampleQuestions.map((text, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  disabled={callState !== "connected" || isProcessingVoice}
-                  onClick={() => handleSimulateCallerVoice(text)}
-                  className={`w-full text-left p-3 rounded-xl border text-xs transition-all ${
-                    callState === "connected"
-                      ? "bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 hover:border-indigo-500"
-                      : "opacity-60 cursor-not-allowed border-slate-200 dark:border-slate-800"
-                  }`}
-                >
-                  <div className="flex items-center justify-between font-medium text-slate-900 dark:text-slate-100">
-                    <span>"{text}"</span>
-                  </div>
-                </button>
-              ))}
-            </div>
 
             {/* In-Call Spoken Response Output */}
             {ivrAnswer && (

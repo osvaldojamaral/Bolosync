@@ -147,6 +147,7 @@ export async function sendConversationAudio(
     sourceLanguage?: string;
     targetLanguage?: string;
     transcript?: string;
+    skipTts?: boolean;
   }
 ): Promise<ConversationTranslateResponse> {
   const formData = new FormData();
@@ -156,6 +157,7 @@ export async function sendConversationAudio(
   if (options.sourceLanguage) formData.append("source_language", options.sourceLanguage);
   if (options.targetLanguage) formData.append("target_language", options.targetLanguage);
   if (options.transcript) formData.append("text", options.transcript);
+  formData.append("skip_tts", String(Boolean(options.skipTts)));
 
   const res = await fetch("/api/translate-conversation", {
     method: "POST",
@@ -178,6 +180,7 @@ export async function sendConversationText(
     speakerName?: string;
     sourceLanguage?: string;
     targetLanguage?: string;
+    skipTts?: boolean;
   }
 ): Promise<ConversationTranslateResponse> {
   const res = await fetch("/api/translate-conversation", {
@@ -189,6 +192,7 @@ export async function sendConversationText(
       speaker_name: options.speakerName,
       source_language: options.sourceLanguage,
       target_language: options.targetLanguage,
+      skip_tts: Boolean(options.skipTts),
     }),
   });
 

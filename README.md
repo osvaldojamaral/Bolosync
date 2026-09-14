@@ -1,37 +1,77 @@
 # BoloSync
 
-BoloSync is a voice-first AI assistant for Indian citizens, farmers, students and workers. It provides practical guidance in Hindi, Punjabi and Indian English through a shared AI pipeline for the Voice Assistant and the 1800 IVR simulator.
+BoloSync is a voice-first AI assistant for Indian users, built to help with government guidance, helplines, reminders, knowledge lookup, live conversation support, and real-time translation in Hindi, Punjabi, and English.
 
-## What It Does
+## Overview
 
-- Answers questions using a curated knowledge base and Gemini-powered RAG.
-- Supports Hindi, Punjabi and English voice interaction.
-- Accepts speech, typed questions and recorded audio.
-- Detects navigation commands such as help, repeat, back, language change and start over.
-- Handles helpline requests with confirmation before opening the phone dialer.
-- Supports emergency numbers including 112, 108, 100, 101, 181 and 1930.
-- Provides a voice-first 1800 IVR simulation with keypad, speech input and typed fallback.
-- Includes a two-way conversation bridge for speech translation.
-- Includes a searchable Knowledge Explorer for schemes, health, farming, education, employment, finance, legal aid, civic services and weather.
-- Includes emergency helpline cards and spoken response playback.
+The project combines a modern React frontend with an Express backend to provide a multilingual voice experience. Users can ask questions in natural language, trigger voice commands, open app sections with speech, confirm reminders by voice, and use live translation tools without manually switching contexts.
 
-## Main Screens
+## Features
 
-### Voice Assistant
+- Voice assistant for Hindi, Punjabi, and English
+- Real-time speech recognition with live command handling
+- Smart reminder flow that distinguishes between:
+  - opening reminders
+  - creating reminders from natural speech
+  - yes/no reminder completion confirmation
+- Emergency and helpline support with call confirmation flow
+- 1800 IVR style simulator for guided support flows
+- Knowledge explorer with curated local domain data
+- Two-way live conversation bridge for bilingual voice interaction
+- Real-time translator with source and target language selection
+- Audio playback through browser speech synthesis or generated audio responses
 
-The main assistant accepts typed or spoken questions, detects the user language, retrieves relevant knowledge, generates a concise answer and plays it aloud. Navigation commands and helpline confirmations share the same conversation context.
+## Main app sections
 
-### 1800 IVR
+### Assistant
+The main conversational chat interface where users can type or speak queries. Requests are processed through the backend pipeline, enriched with domain knowledge, and answered in the selected language.
 
-The IVR simulator represents a phone call to BoloSync. Users can select a keypad topic, speak naturally or type a command. Emergency and helpline commands are confirmed by voice before the dialer is opened.
+### Live Mode
+Live mode listens for short spoken commands such as:
 
-### 2-Way Bridge
+- open reminder
+- open my reminders
+- open IVR
+- go home
+- switch language
+- turn off live mode
 
-The bridge supports two speakers using different languages. Each message can be recorded or typed, translated and played back in the target language.
+The app uses a rule-based command flow to avoid false reminder creation when the user only wants to open the reminder panel.
+
+### Reminder Dashboard
+The reminder feature supports:
+
+- creating reminders from natural language
+- opening the reminder screen without treating it as reminder creation
+- confirming reminder completion with yes/no voice answers
+- scheduling reminder follow-up behavior based on user response
+
+### Conversation Bridge
+The two-way bridge enables a more fluid voice exchange between speakers and supports bilingual conversation assistance with translation playback.
+
+### Real-time Translator
+The translator lets users choose:
+
+- source language to listen for
+- target language to translate into
+
+It is designed for near real-time spoken translation with continuous capture while the translator remains active.
+
+### IVR Simulator
+The IVR module mimics a simple phone-menu flow and helps users respond to guided prompts through voice or typed input.
 
 ### Knowledge Explorer
+The knowledge explorer surfaces curated local data for:
 
-The Knowledge Explorer exposes the curated documents used by the RAG pipeline. It provides topic filters, search, summaries, eligibility, documents, application steps, health precautions, farming advice and official helpline actions.
+- health
+- government schemes
+- education
+- finance
+- employment
+- legal guidance
+- farming
+- civic information
+- weather
 
 ## Architecture
 
@@ -39,31 +79,55 @@ The Knowledge Explorer exposes the curated documents used by the RAG pipeline. I
 React + Vite frontend
         |
         v
-Express API server
+Express backend API
         |
-        +-- Speech-to-text: browser recognition, OpenAI Whisper or Gemini audio
-        +-- Translation: dictionary, Gemini and MyMemory fallback
-        +-- Retrieval: local JSON knowledge base
-        +-- Reasoning: Gemini structured RAG response
-        +-- Text-to-speech: ElevenLabs, Google speech fallback or browser speech
-        +-- Voice navigation and confirmation engine
+        +-- Browser speech recognition
+        +-- Audio transcription
+        +-- Navigation intent detection
+        +-- Translation pipeline
+        +-- Local knowledge retrieval and RAG responses
+        +-- Reminder logic and confirmation flow
+        +-- Text-to-speech/audio playback
 ```
 
-The Voice Assistant and IVR both use `/api/voice-query`. The IVR also has a local command layer for urgent telephone commands so confirmation does not depend on a remote model response.
+## Project structure
+
+```text
+src/
+  App.tsx
+  components/
+  services/
+  types/
+server/
+  services/
+  data/
+  db.ts
+server.ts
+index.html
+package.json
+vite.config.ts
+tsconfig.json
+```
 
 ## Requirements
 
-- Node.js 18 or newer
-- A browser with microphone support for voice features
-- Microphone permission for speech and recording
-- `GEMINI_API_KEY` for Gemini reasoning, translation and audio fallback
+- Node.js 18+
+- Modern browser with microphone access
+- Internet access for AI and translation services
+- Optional environment configuration for API-backed services
 
-Optional services:
+## Environment variables
 
-- `OPENAI_API_KEY` for Whisper transcription
-- `ELEVENLABS_API_KEY` for ElevenLabs speech
+You can create a .env file if your deployment uses external service keys.
 
-## Run Locally
+```env
+GEMINI_API_KEY=your_key_here
+OPENAI_API_KEY=optional
+ELEVENLABS_API_KEY=optional
+PORT=3000
+```
+
+## Setup
 
 Install dependencies:
 
@@ -71,74 +135,25 @@ Install dependencies:
 npm install
 ```
 
-Create a `.env` file from `.env.example` and add the available service keys.
-
-Start the development server:
+Run the app locally:
 
 ```bash
 npm run dev
 ```
 
-Open `http://localhost:3000`.
-
-## Production Build
-
-```bash
-npm run lint
-npm run build
-npm start
-```
-
-The build creates the Vite frontend and bundles the Express server into `dist/server.cjs`.
-
-## Environment Variables
-
-| Variable | Required | Purpose |
-| --- | --- | --- |
-| `GEMINI_API_KEY` | Recommended | Gemini RAG, translation and multimodal audio fallback |
-| `OPENAI_API_KEY` | Optional | OpenAI Whisper transcription fallback |
-| `ELEVENLABS_API_KEY` | Optional | ElevenLabs multilingual speech output |
-| `GOOGLE_TRANSLATE_API_KEY` | Optional | Reserved translation integration key |
-| `APP_URL` | Optional | Public application URL for deployment integrations |
-
-The application still provides browser speech and local knowledge fallbacks when optional providers are unavailable.
-
-## Knowledge Base
-
-Knowledge documents are stored in:
-
-```text
-server/data/knowledge_base/
-```
-
-Each JSON file contains curated entries with a domain, title, summary, eligibility or action details, keywords and optional helpline information. The server loads these files for retrieval and the Knowledge Explorer reads them through `/api/knowledge-base`.
-
-## Useful API Routes
-
-- `GET /api/health` - service and model availability
-- `POST /api/voice-query` - shared text and audio assistant pipeline
-- `POST /api/ivr/dial` - IVR connection and menu prompt
-- `POST /api/tts` - direct speech generation
-- `POST /api/conversation/translate` - two-way conversation translation
-- `POST /api/translate-conversation` - translation endpoint alias
-- `POST /api/translate` - text translation endpoint
-- `GET /api/knowledge-base` - curated knowledge entries
-- `GET /api/history` - query history and metrics
-
-## Safety and User Experience
-
-- Health answers include first-aid guidance and a recommendation to contact a doctor or ASHA worker when appropriate.
-- Helpline calls require explicit confirmation before using `tel:`.
-- Emergency actions remain visible as direct call buttons below relevant answers.
-- The language selector supports large visual choices and microphone guidance for users with limited literacy or technology experience.
-- The app does not claim that AI output is a medical diagnosis or a substitute for official services.
+The app will run through the Express + Vite bridge and serve the frontend on the local development port.
 
 ## Validation
 
 ```bash
 npm run lint
-npx tsc --noEmit --noUnusedLocals --noUnusedParameters
 npm run build
 ```
 
-These checks cover TypeScript correctness, unused code and production compilation.
+## Notes
+
+- Open reminder commands are treated as navigation, not reminder creation.
+- Actual reminder creation is triggered only when the spoken phrase clearly indicates a reminder task.
+- Reminder yes/no confirmation logic is handled through voice input in the reminder flow.
+- The live translator and two-way bridge are designed for rapid, continuous voice handling, but browser speech engine behavior can still vary by device and browser.
+- This project is optimized for accessibility, multilingual support, and simple voice-driven user interactions.

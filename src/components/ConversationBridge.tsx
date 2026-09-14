@@ -80,6 +80,7 @@ export const ConversationBridge: React.FC = () => {
   const animationFrameRef = useRef<number | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const shouldKeepRecordingRef = useRef<boolean>(false);
 
   // Pre-fetch browser voices for smooth immediate playback
   useEffect(() => {
@@ -104,6 +105,7 @@ export const ConversationBridge: React.FC = () => {
   }, [messages, isProcessing, interimTranscript]);
 
   const cleanupAudio = () => {
+    shouldKeepRecordingRef.current = false;
     if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
     if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     if (speechRecognitionRef.current) {
@@ -129,6 +131,7 @@ export const ConversationBridge: React.FC = () => {
   const startRecording = async (speaker: "person_a" | "person_b") => {
     if (isProcessing) return;
     cleanupAudio();
+    shouldKeepRecordingRef.current = true;
     setActiveRecordingSpeaker(speaker);
     audioChunksRef.current = [];
     liveTranscriptRef.current = "";
@@ -149,18 +152,44 @@ export const ConversationBridge: React.FC = () => {
         recognition.lang = speechLang;
 
         recognition.onresult = (event: any) => {
-          let currentText = "";
-          for (let i = 0; i < event.results.length; i++) {
-            currentText += event.results[i][0].transcript;
-          }
-          if (currentText.trim()) {
-            liveTranscriptRef.current = currentText.trim();
-            setInterimTranscript(currentText.trim());
+          const resultIndex = typeof event.resultIndex === "number" ? event.resultIndex : event.results.length - 1;
+          const latestTranscript = (event.results[resultIndex]?.[0]?.transcript || "").trim();
+
+          if (latestTranscript) {
+            liveTranscriptRef.current = latestTranscript;
+            setInterimTranscript(latestTranscript);
           }
         };
 
         recognition.onerror = (e: any) => {
           console.warn("Browser speech recognition notice:", e?.error);
+          if (e?.error === "not-allowed" && shouldKeepRecordingRef.current) {
+            shouldKeepRecordingRef.current = false;
+          }
+        };
+
+        recognition.onend = () => {
+          if (!shouldKeepRecordingRef.current || activeRecordingSpeaker !== speaker) {
+            return;
+          }
+
+          setTimeout(() => {
+            if (shouldKeepRecordingRef.current && !speechRecognitionRef.current) {
+              const nextRecognition = new SpeechRecognition();
+              nextRecognition.continuous = true;
+              nextRecognition.interimResults = true;
+              nextRecognition.lang = speechLang;
+              nextRecognition.onresult = recognition.onresult;
+              nextRecognition.onerror = recognition.onerror;
+              nextRecognition.onend = recognition.onend;
+              try {
+                nextRecognition.start();
+                speechRecognitionRef.current = nextRecognition;
+              } catch {
+                speechRecognitionRef.current = null;
+              }
+            }
+          }, 180);
         };
 
         recognition.start();
@@ -218,16 +247,14 @@ export const ConversationBridge: React.FC = () => {
       };
 
       recorder.onstop = () => {
-        setTimeout(() => {
-          const mime = recorder.mimeType || "audio/webm";
-          const audioBlob = new Blob(audioChunksRef.current, { type: mime });
-          const capturedTranscript = liveTranscriptRef.current.trim();
-          processRecordedAudio(audioBlob, speaker, capturedTranscript);
-          cleanupAudio();
-        }, 200);
+        const mime = recorder.mimeType || "audio/webm";
+        const audioBlob = new Blob(audioChunksRef.current, { type: mime });
+        const capturedTranscript = liveTranscriptRef.current.trim();
+        processRecordedAudio(audioBlob, speaker, capturedTranscript);
+        cleanupAudio();
       };
 
-      recorder.start(100);
+      recorder.start(250);
       mediaRecorderRef.current = recorder;
 
       timerIntervalRef.current = setInterval(() => {
@@ -246,6 +273,7 @@ export const ConversationBridge: React.FC = () => {
   };
 
   const stopRecording = () => {
+    shouldKeepRecordingRef.current = false;
     if (speechRecognitionRef.current) {
       try {
         speechRecognitionRef.current.stop();
@@ -286,6 +314,7 @@ export const ConversationBridge: React.FC = () => {
         sourceLanguage: sourceLang,
         targetLanguage: targetLang,
         transcript: capturedTranscript || undefined,
+        skipTts: true,
       });
 
       const newMsg: ConversationMessage = {
@@ -345,6 +374,7 @@ export const ConversationBridge: React.FC = () => {
         speakerName,
         sourceLanguage: sourceLang,
         targetLanguage: targetLang,
+        skipTts: true,
       });
 
       const newMsg: ConversationMessage = {
@@ -382,7 +412,6 @@ export const ConversationBridge: React.FC = () => {
     msgId: string,
     audioUrl?: string
   ) => {
-    // 1. If currently playing this specific message, pause/stop it
     if (playingMessageId === msgId) {
       if (activeAudioRef.current) {
         activeAudioRef.current.pause();
@@ -395,7 +424,6 @@ export const ConversationBridge: React.FC = () => {
       return;
     }
 
-    // 2. Stop any ongoing playback first
     if (activeAudioRef.current) {
       activeAudioRef.current.pause();
       activeAudioRef.current = null;
@@ -405,6 +433,11 @@ export const ConversationBridge: React.FC = () => {
     }
 
     setPlayingMessageId(msgId);
+
+    if (!text || !text.trim()) {
+      setPlayingMessageId(null);
+      return;
+    }
 
     // 3. If high-fidelity server TTS audio stream/data URL is provided
     if (audioUrl && audioUrl.startsWith("data:audio")) {
@@ -644,7 +677,6 @@ export const ConversationBridge: React.FC = () => {
         </div>
       )}
 
-      {/* Main Conversation Stream */}
       <div
         id="conversation-messages-stream"
         className="flex-1 min-h-0 overflow-y-auto px-2 sm:px-3 py-2 space-y-2.5 rounded-2xl bg-slate-50/50 dark:bg-slate-900/30 border border-slate-200/60 dark:border-slate-800/60 mb-2.5"

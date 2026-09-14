@@ -403,6 +403,7 @@ async function startServer() {
       let targetLang = req.body?.target_language || "auto";
       const speaker = req.body?.speaker || "person_a";
       const speakerName = req.body?.speaker_name || (speaker === "person_a" ? "Speaker 1 (Regional)" : "Speaker 2 (English)");
+      const skipTts = String(req.body?.skip_tts ?? req.body?.skipTts ?? "false").toLowerCase() === "true";
 
       if (req.file) {
         audioBuffer = req.file.buffer;
@@ -471,12 +472,21 @@ async function startServer() {
       const targetLangName = langNameMap[finalTargetLang] || finalTargetLang.toUpperCase();
       const actualSourceLangName = langNameMap[finalSourceLang] || sourceLangName;
 
-      // Translate text
-      const translationRes = await translateText(transcript, finalTargetLang, finalSourceLang);
-      const translatedText = translationRes.translatedText;
+      // Fast-path: if both speakers are using the same language, skip the extra translation work.
+      let translatedText = transcript;
+      if (finalSourceLang !== finalTargetLang) {
+        const translationRes = await translateText(transcript, finalTargetLang, finalSourceLang);
+        translatedText = translationRes.translatedText;
+      }
 
-      // Generate TTS for translated text in target language
-      const ttsResult = await generateSpeechAudio(translatedText, finalTargetLang);
+      // Generate TTS only when explicitly needed. Browser speech synthesis is usually faster and more fluid for live conversations.
+      let audioUrl = "";
+      let ttsProvider = "browser_speech";
+      if (!skipTts) {
+        const ttsResult = await generateSpeechAudio(translatedText, finalTargetLang);
+        audioUrl = ttsResult.audioUrl || "";
+        ttsProvider = ttsResult.provider || "browser_speech";
+      }
 
       const totalLatency = Date.now() - startTime;
 
@@ -491,8 +501,8 @@ async function startServer() {
         translated_text: translatedText,
         target_language: finalTargetLang,
         target_language_name: targetLangName,
-        audio_url: ttsResult.audioUrl || "",
-        tts_provider: ttsResult.provider,
+        audio_url: audioUrl,
+        tts_provider: ttsProvider,
         latency_ms: totalLatency,
       });
     } catch (err: any) {
@@ -557,9 +567,25 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`BoloSync Server running on http://localhost:${PORT}`);
-  });
+  const startServerOnPort = (port: number) => {
+    const server = app.listen(port, "0.0.0.0", () => {
+      console.log(`BoloSync Server running on http://localhost:${port}`);
+    });
+
+    server.on("error", (error: any) => {
+      if (error && error.code === "EADDRINUSE") {
+        const fallbackPort = port + 1;
+        console.warn(`Port ${port} is already in use. Retrying on ${fallbackPort}...`);
+        startServerOnPort(fallbackPort);
+        return;
+      }
+
+      console.error("Server startup error:", error);
+      process.exit(1);
+    });
+  };
+
+  startServerOnPort(PORT);
 }
 
 startServer();

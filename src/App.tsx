@@ -20,8 +20,11 @@ import { ChatBubble } from "./components/ChatBubble";
 import { IVRSimulator } from "./components/IVRSimulator";
 import { KnowledgeExplorer } from "./components/KnowledgeExplorer";
 import { ConversationBridge } from "./components/ConversationBridge";
+import { RealTimeTranslator } from "./components/RealTimeTranslator";
+import { ReminderDashboard } from "./components/ReminderDashboard";
 import { EmergencyModal } from "./components/EmergencyModal";
 import { SpokenLanguageSelector } from "./components/SpokenLanguageSelector";
+import { LiveModeBubble } from "./components/LiveModeBubble";
 import { LanguageProvider, translate } from "./services/i18n";
 
 const getActionableHelpline = (query: string, answer: string, helpline?: string) => {
@@ -46,6 +49,25 @@ const getWelcomeMessage = (langCode: string): ChatMessage => {
     answerTextEn: "Welcome to BoloSync! You can speak in Hindi, Punjabi, or English to get instant spoken guidance.",
     domain: "general",
     confidence: 1.0,
+  };
+};
+
+const getAudioRetryMessage = (language: string) => {
+  if (language === "pa") {
+    return {
+      native: "ਮਾਫ਼ ਕਰਨਾ, ਤੁਹਾਡੀ ਗੱਲ ਸਾਫ਼ ਨਹੀਂ ਸੁਣੀ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਬੋਲੋ।",
+      english: "I could not hear you clearly. Please speak again.",
+    };
+  }
+  if (language === "en") {
+    return {
+      native: "I could not hear you clearly. Please speak again.",
+      english: "I could not hear you clearly. Please speak again.",
+    };
+  }
+  return {
+    native: "माफ कीजिए, आपकी बात साफ़ नहीं सुनाई दी। कृपया फिर से बोलें।",
+    english: "I could not hear you clearly. Please speak again.",
   };
 };
 
@@ -87,6 +109,9 @@ export default function App() {
   const [lastSpokenText, setLastSpokenText] = useState<string>(() => getWelcomeMessage(selectedLanguage).answerText || "");
   const [lastSpokenAudioUrl, setLastSpokenAudioUrl] = useState<string>("");
   const [isAudioPlaying, setIsAudioPlaying] = useState<boolean>(false);
+  const [isLiveModeActive, setIsLiveModeActive] = useState<boolean>(false);
+  const [liveModeStatus, setLiveModeStatus] = useState<string>("Listening for a voice command...");
+  const [reminderSeed, setReminderSeed] = useState<string>("");
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const audioPlayerRef = useRef<HTMLAudioElement | null>(null);
@@ -245,25 +270,110 @@ export default function App() {
           ttsProvider: res.tts_provider,
         };
 
-        setMessages((prev) => [...prev, assistantMsg]);
+        const summaryMessage = createTrustedPersonSummary(res.transcript || "", res.answer_text);
+        const finalMessages = summaryMessage ? [assistantMsg, summaryMessage] : [assistantMsg];
+
+        setMessages((prev) => [...prev, ...finalMessages]);
         setPipelineStage("completed");
 
-        playSpokenResponse(res.answer_text, res.detected_language, res.answer_audio_url, 1.0);
+        playSpokenResponse(
+          summaryMessage ? summaryMessage.answerText || res.answer_text : res.answer_text,
+          res.detected_language,
+          res.answer_audio_url,
+          1.0
+        );
       }
     } catch (err: any) {
       console.error("Audio pipeline error:", err);
+      const retryMessage = getAudioRetryMessage(
+        selectedLanguage === "auto" ? "en" : selectedLanguage
+      );
       const errorMsg: ChatMessage = {
         id: `err-${Date.now()}`,
         sender: "assistant",
         timestamp: new Date().toISOString(),
-        answerText: "माफ कीजिए, आपकी आवाज ठीक से समझ नहीं आई। कृपया शांत जगह से दोबारा बोलें।",
-        answerTextEn: "Sorry, I could not clearly understand the audio. Please try speaking again from a quiet place.",
+        answerText: retryMessage.native,
+        answerTextEn: retryMessage.english,
         domain: "general",
       };
       setMessages((prev) => [...prev, errorMsg]);
+      playSpokenResponse(retryMessage.native, selectedLanguage === "auto" ? "en" : selectedLanguage);
     } finally {
       setIsProcessing(false);
     }
+  };
+
+  const createTrustedPersonSummary = (queryText: string, latestAssistantAnswer?: string): ChatMessage | null => {
+    const normalized = queryText.toLowerCase();
+    const wantsSummary = /(share|send|trusted|family|son|daughter|wife|husband|mother|father|brother|sister|summarize|summary|explain.*to|clear.*to|simple.*to)/i.test(normalized);
+
+    if (!wantsSummary) return null;
+
+    const lastAssistant = latestAssistantAnswer?.trim();
+    const baseSummary = lastAssistant || "The issue is clear, and the next step is to review the details together and decide what should happen next.";
+    const trustedPersonMatch = normalized.match(/(son|daughter|wife|husband|mother|father|brother|sister|trusted person|family member)/i);
+    const personLabel = trustedPersonMatch ? trustedPersonMatch[1] : "your trusted person";
+
+    const summaryText = `Summary for ${personLabel}: ${baseSummary}`;
+
+    return {
+      id: `summary-${Date.now()}`,
+      sender: "assistant",
+      timestamp: new Date().toISOString(),
+      answerText: summaryText,
+      answerTextEn: summaryText,
+      domain: "general",
+      confidence: 1,
+    };
+  };
+
+  const isReminderNavigationRequest = (text: string) => {
+    const clean = text.trim();
+    if (!clean) return false;
+
+    return /^(open|show|view|launch|go to|check|access|display)\s+(the\s+)?(my\s+)?reminders?\b/i.test(clean)
+      || /^reminders?\s*$/i.test(clean)
+      || /\b(reminder|reminders)\b/i.test(clean) && /^(open|show|view|launch|go to|check|access|display)\b/i.test(clean);
+  };
+
+  const createReminderFromAssistantText = (text: string) => {
+    const clean = text.trim();
+    if (!clean || isReminderNavigationRequest(clean)) return null;
+
+    const reminderKeywords = /(remind|reminder|remember|note to self|schedule|set a reminder|alarm|notify me|tell me later|later today|tomorrow morning|tomorrow evening|remind me to|reminder to)/i;
+    if (!reminderKeywords.test(clean)) return null;
+
+    const reminderText = clean
+      .replace(/^(please|can you|could you|kindly|make sure to|kindly\s+please)\s+/i, "")
+      .replace(/^(remind me|reminder to|remember to|note to self|set a reminder|set reminder|create a reminder|add a reminder)\s+/i, "")
+      .replace(/^(please\s+)?(set|create|add)\s+(a\s+)?(new\s+)?reminder(?:\s+for)?\s+/i, "")
+      .replace(/\b(remind|reminder|remember|notify me|tell me later|set a reminder|set reminder|schedule|scheduled|create a reminder|add a reminder)\b/gi, "")
+      .replace(/^(to\s+|me\s+to\s+)/i, "")
+      .replace(/\b(open|show|view|launch|go to|check|access|display)\b/gi, "")
+      .replace(/[\s\-_]+/g, " ")
+      .replace(/^[^\w\p{L}]+/u, "")
+      .replace(/[^\w\p{L}\s]+$/u, "")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    if (!reminderText) return null;
+
+    return {
+      id: `assistant-reminder-${Date.now()}`,
+      text: reminderText.charAt(0).toUpperCase() + reminderText.slice(1),
+      timeLabel: "Set by assistant",
+      scheduledFor: new Date(Date.now() + 1000 * 60 * 60 * 12),
+      done: false,
+      active: true,
+      statusText: "Scheduled by AI",
+    };
+  };
+
+  const queueReminderFromText = (text: string) => {
+    const reminder = createReminderFromAssistantText(text);
+    if (!reminder) return false;
+    setReminderSeed(reminder.text);
+    return true;
   };
 
   const handleNavigationCommandResult = (res: VoiceQueryResponse) => {
@@ -343,6 +453,8 @@ export default function App() {
       detectedLanguage: lang || (selectedLanguage === "auto" ? "hi" : selectedLanguage),
     };
 
+    queueReminderFromText(clean);
+
     setMessages((prev) => [...prev, userMsg]);
     setManualText("");
     setIsProcessing(true);
@@ -382,10 +494,18 @@ export default function App() {
           ttsProvider: res.tts_provider,
         };
 
-        setMessages((prev) => [...prev, assistantMsg]);
+        const summaryMessage = createTrustedPersonSummary(clean, res.answer_text);
+        const finalMessages = summaryMessage ? [assistantMsg, summaryMessage] : [assistantMsg];
+
+        setMessages((prev) => [...prev, ...finalMessages]);
         setPipelineStage("completed");
 
-        playSpokenResponse(res.answer_text, res.detected_language, res.answer_audio_url, 1.0);
+        playSpokenResponse(
+          summaryMessage ? summaryMessage.answerText || res.answer_text : res.answer_text,
+          res.detected_language,
+          res.answer_audio_url,
+          1.0
+        );
       }
     } catch (err) {
       console.error("Text query error:", err);
@@ -406,10 +526,199 @@ export default function App() {
   const handleLanguageSelectedFromPicker = (langCode: "hi" | "pa" | "en") => {
     setSelectedLanguage(langCode);
     setIsSpokenLanguageOpen(false);
+    setLiveModeStatus(
+      langCode === "pa" ? "भाषਾ ਪੰਜਾਬੀ में बदल दी गई है।" : langCode === "en" ? "Language switched to English." : "भाषा हिंदी में बदल दी गई है।"
+    );
 
     const welcomeMessage = { ...getWelcomeMessage(langCode), id: `welcome-${Date.now()}` };
     setMessages([welcomeMessage]);
     setLastSpokenText(welcomeMessage.answerText || "");
+  };
+
+  const resolveHelplineNumber = (input: string) => {
+    const clean = input.replace(/[\s_\-+/()]/g, "").toLowerCase();
+    const knownNumbers: Record<string, string> = {
+      "112": "112",
+      "108": "108",
+      "181": "181",
+      "1930": "1930",
+      "1078": "1078",
+      "139": "139",
+      "1098": "1098",
+      "14567": "14567",
+      "15100": "15100",
+      "1915": "1915",
+      "1912": "1912",
+      "14416": "14416",
+      "18001801551": "1800-180-1551",
+      "1800-180-1551": "1800-180-1551",
+      "1800 180 1551": "1800-180-1551",
+      "1800-1801551": "1800-180-1551",
+    };
+
+    const directMatch = Object.keys(knownNumbers).find((number) => clean.includes(number));
+    if (directMatch) return knownNumbers[directMatch];
+
+    const numericMatch = clean.match(/\d{3,}/g);
+    if (numericMatch && numericMatch.length > 0) {
+      return numericMatch[0].replace(/^(0+)/, "");
+    }
+
+    return null;
+  };
+
+  const handleLiveModeCommand = async (transcript: string) => {
+    const text = transcript.trim();
+    if (!text || isProcessing) return;
+
+    const normalized = text.toLowerCase().replace(/[,.;!?]/g, " ").replace(/\s+/g, " ").trim();
+
+    if (isReminderNavigationRequest(text)) {
+      setActiveTab("reminder");
+      setLiveModeStatus(selectedLanguage === "pa" ? "ਰਿਮਾਈਂਡਰ ਖੁਲ ਗਿਆ ਹੈ।" : selectedLanguage === "en" ? "Opened the reminder." : "रिमाइंडर खुल गया है।");
+      return;
+    }
+
+    const reminderSuggestion = createReminderFromAssistantText(text);
+    if (reminderSuggestion) {
+      setReminderSeed(reminderSuggestion.text);
+      setActiveTab("reminder");
+      setLiveModeStatus(selectedLanguage === "pa" ? "ਰਿਮਾਈਂਡਰ AI ਦੁਆਰਾ ਸੈੱਟ ਕਰ ਦਿੱਤਾ ਗਿਆ ਹੈ।" : selectedLanguage === "en" ? "A reminder was created automatically by the assistant." : "एआई द्वारा रिमाइंडर अपने आप सेट कर दिया गया है।");
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `reminder-auto-${Date.now()}`,
+          sender: "assistant",
+          timestamp: new Date().toISOString(),
+          answerText: `Reminder created: ${reminderSuggestion.text}. I will ask you later whether it is done.`,
+          answerTextEn: `Reminder created: ${reminderSuggestion.text}. I will ask you later whether it is done.`,
+          domain: "general",
+          confidence: 1,
+        },
+      ]);
+      return;
+    }
+
+    if (executeGlobalUiAction(text)) {
+      setLiveModeStatus(selectedLanguage === "pa" ? "ਐਪ ਵਿੱਚ ਕਮਾਂਡ ਕਿਰਿਆਯੋਗ ਕੀਤੀ ਗਈ।" : selectedLanguage === "en" ? "Executed the requested app action." : "ऐप में कमांड लागू की गई।");
+      return;
+    }
+
+    if (/(turn off live|stop live|disable live|exit live|close live|live mode off|live off)/.test(normalized)) {
+      setIsLiveModeActive(false);
+      setLiveModeStatus(selectedLanguage === "pa" ? "ਲਾਈਵ ਮੋਡ ਬੰਦ ਹੋ ਗਿਆ।" : selectedLanguage === "en" ? "Live mode turned off." : "लाइव मोड बंद हो गया।");
+      return;
+    }
+
+    if (/(assistant|voice assistant|chat|ai assistant|ai)/.test(normalized) && !/(change language|set language|switch language)/.test(normalized)) {
+      setActiveTab("assistant");
+      setLiveModeStatus(selectedLanguage === "pa" ? "ਵਾਈਸ ਅਸਿਸਟੈਂਟ ਖੁਲ ਗਿਆ ਹੈ।" : selectedLanguage === "en" ? "Opened the voice assistant." : "वॉइस असिस्टेंट खुल गया है।");
+      await handleSendTextQuery(text.replace(/(assistant|voice assistant|chat|ai assistant|ai)/gi, "").trim() || text);
+      return;
+    }
+
+    if (/(conversation|bridge|translator|translation|two way|two-way|interpreter|live bridge)/.test(normalized)) {
+      setActiveTab("conversation");
+      setLiveModeStatus(selectedLanguage === "pa" ? "ਕਨਵਰਸੇਸ਼ਨ ਬ੍ਰਿਜ ਖੁਲ ਗਿਆ ਹੈ।" : selectedLanguage === "en" ? "Opened the conversation bridge." : "कन्वर्सेशन ब्रिज खुल गया है।");
+      return;
+    }
+
+    if (/(reminder|reminders|scheduled task|task reminder|my reminders|memory note|memo)/.test(normalized)) {
+      setActiveTab("reminder");
+      setLiveModeStatus(selectedLanguage === "pa" ? "ਰਿਮਾਈਂਡਰ ਖੁਲ ਗਿਆ ਹੈ।" : selectedLanguage === "en" ? "Opened the reminder." : "रिमाइंडर खुल गया है।");
+      return;
+    }
+
+    if (/(ivr|call center|phone menu|customer support|phone support|menu|ivr simulator|open ivr|open phone menu|open 1800 ivr|1800 ivr)/.test(normalized)
+      || /(ivr|ivr सिम्युलेटर|आईवीआर|आईवीआर सिम्युलेटर|ਆਈਵੀਆਰ|IVR)/.test(normalized)) {
+      setActiveTab("ivr");
+      setLiveModeStatus(selectedLanguage === "pa" ? "IVR ਸਿਮੂਲੇਟਰ ਖੁਲ ਗਿਆ ਹੈ।" : selectedLanguage === "en" ? "Opened the IVR simulator." : "IVR सिम्युलेटर खुल गया है।");
+      return;
+    }
+
+    if (/(knowledge|knowledge base|explorer|schemes|base|inform|info)/.test(normalized)) {
+      setActiveTab("knowledge");
+      setLiveModeStatus(selectedLanguage === "pa" ? "ਨਿਜੀ ਜਾਣਕਾਰੀ ਬ੍ਰਾਊਜ਼ਰ ਖੁਲ ਗਿਆ ਹੈ।" : selectedLanguage === "en" ? "Opened the knowledge explorer." : "ज्ञान एक्सप्लोरर खुल गया है।");
+      return;
+    }
+
+    if (/(home|main menu|dashboard|back to home|go home|start screen)/.test(normalized)) {
+      setActiveTab("assistant");
+      setCurrentTopic("home");
+      setLiveModeStatus(selectedLanguage === "pa" ? "ਹੋਮ ਸਕ੍ਰੀਨ ਤੇ ਵਾਪਸ ਆ ਗਿਆ ਹੈ।" : selectedLanguage === "en" ? "Returned to the home screen." : "होम स्क्रीन पर वापस आ गए।");
+      return;
+    }
+
+    if (/(clear chat|clear history|new chat|start over|reset chat)/.test(normalized)) {
+      clearChat();
+      setLiveModeStatus(selectedLanguage === "pa" ? "ਗੱਲਬਾਤ ਸਾਫ਼ ਕਰ ਦਿੱਤੀ ਗਈ।" : selectedLanguage === "en" ? "Cleared the chat." : "बातचीत साफ़ कर दी गई।");
+      return;
+    }
+
+    if (/(repeat|play again|say again|repeat answer|again)/.test(normalized)) {
+      repeatLastSpokenAnswer();
+      setLiveModeStatus(selectedLanguage === "pa" ? "ਪਿਛਲੀ ਜਵਾਬ ਦੁਬਾਰਾ ਸੁਣਾਈ ਜਾ ਰਹੀ ਹੈ।" : selectedLanguage === "en" ? "Repeating the last answer." : "पिछला जवाब दोबारा चल रहा है।");
+      return;
+    }
+
+    if (/(stop audio|stop voice|pause audio|mute|silence|pause)/.test(normalized)) {
+      stopAudioPlayback();
+      setLiveModeStatus(selectedLanguage === "pa" ? "ਆਵਾਜ਼ ਰੋਕ ਦਿੱਤੀ ਗਈ।" : selectedLanguage === "en" ? "Stopped the current audio." : "ऑडियो रुक गया है।");
+      return;
+    }
+
+    if (/(emergency|helpline|help line|support line|crisis|urgent|medical help)/.test(normalized)) {
+      setIsEmergencyOpen(true);
+      setLiveModeStatus(selectedLanguage === "pa" ? "ਐਮਰਜੈਂਸੀ ਸਹਾਇਤਾ ਖੁਲ ਗਿਆ ਹੈ।" : selectedLanguage === "en" ? "Opened emergency support." : "आपातकालीन सहायता खुल गई है।");
+      return;
+    }
+
+    if (/((change|switch|set)\s+(language|lang)|hindi|punjabi|english|assamese|marathi|tamil|telugu)/.test(normalized)) {
+      const langMap: Record<string, "hi" | "pa" | "en"> = {
+        hindi: "hi",
+        punjabi: "pa",
+        english: "en",
+        "hindi language": "hi",
+        "punjabi language": "pa",
+        "english language": "en",
+      };
+
+      const detectedLang = Object.entries(langMap).find(([key]) => normalized.includes(key))?.[1];
+      if (detectedLang) {
+        handleLanguageSelectedFromPicker(detectedLang);
+        return;
+      }
+    }
+
+    const callNumber = resolveHelplineNumber(normalized);
+    if ((/\b(call|dial|ring|connect|contact)\b/.test(normalized) || /\bhelpline\b/.test(normalized)) && callNumber) {
+      const finalNumber = callNumber.replace(/-/g, "").replace(/\s+/g, "");
+      window.location.href = `tel:${finalNumber}`;
+      setPendingAction(null);
+      setLiveModeStatus(selectedLanguage === "pa" ? `ਨੰਬਰ ${callNumber} ਨੂੰ ਕਾਲ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ।` : selectedLanguage === "en" ? `Calling ${callNumber}.` : `नंबर ${callNumber} पर कॉल किया जा रहा है।`);
+      return;
+    }
+
+    if (pendingAction && /^(yes|ya|confirm|sure|okay|haan|h|ji haan|yes please)$/i.test(text)) {
+      const number = pendingAction.helpline.split("/")[0].trim();
+      window.location.href = `tel:${number}`;
+      setPendingAction(null);
+      setLiveModeStatus(selectedLanguage === "pa" ? "ਕਾਲ ਪੁਸ਼ਟੀ ਹੋ ਗਈ।" : selectedLanguage === "en" ? "Call confirmed." : "कॉल पुष्टि हो गई।");
+      return;
+    }
+
+    if (pendingAction && /^(no|cancel|not now|reject|nah|nahi|not)|\b(रद्द|नहीं|अभी नहीं)\b/i.test(text)) {
+      setPendingAction(null);
+      setLiveModeStatus(selectedLanguage === "pa" ? "ਕਾਲ ਰੱਦ ਕਰ ਦਿੱਤੀ ਗਈ।" : selectedLanguage === "en" ? "Call cancelled." : "कॉल रद्द कर दी गई।");
+      return;
+    }
+
+    if (executeGlobalUiAction(text)) {
+      setLiveModeStatus(selectedLanguage === "pa" ? "ਐਪ ਵਿੱਚ ਕਮਾਂਡ ਕਿਰਿਆਯੋਗ ਕੀਤੀ ਗਈ।" : selectedLanguage === "en" ? "Executed the requested app action." : "ऐप में कमांड लागू की गई।");
+      return;
+    }
+
+    await handleSendTextQuery(text);
   };
 
   const clearChat = () => {
@@ -419,6 +728,135 @@ export default function App() {
     setCurrentTopic("home");
     setPendingAction(null);
     stopAudioPlayback();
+  };
+
+  const findAndClickTarget = (text: string) => {
+    if (typeof document === "undefined") return false;
+
+    const normalizedQuery = text
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    if (!normalizedQuery) return false;
+
+    const candidates = Array.from(
+      document.querySelectorAll(
+        'button, [role="button"], a, input[type="button"], input[type="submit"], [data-action]'
+      )
+    ) as HTMLElement[];
+
+    const scored = candidates
+      .map((element) => {
+        const ariaLabel = element.getAttribute("aria-label") || "";
+        const title = element.getAttribute("title") || "";
+        const content = (element.textContent || "").replace(/\s+/g, " ").trim();
+        const combined = `${ariaLabel} ${title} ${content}`.trim();
+        const normalizedCombined = combined
+          .toLowerCase()
+          .replace(/[^a-z0-9\s]/g, " ")
+          .replace(/\s+/g, " ")
+          .trim();
+
+        if (!normalizedCombined) return null;
+
+        const queryParts = normalizedQuery.split(" ").filter(Boolean);
+        const matchCount = queryParts.filter((part) => normalizedCombined.includes(part)).length;
+        const exactMatch = normalizedCombined.includes(normalizedQuery);
+        const score = exactMatch ? 100 : matchCount * 18;
+
+        if (score <= 0) return null;
+        return { element, score };
+      })
+      .filter(Boolean) as Array<{ element: HTMLElement; score: number }>;
+
+    if (!scored.length) return false;
+
+    scored.sort((a, b) => b.score - a.score);
+    scored[0].element.click();
+    return true;
+  };
+
+  const executeGlobalUiAction = (text: string) => {
+    const normalized = text.toLowerCase().replace(/[,.;!?]/g, " ").replace(/\s+/g, " ").trim();
+    if (!normalized) return false;
+
+    const tabMap: Record<string, "assistant" | "conversation" | "translator" | "ivr" | "reminder" | "knowledge"> = {
+      "voice assistant": "assistant",
+      "assistant": "assistant",
+      "chat": "assistant",
+      "ai assistant": "assistant",
+      "conversation": "conversation",
+      "bridge": "conversation",
+      "two way bridge": "conversation",
+      "translator": "translator",
+      "translate": "translator",
+      "real time translator": "translator",
+      "live translator": "translator",
+      "language translator": "translator",
+      "ivr": "ivr",
+      "1800 ivr": "ivr",
+      "phone menu": "ivr",
+      "reminder": "reminder",
+      "my reminders": "reminder",
+      "knowledge": "knowledge",
+      "knowledge base": "knowledge",
+      "explorer": "knowledge",
+      "home": "assistant",
+      "main menu": "assistant",
+    };
+
+    for (const [key, tab] of Object.entries(tabMap)) {
+      if (normalized.includes(key)) {
+        setActiveTab(tab);
+        if (tab === "assistant") setCurrentTopic("home");
+        return true;
+      }
+    }
+
+    if (/(change language|switch language|set language)/.test(normalized)) {
+      setIsSpokenLanguageOpen(true);
+      return true;
+    }
+
+    if (/(clear chat|clear history|reset chat|new chat)/.test(normalized)) {
+      clearChat();
+      return true;
+    }
+
+    if (/(emergency|helpline|help line|support|112|108)/.test(normalized)) {
+      setIsEmergencyOpen(true);
+      return true;
+    }
+
+    if (/(open|click|tap|press|select)\b/.test(normalized)) {
+      return findAndClickTarget(normalized.replace(/^(open|click|tap|press|select)\s+/, ""));
+    }
+
+    const buttonCandidates = [
+      "main menu",
+      "voice assistant",
+      "change language",
+      "knowledge",
+      "clear",
+      "back to home",
+      "112 helplines",
+      "reminder",
+      "1800 ivr",
+      "2-way bridge",
+      "listen",
+      "call",
+      "yes",
+      "no",
+    ];
+
+    const match = buttonCandidates.find((candidate) => normalized.includes(candidate));
+    if (match) {
+      return findAndClickTarget(match);
+    }
+
+    return false;
   };
 
   return (
@@ -449,8 +887,17 @@ export default function App() {
       <main className="flex-1 w-full max-w-6xl mx-auto px-3 sm:px-6 py-3 flex flex-col min-h-0">
         {activeTab === "conversation" ? (
           <ConversationBridge />
+        ) : activeTab === "translator" ? (
+          <RealTimeTranslator />
         ) : activeTab === "ivr" ? (
           <IVRSimulator />
+        ) : activeTab === "reminder" ? (
+          <ReminderDashboard
+            selectedLanguage={selectedLanguage}
+            reminderSeed={reminderSeed}
+            onReminderSeedConsumed={() => setReminderSeed("")}
+            onSpeak={(text, language) => playSpokenResponse(text, language || selectedLanguage, undefined, 1.0)}
+          />
         ) : activeTab === "knowledge" ? (
           <KnowledgeExplorer onBackToAssistant={() => setActiveTab("assistant")} />
         ) : (
@@ -651,6 +1098,14 @@ export default function App() {
       <EmergencyModal
         isOpen={isEmergencyOpen}
         onClose={() => setIsEmergencyOpen(false)}
+      />
+
+      <LiveModeBubble
+        isActive={isLiveModeActive}
+        onToggle={(next) => setIsLiveModeActive(next)}
+        onCommand={handleLiveModeCommand}
+        statusText={liveModeStatus}
+        language={selectedLanguage}
       />
 
       </div>

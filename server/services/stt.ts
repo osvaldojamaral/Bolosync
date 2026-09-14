@@ -204,7 +204,7 @@ Return pure JSON without markdown or backticks.`;
           const confidence = typeof parsed.confidence === "number" ? parsed.confidence : 0.94;
 
           return {
-            transcript: transcript || "आवाज स्पष्ट नहीं सुनाई दी (Voice not clear)",
+            transcript,
             detectedLanguage,
             languageName,
             confidence,
